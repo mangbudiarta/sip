@@ -175,7 +175,7 @@
   <!-- Video Modal End -->
 
   <!-- Info Wilayah Start -->
-  <div class="container-fluid product py-5 my-5">
+  <div class="container-fluid product py-5 my-5" id="infowilayah">
     <div class="container py-5">
       <div
         class="section-title text-center mx-auto wow fadeInUp"
@@ -201,7 +201,7 @@
   <!-- Info Wilayah End -->
 
   <!-- Potensi Desa Start -->
-  <div class="container-fluid product py-5 my-5">
+  <div class="container-fluid product py-5 my-5" id="potensidesa">
     <div class="container py-5">
       <div
         class="section-title text-center mx-auto wow fadeInUp"
@@ -273,7 +273,7 @@
   <!-- Potensi Desa End -->
 
   <!-- UMKM Start -->
-  <div class="container-xxl py-5">
+  <div class="container-xxl py-5" id="umkm">
     <div class="container">
       <div
         class="section-title text-center mx-auto wow fadeInUp"
@@ -433,7 +433,7 @@
   <!-- Langganan End -->
 
   <!-- Berita Start -->
-  <div class="container-xxl contact py-5">
+  <div class="container-xxl contact py-5" id="berita">
     <div class="container">
       <div
         class="section-title text-center mx-auto wow fadeInUp"

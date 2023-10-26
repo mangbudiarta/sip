@@ -48,3 +48,61 @@ Route::get('/kontak', function () {
         "title" => "Kontak"
     ]);
 });
+
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('dashboard', function () {
+        return view('admin/dashboard',[
+            "title" => "Dashboard"
+        ]);
+    });
+    Route::get('navbar', function () {
+        return view('admin/navbar',[
+            "title" => "Navbar"
+        ]);
+    });
+    Route::get('banner', function () {
+        return view('admin/banner',[
+            "title" => "Banner"
+        ]);
+    });
+    Route::get('profildesa', function () {
+        return view('admin/profildesa',[
+            "title" => "Profil Desa"
+        ]);
+    });
+    Route::get('infowilayah', function () {
+        return view('admin/infowilayah',[
+            "title" => "Info Wilayah"
+        ]);
+    });
+    Route::get('footer', function () {
+        return view('admin/footer',[
+            "title" => "Footer"
+        ]);
+    });
+    Route::get('potensidesa', function () {
+        return view('admin/potensi',[
+            "title" => "Potensi Desa"
+        ]);
+    });
+    Route::get('umkm', function () {
+        return view('admin/umkm',[
+            "title" => "UMKM"
+        ]);
+    });
+    Route::get('berita', function () {
+        return view('admin/berita',[
+            "title" => "Berita"
+        ]);
+    });
+    Route::get('kategoriberita', function () {
+        return view('admin/kategoriberita',[
+            "title" => "Kategori Berita"
+        ]);
+    });
+    Route::get('petugas', function () {
+        return view('admin/petugas',[
+            "title" => "Petugas"
+        ]);
+    });
+});
