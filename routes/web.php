@@ -81,7 +81,7 @@ Route::group(['prefix' => 'admin'], function () {
         ]);
     });
     Route::get('potensidesa', function () {
-        return view('admin/potensi',[
+        return view('admin/potensidesa/potensidesa',[
             "title" => "Potensi Desa"
         ]);
     });
@@ -103,6 +103,16 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('petugas', function () {
         return view('admin/petugas',[
             "title" => "Petugas"
+        ]);
+    });
+    Route::get('potensigambar', function () {
+        return view('admin/potensidesa/potensigambar',[
+            "title" => "Gambar"
+        ]);
+    });
+    Route::get('umkmgambar', function () {
+        return view('admin/umkm/umkmgambar',[
+            "title" => "Gambar"
         ]);
     });
 });

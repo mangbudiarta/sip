@@ -105,3 +105,6 @@
   text-align: center;
   margin-top: 1rem;
 }
+.ck-editor__editable_inline {
+  height: 400px;
+}

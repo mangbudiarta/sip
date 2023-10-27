@@ -122,14 +122,12 @@
 
     <!-- Page JS -->
     <script src="{{ asset('backend/assets/js/dashboards-analytics.js') }}"></script>
-
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
     
+    <!-- Chk Editor-->
+    <script src="{{ asset('backend/assets/vendor/libs/ckeditor/build/ckeditor.js') }}"></script>
     <!-- Data tables-->
     <script src="{{ asset('backend/assets/vendor/libs/datatables/datatables.min.js') }}"></script>
     <script src="{{ asset('backend/assets/vendor/libs/datatables/jquery.datatables.min.js') }}"></script>
-    <script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script>
      $(function() {
         $(".datatables").DataTable();
