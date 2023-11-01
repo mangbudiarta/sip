@@ -57,7 +57,6 @@
     
     <!-- Data tables -->
     <link rel="stylesheet" href="{{ asset('backend/assets/vendor/libs/datatables/datatables.min.css') }}" />
-    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"/>
 
     <!-- Helpers -->
     <script src="{{ asset('backend/assets/vendor/js/helpers.js') }}"></script>
@@ -129,9 +128,9 @@
     <script src="{{ asset('backend/assets/vendor/libs/datatables/datatables.min.js') }}"></script>
     <script src="{{ asset('backend/assets/vendor/libs/datatables/jquery.datatables.min.js') }}"></script>
     <script>
-     $(function() {
-        $(".datatables").DataTable();
-    });
+        $(function() {
+            $(".datatables").DataTable();
+        });
     </script>
   </body>
 </html>

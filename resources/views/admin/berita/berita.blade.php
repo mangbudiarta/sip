@@ -5,25 +5,25 @@
             <div class="col-lg-12 mb-4 order-0">
                 <div class="row">
                     <div class="col-xxl">
-                        <h4 class="fw-bold py-3 mb-4">Potensi Desa</h4>
-
+                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Berita/</span> Daftar Berita</h4>
                         <!-- Table Layout Start -->
                         <div class="card mb-4">
                             <div class="card-datatable table-responsive p-3">
                                 <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal"
-                                    data-bs-target="#PotensiTambah">
+                                    data-bs-target="#BeritaTambah">
                                     <i class="menu-icon tf-icons bx bx-plus m-0"></i>Tambah
                                 </button>
                                 <table class="datatables table border-top">
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama UMKM</th>
-                                            <th>Deskripsi</th>
+                                            <th>Judul Berita</th>
+                                            <th>Isi Berita</th>
                                             <th>Penulis</th>
                                             <th>Tgl Posting</th>
                                             <th>Gambar</th>
                                             <th>Slug</th>
+                                            <th>Kategori</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -37,13 +37,12 @@
                                             <td>23-08-2023</td>
                                             <td>gambar.jpg</td>
                                             <td>Pantai-Kaca</td>
+                                            <td>Alam</td>
                                             <td>
                                                 <a href="" class="btn btn-info btn-sm"><i
                                                         class="menu-icon tf-icons bx bx-show m-0"></i></a>
-                                                <a href="/admin/potensigambar" class="btn btn-success btn-sm"><i
-                                                        class="menu-icon tf-icons bx bx-image m-0"></i></a>
                                                 <a href="#" class="btn btn-warning btn-sm" data-bs-toggle="modal"
-                                                    data-bs-target="#PotensiEdit"><i
+                                                    data-bs-target="#BeritaEdit"><i
                                                         class="menu-icon tf-icons bx bx-edit m-0"></i></a>
                                                 <a href="" class="btn btn-danger btn-sm"><i
                                                         class="menu-icon tf-icons bx bx-trash m-0"></i></a>
@@ -55,11 +54,11 @@
                         </div>
                         <!-- Table Layout End -->
                         <!-- Modal Tambah Start -->
-                        <div class="modal fade" id="PotensiTambah" tabindex="-1" aria-hidden="true">
+                        <div class="modal fade" id="BeritaTambah" tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="ModalTambah">Tambah Potensi Desa</h5>
+                                        <h5 class="modal-title" id="ModalTambah">Tambah Berita</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
@@ -67,9 +66,9 @@
                                         <!-- Form Layout Start-->
                                         <form>
                                             <div class="mb-3">
-                                                <label class="col-form-label" for="namapotensi">Nama Potensi</label>
-                                                <input type="text" class="form-control" id="namapotensi"
-                                                    name="namapotensi" placeholder="ex : Pantai Kaca" />
+                                                <label class="col-form-label" for="judulberitatambah">Judul Berita</label>
+                                                <input type="text" class="form-control" id="judulberitatambah"
+                                                    name="judulberita" placeholder="ex : Pantai Kaca" />
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="slug">Slug</label>
@@ -77,8 +76,8 @@
                                                     placeholder="ex : Pantai-Kaca" />
                                             </div>
                                             <div class="mb-3">
-                                                <label class="col-form-label" for="deskripsi">Deskripsi</label>
-                                                <textarea id="deskripsi" class="form-control editor" name="deskripsi"
+                                                <label class="col-form-label" for="isiberita">Isi berita</label>
+                                                <textarea id="isiberita" class="form-control editor" name="isiberita"
                                                     placeholder="ex: Desa Candikuning merupakan desa wisata yang ada di Tabanan"
                                                     aria-label="ex: Desa Candikuning merupakan desa wisata yang ada di Tabanan"
                                                     aria-describedby="basic-icon-default-message2"></textarea>
@@ -102,6 +101,11 @@
                                                     <img id="imageView1" class="my-2" alt="">
                                                 </div>
                                             </div>
+                                            <div class="mb-3">
+                                                <label class="col-form-label" for="kategori">Kategori</label>
+                                                <input type="text" class="form-control" id="kategori"
+                                                    name="kategori" />
+                                            </div>
                                             <div class="row justify-content-end">
                                                 <div class="col-sm-12">
                                                     <button type="submit" class="btn btn-primary"
@@ -121,7 +125,7 @@
                         <!-- Modal Tambah End -->
 
                         <!-- Modal Edit Start -->
-                        <div class="modal fade" id="PotensiEdit" tabindex="-1" aria-hidden="true">
+                        <div class="modal fade" id="BeritaEdit" tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -132,12 +136,12 @@
                                     <div class="modal-body">
                                         <!-- Form Layout Start-->
                                         <form>
-                                            <input type="hidden" class="form-control" id="id_potensidesa"
-                                                name="id_potensidesa" />
+                                            <input type="hidden" class="form-control" id="id_berita"
+                                                name="id_berita" />
                                             <div class="mb-3">
-                                                <label class="col-form-label" for="namapotensitambah">Nama Potensi</label>
-                                                <input type="text" class="form-control" id="namapotensitambah"
-                                                    name="namapotensi" placeholder="ex : Pantai Kaca" />
+                                                <label class="col-form-label" for="judulberitaedit">Judul Berita</label>
+                                                <input type="text" class="form-control" id="judulberitaedit"
+                                                    name="judulberita" placeholder="ex : Pantai Kaca" />
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="slugedit">Slug</label>
@@ -145,8 +149,8 @@
                                                     placeholder="ex : Pantai-Kaca" />
                                             </div>
                                             <div class="mb-3">
-                                                <label class="col-form-label" for="deskripsiedit">Deskripsi</label>
-                                                <textarea id="deskripsiedit" class="form-control editoredit" name="deskripsi"
+                                                <label class="col-form-label" for="isiberitaedit">Isi Berita</label>
+                                                <textarea id="isiberitaedit" class="form-control editoredit" name="isiberita"
                                                     placeholder="ex: Desa Candikuning merupakan desa wisata yang ada di Tabanan"
                                                     aria-label="ex: Desa Candikuning merupakan desa wisata yang ada di Tabanan"
                                                     aria-describedby="basic-icon-default-message2"></textarea>
@@ -169,6 +173,11 @@
                                                 <div class="overflow-auto">
                                                     <img id="imageView2" class="my-2" alt="">
                                                 </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="col-form-label" for="kategoriedit">Kategori</label>
+                                                <input type="text" class="form-control" id="kategoriedit"
+                                                    name="kategori" />
                                             </div>
                                             <div class="row justify-content-end">
                                                 <div class="col-sm-12">

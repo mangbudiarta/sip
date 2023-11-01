@@ -5,28 +5,26 @@
             <div class="col-lg-12 mb-4 order-0">
                 <div class="row">
                     <div class="col-xxl">
-                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Potensi Desa/</span> Gambar</h4>
+                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">UMKM/</span> Gambar</h4>
                         <!-- Form Layout Start-->
                         <div class="card mb-4">
                             <div class="card-header d-flex align-items-center justify-content-between">
-                                <h5 class="mb-0">Tambah Potensi Gambar</h5>
+                                <h5 class="mb-0">Tambah UMKM Gambar</h5>
                             </div>
                             <div class="card-body">
                                 <form>
-                                    <input type="hidden" name="id_potensidesa">
+                                    <input type="hidden" name="id_umkm">
                                     <div class="mb-3">
-                                        <label class="col-form-label" for="namapotensi">Nama Potensi</label>
-                                        <input type="text" class="form-control" id="namapotensi" name="namapotensi"
-                                            disabled readonly />
+                                        <label class="col-form-label" for="namaumkm">Nama UMKM</label>
+                                        <input type="text" class="form-control" id="namaumkm" name="namaumkm" disabled
+                                            readonly />
                                     </div>
                                     <div>
                                         <label for="formFile" class="form-label">Gambar <span
                                                 class=" text-muted">(png/jpg)</span></label>
                                         <input type="file" class="form-control" type="file" id="formFile"
                                             name="gambarnav" onchange="handleFiles(event)" />
-                                        <div class="overflow-auto">
-                                            <img id="imageView" class="my-2" alt="">
-                                        </div>
+                                        <img id="imageView" class="my-2" alt="">
                                     </div>
                                     <div class="row justify-content-end">
                                         <div class="col-sm-12">
@@ -44,7 +42,7 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama Potensi</th>
+                                            <th>Nama UMKM</th>
                                             <th>Gambar</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -52,7 +50,7 @@
                                     <tbody>
                                         <tr>
                                             <td>1</td>
-                                            <td>Pantai Kaca</td>
+                                            <td>Toko Bagus</td>
                                             <td>navbar.png</td>
                                             <td>
                                                 <a href="#" class="btn btn-danger btn-sm"><i

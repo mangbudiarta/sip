@@ -86,17 +86,17 @@ Route::group(['prefix' => 'admin'], function () {
         ]);
     });
     Route::get('umkm', function () {
-        return view('admin/umkm',[
+        return view('admin/umkm/umkm',[
             "title" => "UMKM"
         ]);
     });
     Route::get('berita', function () {
-        return view('admin/berita',[
+        return view('admin/berita/berita',[
             "title" => "Berita"
         ]);
     });
     Route::get('kategoriberita', function () {
-        return view('admin/kategoriberita',[
+        return view('admin/berita/kategoriberita',[
             "title" => "Kategori Berita"
         ]);
     });
