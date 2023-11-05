@@ -61,7 +61,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <!-- Form Layout Start-->
-                                        <form>
+                                        <form action="" method="post">
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="nama">Nama Petugas</label>
                                                 <input type="text" class="form-control" id="nama" name="nama"
@@ -129,7 +129,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <!-- Form Layout Start-->
-                                        <form>
+                                        <form action="" method="post">
                                             <input type="hidden" class="form-control" id="id_petugas"
                                                 name="id_petugas" />
                                             <div class="mb-3">

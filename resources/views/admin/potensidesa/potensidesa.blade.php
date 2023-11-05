@@ -18,7 +18,7 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama UMKM</th>
+                                            <th>Nama Potensi</th>
                                             <th>Deskripsi</th>
                                             <th>Penulis</th>
                                             <th>Tgl Posting</th>
@@ -65,7 +65,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <!-- Form Layout Start-->
-                                        <form>
+                                        <form action="" method="post">
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="namapotensi">Nama Potensi</label>
                                                 <input type="text" class="form-control" id="namapotensi"
@@ -131,7 +131,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <!-- Form Layout Start-->
-                                        <form>
+                                        <form action="" method="post">
                                             <input type="hidden" class="form-control" id="id_potensidesa"
                                                 name="id_potensidesa" />
                                             <div class="mb-3">

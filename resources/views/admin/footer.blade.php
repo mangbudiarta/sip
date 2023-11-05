@@ -51,7 +51,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <!-- Form Layout Start-->
-                                        <form>
+                                        <form action="" method="post">
                                             <div>
                                                 <label for="formFile" class="form-label">Gambar <span
                                                         class=" text-muted">(png/jpg)</span></label>

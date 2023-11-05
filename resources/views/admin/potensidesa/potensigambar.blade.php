@@ -12,7 +12,7 @@
                                 <h5 class="mb-0">Tambah Potensi Gambar</h5>
                             </div>
                             <div class="card-body">
-                                <form>
+                                <form action="" method="post">
                                     <input type="hidden" name="id_potensidesa">
                                     <div class="mb-3">
                                         <label class="col-form-label" for="namapotensi">Nama Potensi</label>

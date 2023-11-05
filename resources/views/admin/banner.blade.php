@@ -56,7 +56,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <!-- Form Layout Start-->
-                                        <form>
+                                        <form action="" method="post">
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="judulTambah">Judul Banner</label>
                                                 <input type="text" class="form-control" id="judulTambah" name="judul"
@@ -107,7 +107,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <!-- Form Layout Start-->
-                                        <form>
+                                        <form action="" method="post">
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="judulEdit">Judul Banner</label>
                                                 <input type="text" class="form-control" id="judulEdit" name="judul"

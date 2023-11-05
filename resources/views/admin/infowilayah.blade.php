@@ -50,7 +50,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <!-- Form Layout Start-->
-                                        <form>
+                                        <form action="" method="post">
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="judul">Judul</label>
                                                 <input type="text" class="form-control" id="judul" name="judul"
