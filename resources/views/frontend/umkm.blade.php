@@ -22,7 +22,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-center wow fadeInUp" data-wow-delay="0.1s">
+            <div class="row wow fadeInUp" data-wow-delay="0.1s">
                 <div class="col-lg-4 col-md-12 mb-4 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="store-item position-relative text-center">
                         <img class="img-fluid" src="{{ asset('frontend/img/store-product-1.jpg') }}" alt="" />
@@ -31,60 +31,6 @@
                             <p class="deskripsi">
                                 Lorem ipsum dolor, sit amet consectetur adipisicing elit.
                                 Ipsam sapiente repellat repellendus, voluptatibus ullam unde?
-                            </p>
-                        </div>
-                        <div class="store-overlay">
-                            <a href="" class="btn btn-primary rounded-pill py-2 px-4 m-2">Info
-                                Selengkapnya<i class="fa fa-arrow-right ms-2"></i></a>
-                            <a href="" class="btn btn-dark rounded-pill py-2 px-4 m-2">Hubungi Pemilik <i
-                                    class="fa fa-phone-alt ms-2"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-12 mb-4 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="store-item position-relative text-center">
-                        <img class="img-fluid" src="{{ asset('frontend/img/store-product-2.jpg') }}" alt="" />
-                        <div class="p-4">
-                            <h4 class="mb-3">UMKM DUA</h4>
-                            <p class="deskripsi">
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                                Tempore, sit quasi commodi consequatur totam quo!
-                            </p>
-                        </div>
-                        <div class="store-overlay">
-                            <a href="" class="btn btn-primary rounded-pill py-2 px-4 m-2">Info
-                                Selengkapnya<i class="fa fa-arrow-right ms-2"></i></a>
-                            <a href="" class="btn btn-dark rounded-pill py-2 px-4 m-2">Hubungi Pemilik <i
-                                    class="fa fa-phone-alt ms-2"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-12 mb-4 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="store-item position-relative text-center">
-                        <img class="img-fluid" src="{{ asset('frontend/img/store-product-3.jpg') }}" alt="" />
-                        <div class="p-4">
-                            <h4 class="mb-3">UMKM TIGA</h4>
-                            <p class="deskripsi">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Mollitia quod odit obcaecati officiis id dolorem.
-                            </p>
-                        </div>
-                        <div class="store-overlay">
-                            <a href="" class="btn btn-primary rounded-pill py-2 px-4 m-2">Info
-                                Selengkapnya<i class="fa fa-arrow-right ms-2"></i></a>
-                            <a href="" class="btn btn-dark rounded-pill py-2 px-4 m-2">Hubungi Pemilik <i
-                                    class="fa fa-phone-alt ms-2"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-12 mb-4 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="store-item position-relative text-center">
-                        <img class="img-fluid" src="{{ asset('frontend/img/store-product-3.jpg') }}" alt="" />
-                        <div class="p-4">
-                            <h4 class="mb-3">UMKM EMPAT</h4>
-                            <p class="deskripsi">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Non
-                                hic itaque earum ab mollitia voluptatem!
                             </p>
                         </div>
                         <div class="store-overlay">

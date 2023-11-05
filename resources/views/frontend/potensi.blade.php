@@ -22,10 +22,28 @@
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-center wow fadeInUp" data-wow-delay="0.5s">
+            <div class="row product py-3 justify-content-center wow fadeInUp" data-wow-delay="0.5s">
                 <div class="col-lg-12">
                     <div class="row g-5">
-
+                        <a href="" class="col-lg-4 rounded">
+                            <div class="row">
+                                <img src="{{ asset('frontend/img/product-4.jpg') }}" alt="" class="si" />
+                            </div>
+                            <div class="bg-white shadow-sm text-center p-4 position-relative mt-n5 mx-4">
+                                <div class="text-center mb-3 rating-star" onclick="ratingPotensi()">
+                                    <small class="fa fa-star text-warning"></small>
+                                    <small class="fa fa-star text-warning"></small>
+                                    <small class="fa fa-star text-warning"></small>
+                                    <small class="fa fa-star text-warning"></small>
+                                    <small class="fa fa-star text-warning"></small>
+                                    <small>(5)</small>
+                                </div>
+                                <h4 class="text-primary">Potensi Empat</h4>
+                                <span class="text-body deskripsi">Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                                    Corrupti vitae magnam quia praesentium eum quae vero ipsa
+                                    tempore quidem officiis.</span>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>

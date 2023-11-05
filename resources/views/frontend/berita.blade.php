@@ -29,45 +29,7 @@
                 </div>
             </div>
 
-            <div class="row justify-content-center wow fadeInUp" data-wow-delay="0.1s">
-                <div class="col-lg-4 col-md-12 mb-4">
-                    <div class="card">
-                        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                            <img src="{{ asset('frontend/img/product-1.jpg') }}" class="img-fluid" />
-                            <a href="#!">
-                                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Post title</h5>
-                            <p class="card-text deskripsi">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Error
-                                quas, corrupti est a odit nihil suscipit ipsam? Sequi, nostrum
-                                eaque?
-                            </p>
-                            <a href="#!" class="btn btn-outline-primary">Baca</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-12 mb-4">
-                    <div class="card">
-                        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                            <img src="{{ asset('frontend/img/product-1.jpg') }}" class="img-fluid" />
-                            <a href="#!">
-                                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Post title</h5>
-                            <p class="card-text deskripsi">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Error
-                                quas, corrupti est a odit nihil suscipit ipsam? Sequi, nostrum
-                                eaque?
-                            </p>
-                            <a href="#!" class="btn btn-outline-primary">Baca</a>
-                        </div>
-                    </div>
-                </div>
+            <div class="row wow fadeInUp" data-wow-delay="0.1s">
                 <div class="col-lg-4 col-md-12 mb-4">
                     <div class="card">
                         <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
