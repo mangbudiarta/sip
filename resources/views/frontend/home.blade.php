@@ -83,7 +83,7 @@
             <div class="row g-5">
                 <div class="col-lg-6 position-relative">
                     <button type="button" class="btn-play position-absolute top-50 start-50 z-index-1"
-                        data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc"
+                        data-bs-toggle="modal" data-src="https://www.youtube.com/embed/wRxxUSAkGZ4?si=RAKxwrMtuf6LhjdI"
                         data-bs-target="#videoModal">
                         <span></span>
                     </button>
@@ -161,74 +161,74 @@
                 <h2 class="display-6">Temukan Tempat yang Indah Bagaikan Surga</h2>
             </div>
             <div class="owl-carousel product-carousel wow fadeInUp" data-wow-delay="0.5s">
-                <a href="" class="d-block product-item rounded">
+                <div class="product-item rounded">
                     <img src="{{ asset('frontend/img/product-1.jpg') }}" alt="" />
                     <div class="bg-white shadow-sm text-center p-4 position-relative mt-n5 mx-4">
-                        <div class="text-center mb-3 rating-star" onclick="ratingPotensi()">
+                        <a href="/review" class="text-center mb-3 rating-star">
                             <small class="fa fa-star text-warning"></small>
                             <small class="fa fa-star text-warning"></small>
                             <small class="fa fa-star text-warning"></small>
                             <small class="fa fa-star text-warning"></small>
                             <small class="fa fa-star text-warning"></small>
                             <small>(5)</small>
-                        </div>
-                        <h4 class="text-primary">Potensi Satu</h4>
+                        </a>
+                        <a href="/potensidetail" class="h4 d-block text-primary">Potensi Satu</a>
                         <span class="text-body deskripsi">Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                             Corrupti vitae magnam quia praesentium eum quae vero ipsa
                             tempore quidem officiis.</span>
                     </div>
-                </a>
-                <a href="" class="d-block product-item rounded">
-                    <img src="{{ asset('frontend/img/product-2.jpg') }}" alt="" />
+                </div>
+                <div class="product-item rounded">
+                    <img src="{{ asset('frontend/img/product-1.jpg') }}" alt="" />
                     <div class="bg-white shadow-sm text-center p-4 position-relative mt-n5 mx-4">
-                        <div class="text-center mb-3 rating-star" onclick="ratingPotensi()">
+                        <a href="/review" class="text-center mb-3 rating-star">
                             <small class="fa fa-star text-warning"></small>
                             <small class="fa fa-star text-warning"></small>
                             <small class="fa fa-star text-warning"></small>
                             <small class="fa fa-star text-warning"></small>
                             <small class="fa fa-star text-warning"></small>
                             <small>(5)</small>
-                        </div>
-                        <h4 class="text-primary">Potensi Dua</h4>
+                        </a>
+                        <a href="/kontak" class="h4 d-block text-primary">Potensi Dua</a>
                         <span class="text-body deskripsi">Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                             Corrupti vitae magnam quia praesentium eum quae vero ipsa
                             tempore quidem officiis.</span>
                     </div>
-                </a>
-                <a href="" class="d-block product-item rounded">
-                    <img src="{{ asset('frontend/img/product-3.jpg') }}" alt="" />
+                </div>
+                <div class="product-item rounded">
+                    <img src="{{ asset('frontend/img/product-1.jpg') }}" alt="" />
                     <div class="bg-white shadow-sm text-center p-4 position-relative mt-n5 mx-4">
-                        <div class="text-center mb-3 rating-star" onclick="ratingPotensi()">
+                        <a href="/review" class="text-center mb-3 rating-star">
                             <small class="fa fa-star text-warning"></small>
                             <small class="fa fa-star text-warning"></small>
                             <small class="fa fa-star text-warning"></small>
                             <small class="fa fa-star text-warning"></small>
                             <small class="fa fa-star text-warning"></small>
                             <small>(5)</small>
-                        </div>
-                        <h4 class="text-primary">Potensi Tiga</h4>
+                        </a>
+                        <a href="/kontak" class="h4 d-block text-primary">Potensi Tiga</a>
                         <span class="text-body deskripsi">Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                             Corrupti vitae magnam quia praesentium eum quae vero ipsa
                             tempore quidem officiis.</span>
                     </div>
-                </a>
-                <a href="" class="d-block product-item rounded">
-                    <img src="{{ asset('frontend/img/product-4.jpg') }}" alt="" />
+                </div>
+                <div class="product-item rounded">
+                    <img src="{{ asset('frontend/img/product-1.jpg') }}" alt="" />
                     <div class="bg-white shadow-sm text-center p-4 position-relative mt-n5 mx-4">
-                        <div class="text-center mb-3 rating-star" onclick="ratingPotensi()">
+                        <a href="/review" class="text-center mb-3 rating-star">
                             <small class="fa fa-star text-warning"></small>
                             <small class="fa fa-star text-warning"></small>
                             <small class="fa fa-star text-warning"></small>
                             <small class="fa fa-star text-warning"></small>
                             <small class="fa fa-star text-warning"></small>
                             <small>(5)</small>
-                        </div>
-                        <h4 class="text-primary">Potensi Empat</h4>
+                        </a>
+                        <a href="/kontak" class="h4 d-block text-primary">Potensi Empat</a>
                         <span class="text-body deskripsi">Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                             Corrupti vitae magnam quia praesentium eum quae vero ipsa
                             tempore quidem officiis.</span>
                     </div>
-                </a>
+                </div>
             </div>
         </div>
     </div>
@@ -253,7 +253,7 @@
                             </p>
                         </div>
                         <div class="store-overlay">
-                            <a href="" class="btn btn-primary rounded-pill py-2 px-4 m-2">Info Selengkapnya<i
+                            <a href="/umkmdetail" class="btn btn-primary rounded-pill py-2 px-4 m-2">Info Selengkapnya<i
                                     class="fa fa-arrow-right ms-2"></i></a>
                             <a href="" class="btn btn-dark rounded-pill py-2 px-4 m-2">Hubungi Pemilik <i
                                     class="fa fa-phone-alt ms-2"></i></a>
@@ -322,22 +322,13 @@
     <!-- Langganan Start -->
     <div class="container-fluid video my-5">
         <div class="container">
-            <div class="row g-0">
-                <div class="col-lg-6 py-5 wow fadeIn" data-wow-delay="0.1s">
+            <div class="row g-0 justify-content-center">
+                <div class="col-lg-8 py-5 wow fadeIn" data-wow-delay="0.1s">
                     <div class="py-2">
-                        <h2 class="display-6 mb-4">
-                            <span class="text-white">Ikuti Halaman Kami</span> untuk
-                            Informasi Terbaru
+                        <h2 class="display-6 mb-4 text-center">
+                            <span class="text-white">Jelajahi Wisata Candikuning</span>
+                            <br> Mulai Dari Sini
                         </h2>
-                    </div>
-                </div>
-                <div class="col-lg-6 d-flex align-items-center">
-                    <div class="position-relative w-100">
-                        <input class="form-control bg-white w-100 py-3 ps-4 pe-5" type="text"
-                            placeholder="Your email" />
-                        <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">
-                            SignUp
-                        </button>
                     </div>
                 </div>
             </div>
@@ -368,7 +359,7 @@
                                 quas, corrupti est a odit nihil suscipit ipsam? Sequi, nostrum
                                 eaque?
                             </p>
-                            <a href="#!" class="btn btn-outline-primary">Baca</a>
+                            <a href="/beritadetail" class="btn btn-outline-primary">Baca</a>
                         </div>
                     </div>
                 </div>
@@ -468,15 +459,8 @@
                     </div>
                 </div>
             </div>
-            <button class="btn btn-primary">Berita Lainnya</button>
+            <a href="/berita" class="btn btn-primary">Berita Lainnya</a>
         </div>
     </div>
     <!-- Berita End -->
-
-    <!-- Script Tampil Rating -->
-    <script>
-        function ratingPotensi() {
-            alert("Tes")
-        }
-    </script>
 @endsection

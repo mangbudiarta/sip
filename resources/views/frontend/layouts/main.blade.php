@@ -66,6 +66,7 @@
                         <a href="/berita" class="nav-item nav-link {{ $title == 'Berita' ? 'active' : '' }}">Berita</a>
                         <a href="/kontak" class="nav-item nav-link {{ $title == 'Kontak' ? 'active' : '' }}">Kontak</a>
                     </div>
+                    <a href="/" class="btn btn-outline-primary rounded-pill py-2 px-4">LOGIN</a>
                 </div>
             </nav>
         </div>

@@ -24,21 +24,31 @@ Route::get('/profil', function () {
         "title" => "Profil"
     ]);
 });
-
 Route::get('/potensi', function () {
-    return view('frontend/potensi',[
+    return view('frontend/potensi/index',[
+        "title" => "Potensi"
+    ]);
+});
+Route::get('/potensidetail', function () {
+    return view('frontend/potensi/potensidetail',[
         "title" => "Potensi"
     ]);
 });
 
+
 Route::get('/umkm', function () {
-    return view('frontend/umkm',[
+    return view('frontend/umkm/index',[
+        "title" => "Umkm"
+    ]);
+});
+Route::get('/umkmdetail', function () {
+    return view('frontend/umkm/umkmdetail',[
         "title" => "Umkm"
     ]);
 });
 
 Route::get('/berita', function () {
-    return view('frontend/berita',[
+    return view('frontend/berita/index',[
         "title" => "Berita"
     ]);
 });
@@ -46,6 +56,16 @@ Route::get('/berita', function () {
 Route::get('/kontak', function () {
     return view('frontend/kontak',[
         "title" => "Kontak"
+    ]);
+});
+Route::get('/review', function () {
+    return view('frontend/potensi/review',[
+        "title" => "review"
+    ]);
+});
+Route::get('/beritadetail', function () {
+    return view('frontend/berita/beritadetail',[
+        "title" => "Judul Berita"
     ]);
 });
 

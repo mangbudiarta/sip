@@ -6,20 +6,26 @@
                 <h2 class="display-6">Daftar UMKM</h2>
             </div>
             <div class="row justify-content-center wow fadeInUp" data-wow-delay="0.1s">
-                <div class="col-lg-8">
-                    <div class="row g-5">
-                        <form action="/" method="get">
-                            <div class="row mb-3 justify-content-center">
-                                <div class="col-sm-6 mb-3">
-                                    <input type="text" class="form-control" id="cari" name="keyword"
-                                        placeholder="Pencarian">
-                                </div>
-                                <div class="col-sm-2">
-                                    <button type="submit" class="btn btn-primary px-4">Cari</button>
-                                </div>
+                <div class="col-lg-8 justify-content-center">
+                    <form action="/" method="get">
+                        <div class="row mb-3 justify-content-center">
+                            <div class="col-sm-5 mb-3">
+                                <input type="text" class="form-control" id="cari" name="keyword"
+                                    placeholder="Pencarian">
                             </div>
-                        </form>
-                    </div>
+                            <div class="col-sm-5 mb-3">
+                                <select class="form-select form-select">
+                                    <option>Kategori</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-2">
+                                <button type="submit" class="btn btn-primary px-4">Cari</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
             <div class="row wow fadeInUp" data-wow-delay="0.1s">
@@ -34,7 +40,7 @@
                             </p>
                         </div>
                         <div class="store-overlay">
-                            <a href="" class="btn btn-primary rounded-pill py-2 px-4 m-2">Info
+                            <a href="/umkmdetail" class="btn btn-primary rounded-pill py-2 px-4 m-2">Info
                                 Selengkapnya<i class="fa fa-arrow-right ms-2"></i></a>
                             <a href="" class="btn btn-dark rounded-pill py-2 px-4 m-2">Hubungi Pemilik <i
                                     class="fa fa-phone-alt ms-2"></i></a>

@@ -1,9 +1,9 @@
 @extends('frontend.layouts.main') @section('content')
-    <!-- Berita Start -->
+    <!-- Potensi Start -->
     <div class="container-xxl contact py-5">
         <div class="container">
             <div class="section-title text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                <h2 class="display-6">Daftar Berita</h2>
+                <h2 class="display-6">Daftar Potensi Desa</h2>
             </div>
             <div class="row justify-content-center wow fadeInUp" data-wow-delay="0.1s">
                 <div class="col-lg-8 justify-content-center">
@@ -28,29 +28,32 @@
                     </form>
                 </div>
             </div>
-
-            <div class="row wow fadeInUp" data-wow-delay="0.1s">
-                <div class="col-lg-4 col-md-12 mb-4">
-                    <div class="card">
-                        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                            <img src="{{ asset('frontend/img/product-1.jpg') }}" class="img-fluid" />
-                            <a href="#!">
-                                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Post title</h5>
-                            <p class="card-text deskripsi">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Error
-                                quas, corrupti est a odit nihil suscipit ipsam? Sequi, nostrum
-                                eaque?
-                            </p>
-                            <a href="#!" class="btn btn-outline-primary">Baca</a>
+            <div class="row product py-3 justify-content-center wow fadeInUp" data-wow-delay="0.5s">
+                <div class="col-lg-12">
+                    <div class="row g-5">
+                        <div class="product-item col-lg-4 rounded">
+                            <div class="row">
+                                <img src="{{ asset('frontend/img/product-1.jpg') }}" alt="" />
+                            </div>
+                            <div class="bg-white shadow-sm text-center p-4 position-relative mt-n5 mx-4">
+                                <a href="/review" class="text-center mb-3 rating-star">
+                                    <small class="fa fa-star text-warning"></small>
+                                    <small class="fa fa-star text-warning"></small>
+                                    <small class="fa fa-star text-warning"></small>
+                                    <small class="fa fa-star text-warning"></small>
+                                    <small class="fa fa-star text-warning"></small>
+                                    <small>(5)</small>
+                                </a>
+                                <a href="/potensidetail" class="h4 d-block text-primary">Potensi Satu</a>
+                                <span class="text-body deskripsi">Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                                    Corrupti vitae magnam quia praesentium eum quae vero ipsa
+                                    tempore quidem officiis.</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Berita End -->
+    <!-- Potensi Start -->
 @endsection
