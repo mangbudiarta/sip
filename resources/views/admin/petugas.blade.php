@@ -20,7 +20,8 @@
                                             <th>Nama</th>
                                             <th>JK</th>
                                             <th>Tempat Lahir</th>
-                                            <th>Tgl Lahir/th>
+                                            <th>Tgl Lahir</th>
+                                            <th>Foto</th>
                                             <th>Email</th>
                                             <th>Telepon</th>
                                             <th>Alamat</th>
@@ -34,6 +35,7 @@
                                             <td>Laki-laki</td>
                                             <td>Badung</td>
                                             <td>23-08-2000</td>
+                                            <td>foto.jpg</td>
                                             <td>petugas@gmail.com</td>
                                             <td>089123123</td>
                                             <td>Badung Bali</td>
@@ -83,6 +85,15 @@
                                                 <label class="col-form-label" for="tanggallahir">Tanggal Lahir</label>
                                                 <input type="date" class="form-control" id="tanggallahir"
                                                     name="tanggalposting" placeholder="ex :23/08/2023" />
+                                            </div>
+                                            <div>
+                                                <label for="formFile" class="form-label">Foto <span
+                                                        class=" text-muted">(png/jpg)</span></label>
+                                                <input type="file" class="form-control" type="file" id="formFile"
+                                                    name="foto" onchange="handleFiles(event)" />
+                                                <div class="overflow-auto">
+                                                    <img id="imageView1" class="my-2" alt="">
+                                                </div>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="email">Email</label>
@@ -156,6 +167,15 @@
                                                 <input type="date" class="form-control" id="tanggallahiredit"
                                                     name="tanggalposting" placeholder="ex :23/08/2023" />
                                             </div>
+                                            <div>
+                                                <label for="formFile" class="form-label">Foto <span
+                                                        class=" text-muted">(png/jpg)</span></label>
+                                                <input type="file" class="form-control" type="file" id="formFile"
+                                                    name="foto" onchange="handleFiles(event)" />
+                                                <div class="overflow-auto">
+                                                    <img id="imageView2" class="my-2" alt="">
+                                                </div>
+                                            </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="emailedit">Email</label>
                                                 <div class="input-group input-group-merge">
@@ -194,4 +214,14 @@
             </div>
         </div>
     </div>
+    <script>
+        function handleFiles(e) {
+            const imageView1 = document.getElementById('imageView1');
+            const imageView2 = document.getElementById('imageView2');
+            const file = e.target.files[0];
+            const blobURL = URL.createObjectURL(file);
+            imageView1.src = blobURL;
+            imageView2.src = blobURL;
+        }
+    </script>
 @endsection

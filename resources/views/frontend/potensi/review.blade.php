@@ -5,7 +5,7 @@
             <div class="row justify-content-center wow fadeInUp mb-5" data-wow-delay="0.1s">
                 <div class="col-lg-4">
                     <div class="mx-auto wow fadeInUp mb-2" data-wow-delay="0.1s">
-                        <h2 class="display-6">Potensi Satu</h2>
+                        <h2 class="display-6">Wisata Petik Buah</h2>
                     </div>
                     <!-- Carousel Start -->
                     <div class="container-fluid px-0 mb-5">

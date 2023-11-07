@@ -101,17 +101,27 @@ Route::group(['prefix' => 'admin'], function () {
         ]);
     });
     Route::get('potensidesa', function () {
-        return view('admin/potensidesa/potensidesa',[
+        return view('admin/potensidesa/index',[
             "title" => "Potensi Desa"
         ]);
     });
+    Route::get('kategoripotensi', function () {
+        return view('admin/potensidesa/kategoripotensi',[
+            "title" => "Kategori Potensi Desa"
+        ]);
+    });
     Route::get('umkm', function () {
-        return view('admin/umkm/umkm',[
+        return view('admin/umkm/index',[
             "title" => "UMKM"
         ]);
     });
+    Route::get('kategoriumkm', function () {
+        return view('admin/umkm/kategoriumkm',[
+            "title" => "Kategori UMKM"
+        ]);
+    });
     Route::get('berita', function () {
-        return view('admin/berita/berita',[
+        return view('admin/berita/index',[
             "title" => "Berita"
         ]);
     });
@@ -123,6 +133,11 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('petugas', function () {
         return view('admin/petugas',[
             "title" => "Petugas"
+        ]);
+    });
+    Route::get('wisatawan', function () {
+        return view('admin/wisatawan',[
+            "title" => "wisatawan"
         ]);
     });
     Route::get('potensigambar', function () {
