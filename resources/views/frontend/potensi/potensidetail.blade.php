@@ -37,6 +37,8 @@
                 <li class="pe-lg-4 pe-3"><i class="bi bi-person-check"></i> By Admin</li>
                 <li class="pe-lg-4 pe-3"><i class="bi bi-calendar-date"></i> 2-June-2023</li>
                 <li class="pe-lg-4 pe-3"><i class="bi bi-list"></i> Wisata sejarah</li>
+                <li class="pe-lg-4 pe-3"><a href="/" class="btn btn-sm btn-info">Lokasi</a>
+                </li>
             </ul>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque officia pariatur enim rem laborum. Delectus
                 ex voluptates facilis doloribus quasi tenetur, molestiae ipsum, obcaecati sint fugit placeat. Voluptatibus

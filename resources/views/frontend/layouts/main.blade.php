@@ -59,12 +59,12 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto">
                         <a href="/" class="nav-item nav-link {{ $title == 'Home' ? 'active' : '' }}">Home</a>
-                        <a href="/profil" class="nav-item nav-link {{ $title == 'Profil' ? 'active' : '' }}">Profil</a>
                         <a href="/potensi"
                             class="nav-item nav-link {{ $title == 'Potensi' ? 'active' : '' }}">Potensi</a>
                         <a href="/umkm" class="nav-item nav-link {{ $title == 'Umkm' ? 'active' : '' }}">UMKM</a>
+                        <a href="/fasilitas"
+                            class="nav-item nav-link {{ $title == 'Fasilitas' ? 'active' : '' }}">Fasilitas</a>
                         <a href="/berita" class="nav-item nav-link {{ $title == 'Berita' ? 'active' : '' }}">Berita</a>
-                        <a href="/kontak" class="nav-item nav-link {{ $title == 'Kontak' ? 'active' : '' }}">Kontak</a>
                     </div>
                     <a href="/" class="btn btn-outline-primary rounded-pill py-2 px-4">LOGIN</a>
                 </div>

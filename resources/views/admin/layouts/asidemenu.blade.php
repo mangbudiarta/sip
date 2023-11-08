@@ -139,6 +139,24 @@
         </li>
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-hotel"></i>
+                <div data-i18n="Fasilitas">Fasilitas</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a href="/admin/fasilitas" class="menu-link">
+                        <div data-i18n="Fasilitas">Daftar Fasilitas</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="/admin/kategorifasilitas" class="menu-link">
+                        <div data-i18n="Kategori Fasilitas">Kategori Fasilitas</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-news"></i>
                 <div data-i18n="Berita">Berita</div>
             </a>

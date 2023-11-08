@@ -30,7 +30,7 @@
             </div>
             <div class="row wow fadeInUp" data-wow-delay="0.1s">
                 <div class="col-lg-4 col-md-12 mb-4 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="store-item position-relative text-center">
+                    <div class="store-item position-relative text-center shadow-sm">
                         <img class="img-fluid" src="{{ asset('frontend/img/store-product-1.jpg') }}" alt="" />
                         <div class="p-4">
                             <h4 class="mb-3">UMKM SATU</h4>

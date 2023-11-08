@@ -20,7 +20,7 @@ Route::get('/', function () {
 });
 
 Route::get('/profil', function () {
-    return view('frontend/profil',[
+    return view('frontend/pages/profil',[
         "title" => "Profil"
     ]);
 });
@@ -53,9 +53,9 @@ Route::get('/berita', function () {
     ]);
 });
 
-Route::get('/kontak', function () {
-    return view('frontend/kontak',[
-        "title" => "Kontak"
+Route::get('/fasilitas', function () {
+    return view('frontend/pages/fasilitas',[
+        "title" => "Fasilitas"
     ]);
 });
 Route::get('/review', function () {
@@ -76,27 +76,27 @@ Route::group(['prefix' => 'admin'], function () {
         ]);
     });
     Route::get('navbar', function () {
-        return view('admin/navbar',[
+        return view('admin/pages/navbar',[
             "title" => "Navbar"
         ]);
     });
     Route::get('banner', function () {
-        return view('admin/banner',[
+        return view('admin/pages/banner',[
             "title" => "Banner"
         ]);
     });
     Route::get('profildesa', function () {
-        return view('admin/profildesa',[
+        return view('admin/pages/profildesa',[
             "title" => "Profil Desa"
         ]);
     });
     Route::get('infowilayah', function () {
-        return view('admin/infowilayah',[
+        return view('admin/pages/infowilayah',[
             "title" => "Info Wilayah"
         ]);
     });
     Route::get('footer', function () {
-        return view('admin/footer',[
+        return view('admin/pages/footer',[
             "title" => "Footer"
         ]);
     });
@@ -131,12 +131,12 @@ Route::group(['prefix' => 'admin'], function () {
         ]);
     });
     Route::get('petugas', function () {
-        return view('admin/petugas',[
+        return view('admin/pages/petugas',[
             "title" => "Petugas"
         ]);
     });
     Route::get('wisatawan', function () {
-        return view('admin/wisatawan',[
+        return view('admin/pages/wisatawan',[
             "title" => "wisatawan"
         ]);
     });
@@ -148,6 +148,16 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('umkmgambar', function () {
         return view('admin/umkm/umkmgambar',[
             "title" => "Gambar"
+        ]);
+    });
+    Route::get('fasilitas', function () {
+        return view('admin/fasilitas/index',[
+            "title" => "Fasilitas"
+        ]);
+    });
+    Route::get('kategorifasilitas', function () {
+        return view('admin/fasilitas/kategorifasilitas',[
+            "title" => "Kategori Fasilitas"
         ]);
     });
 });

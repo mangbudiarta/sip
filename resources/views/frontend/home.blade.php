@@ -95,7 +95,7 @@
                         <p class="fs-5 fw-medium fst-italic text-primary">Profil Desa</p>
                         <h1 class="display-6">Desa Wisata Candikuning</h1>
                     </div>
-                    <div class="row g-3">
+                    <div class="row g-3 mb-3">
                         <p class="mb-0 deskripsi-large">
                             Lorem ipsum dolor sit amet consectetur adipisicing elit.
                             Excepturi, corporis blanditiis. Consequatur optio minus impedit
@@ -104,6 +104,8 @@
                             cupiditate.
                         </p>
                     </div>
+                    <a href="/profil"
+                        class="btn btn-outline-primary rounded-pill py-2 px-4 animated zoomIn">Selengkapnya</a>
                 </div>
             </div>
         </div>
@@ -323,12 +325,18 @@
     <div class="container-fluid video my-5">
         <div class="container">
             <div class="row g-0 justify-content-center">
-                <div class="col-lg-8 py-5 wow fadeIn" data-wow-delay="0.1s">
+                <div class="col-lg-7 py-5 wow fadeIn" data-wow-delay="0.1s">
                     <div class="py-2">
-                        <h2 class="display-6 mb-4 text-center">
-                            <span class="text-white">Jelajahi Wisata Candikuning</span>
-                            <br> Mulai Dari Sini
+                        <h2 class="display-6 mb-4 text-white">
+                            <span class="text-dark">Jelajahi Fasilitas</span> Desa
+                            <br>Wisata Candikuning <span class="text-dark"> Disini</span>
                         </h2>
+                    </div>
+                </div>
+                <div class="col-lg-3 py-5 wow fadeIn" data-wow-delay="0.1s">
+                    <div class="py-5">
+                        <a href="/fasilitas" class="btn btn-light rounded-pill py-3 px-5 animated zoomIn">Jelajahi
+                            Sekarang</a>
                     </div>
                 </div>
             </div>
@@ -359,7 +367,7 @@
                                 quas, corrupti est a odit nihil suscipit ipsam? Sequi, nostrum
                                 eaque?
                             </p>
-                            <a href="/beritadetail" class="btn btn-outline-primary">Baca</a>
+                            <a href="/beritadetail" class="btn btn-outline-primary rounded-pill py-2 px-4">Baca</a>
                         </div>
                     </div>
                 </div>
@@ -378,7 +386,7 @@
                                 quas, corrupti est a odit nihil suscipit ipsam? Sequi, nostrum
                                 eaque?
                             </p>
-                            <a href="#!" class="btn btn-outline-primary">Baca</a>
+                            <a href="#!" class="btn btn-outline-primary rounded-pill py-2 px-4">Baca</a>
                         </div>
                     </div>
                 </div>
@@ -397,7 +405,7 @@
                                 quas, corrupti est a odit nihil suscipit ipsam? Sequi, nostrum
                                 eaque?
                             </p>
-                            <a href="#!" class="btn btn-outline-primary">Baca</a>
+                            <a href="#!" class="btn btn-outline-primary rounded-pill py-2 px-4">Baca</a>
                         </div>
                     </div>
                 </div>
@@ -416,7 +424,7 @@
                                 quas, corrupti est a odit nihil suscipit ipsam? Sequi, nostrum
                                 eaque?
                             </p>
-                            <a href="#!" class="btn btn-outline-primary">Baca</a>
+                            <a href="#!" class="btn btn-outline-primary rounded-pill py-2 px-4">Baca</a>
                         </div>
                     </div>
                 </div>
@@ -435,7 +443,7 @@
                                 quas, corrupti est a odit nihil suscipit ipsam? Sequi, nostrum
                                 eaque?
                             </p>
-                            <a href="#!" class="btn btn-outline-primary">Baca</a>
+                            <a href="#!" class="btn btn-outline-primary rounded-pill py-2 px-4">Baca</a>
                         </div>
                     </div>
                 </div>
@@ -454,13 +462,58 @@
                                 quas, corrupti est a odit nihil suscipit ipsam? Sequi, nostrum
                                 eaque?
                             </p>
-                            <a href="#!" class="btn btn-outline-primary">Baca</a>
+                            <a href="#!" class="btn btn-outline-primary rounded-pill py-2 px-4">Baca</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <a href="/berita" class="btn btn-primary">Berita Lainnya</a>
+            <a href="/berita" class="btn btn-primary rounded-pill py-2 px-4">Berita Lainnya</a>
         </div>
     </div>
     <!-- Berita End -->
+    <!-- Kontak Start -->
+    <div class="container-xxl contact py-5">
+        <div class="container">
+            <div class="section-title text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+                <p class="fs-5 fw-medium fst-italic text-primary">Kontak</p>
+                <h2 class="display-6">Hubungi Kami untuk Informasi Lainnya</h2>
+            </div>
+            <div class="row justify-content-center wow fadeInUp" data-wow-delay="0.1s">
+                <div class="col-lg-8">
+                    <div class="row g-5">
+                        <div class="col-md-3 text-center wow fadeInUp" data-wow-delay="0.3s">
+                            <div class="btn-square mx-auto mb-3">
+                                <i class="fa fa-envelope fa-2x text-white"></i>
+                            </div>
+                            <p class="mb-2">Email</p>
+                            <p class="mb-0">support@example.com</p>
+                        </div>
+                        <div class="col-md-3 text-center wow fadeInUp" data-wow-delay="0.4s">
+                            <div class="btn-square mx-auto mb-3">
+                                <i class="fa fa-phone fa-2x text-white"></i>
+                            </div>
+                            <p class="mb-2">Telepon/Wa</p>
+                            <p class="mb-0">+012 345 67890</p>
+                        </div>
+                        <div class="col-md-3 text-center wow fadeInUp" data-wow-delay="0.5s">
+                            <div class="btn-square mx-auto mb-3">
+                                <i class="fa fa-map-marker-alt fa-2x text-white"></i>
+                            </div>
+                            <p class="mb-2">Alamat Kantor Desa</p>
+                            <p class="mb-0">Jalan Raya Bedugul, Candikuning Tabanan</p>
+                        </div>
+                        <div class="col-md-3 text-center wow fadeInUp" data-wow-delay="0.5s">
+                            <div class="btn-square mx-auto mb-3">
+                                <i class="fa fa-map-marked-alt fa-2x text-white"></i>
+                            </div>
+                            <p class="mb-2">Maps Kantor Desa</p>
+                            <p class="mb-0"><a href="https://maps.app.goo.gl/KWBkuRuPTJ3dtdVq6" target="_blank">Link
+                                    Maps</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Kontak End -->
 @endsection

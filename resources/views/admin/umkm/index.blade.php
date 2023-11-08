@@ -81,10 +81,19 @@
                                                     aria-label="ex: UMKM Teko adalah umkm yang ada di Desa Candikuning" aria-describedby="basic-icon-default-message2"></textarea>
                                             </div>
                                             <div class="mb-3">
-                                                <label class="col-form-label" for="infopemilih">Info Pemilik <span
+                                                <label class="col-form-label" for="infopemilik">Info Pemilik <span
                                                         class=" text-muted">(no telepon/media sosial)</span></label>
-                                                <input type="text" class="form-control" id="infopemilih"
-                                                    name="infopemilih" />
+                                                <input type="text" class="form-control" id="infopemilik"
+                                                    name="infopemilik" placeholder="ex: +62831123123" />
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="col-form-label" for="kategori">Kategori</label>
+                                                <select class="form-select form-select" name="id_kategori" id="kategori">
+                                                    <option>-- Pilih Kategori --</option>
+                                                    <option value="Hotel">Hotel</option>
+                                                    <option value="Transportasi">Trabsportasi</option>
+                                                    <option value="Rumah Sakit">Rumah Sakit</option>
+                                                </select>
                                             </div>
                                             <div>
                                                 <label for="formFile1" class="form-label">Gambar Cover<span
@@ -147,7 +156,17 @@
                                                 <label class="col-form-label" for="pemilikedit">Info Pemilik<span
                                                         class=" text-muted">(no telepon/media sosial)</span></label>
                                                 <input type="text" class="form-control" id="pemilikedit"
-                                                    name="pemilik" />
+                                                    name="infopemilik" placeholder="ex: +62831123123" />
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="col-form-label" for="kategoriedit">Kategori</label>
+                                                <select class="form-select form-select" name="id_kategori"
+                                                    id="kategoriedit">
+                                                    <option>-- Pilih Kategori --</option>
+                                                    <option value="Hotel">Hotel</option>
+                                                    <option value="Transportasi">Trabsportasi</option>
+                                                    <option value="Rumah Sakit">Rumah Sakit</option>
+                                                </select>
                                             </div>
                                             <div>
                                                 <label for="formFileedit" class="form-label">Gambar Cover<span

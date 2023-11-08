@@ -20,6 +20,7 @@
                                             <th>No</th>
                                             <th>Nama Potensi</th>
                                             <th>Deskripsi</th>
+                                            <th>Lokasi</th>
                                             <th>Penulis</th>
                                             <th>Tgl Posting</th>
                                             <th>Gambar</th>
@@ -33,6 +34,7 @@
                                             <td>Web Desa</td>
                                             <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure, voluptatum!
                                             </td>
+                                            <td><a href="/" class="btn btn-sm btn-info">Lokasi</a></td>
                                             <td>Admin</td>
                                             <td>23-08-2023</td>
                                             <td>gambar.jpg</td>
@@ -72,6 +74,11 @@
                                                     name="namapotensi" placeholder="ex : Pantai Kaca" />
                                             </div>
                                             <div class="mb-3">
+                                                <label class="col-form-label" for="lokasi">Maps Lokasi</label>
+                                                <input type="text" class="form-control" id="lokasi" name="lokasi"
+                                                    placeholder="ex : https:maps.google.com/ssss" />
+                                            </div>
+                                            <div class="mb-3">
                                                 <label class="col-form-label" for="slug">Slug</label>
                                                 <input type="text" class="form-control" id="slug" name="slug"
                                                     placeholder="ex : Pantai-Kaca" />
@@ -92,6 +99,15 @@
                                                 <label class="col-form-label" for="tglposting">Tanggal posting</label>
                                                 <input type="date" class="form-control" id="tglposting"
                                                     name="tanggalposting" placeholder="ex :23/08/2023" />
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="col-form-label" for="kategori">Kategori</label>
+                                                <select class="form-select form-select" name="id_kategori" id="kategori">
+                                                    <option>-- Pilih Kategori --</option>
+                                                    <option value="Hotel">Hotel</option>
+                                                    <option value="Transportasi">Trabsportasi</option>
+                                                    <option value="Rumah Sakit">Rumah Sakit</option>
+                                                </select>
                                             </div>
                                             <div>
                                                 <label for="formFile1" class="form-label">Gambar Cover<span
@@ -140,6 +156,11 @@
                                                     name="namapotensi" placeholder="ex : Pantai Kaca" />
                                             </div>
                                             <div class="mb-3">
+                                                <label class="col-form-label" for="lokasiedit">Maps Lokasi</label>
+                                                <input type="text" class="form-control" id="lokasiedit"
+                                                    name="lokasi" placeholder="ex : https:maps.google.com/ssss" />
+                                            </div>
+                                            <div class="mb-3">
                                                 <label class="col-form-label" for="slugedit">Slug</label>
                                                 <input type="text" class="form-control" id="slugedit" name="slug"
                                                     placeholder="ex : Pantai-Kaca" />
@@ -160,6 +181,16 @@
                                                 <label class="col-form-label" for="tglpostingedit">Tanggal posting</label>
                                                 <input type="date" class="form-control" id="tglpostingedit"
                                                     name="tanggalposting" placeholder="ex :23/08/2023" />
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="col-form-label" for="kategorediti">Kategori</label>
+                                                <select class="form-select form-select" name="id_kategori"
+                                                    id="kategoriedit">
+                                                    <option>-- Pilih Kategori --</option>
+                                                    <option value="Hotel">Hotel</option>
+                                                    <option value="Transportasi">Trabsportasi</option>
+                                                    <option value="Rumah Sakit">Rumah Sakit</option>
+                                                </select>
                                             </div>
                                             <div>
                                                 <label for="formFileedit" class="form-label">Gambar Cover<span
