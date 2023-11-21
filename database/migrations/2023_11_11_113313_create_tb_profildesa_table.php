@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('tb_profildesa', function (Blueprint $table) {
             $table->integer('id_profildesa')->autoIncrement();
-            $table->string('gambarcover', 15);
+            $table->string('gambarcover', 50);
             $table->string('video', 60);
             $table->string('judul', 25);
             $table->text('deskripsi');

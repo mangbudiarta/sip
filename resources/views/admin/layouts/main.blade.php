@@ -56,7 +56,7 @@
     <link rel="stylesheet" href="{{ asset('backend/assets/vendor/libs/apex-charts/apex-charts.css') }}" />
     
     <!-- Data tables -->
-    <link rel="stylesheet" href="{{ asset('backend/assets/vendor/libs/datatables/datatables.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('backend/assets/vendor/libs/datatables/jquery.dataTables.min.css') }}" />
 
     <!-- Helpers -->
     <script src="{{ asset('backend/assets/vendor/js/helpers.js') }}"></script>
@@ -64,6 +64,8 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('backend/assets/js/config.js') }}"></script>
+    <script src="{{ asset('backend/assets/vendor/libs/jquery/jquery.js') }}"></script>
+
   </head>
 
   <body>
@@ -105,7 +107,6 @@
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
-    <script src="{{ asset('backend/assets/vendor/libs/jquery/jquery.js') }}"></script>
     <script src="{{ asset('backend/assets/vendor/libs/popper/popper.js') }}"></script>
     <script src="{{ asset('backend/assets/vendor/js/bootstrap.js') }}"></script>
     <script src="{{ asset('backend/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
@@ -125,12 +126,11 @@
     <!-- Chk Editor-->
     <script src="{{ asset('backend/assets/vendor/libs/ckeditor/build/ckeditor.js') }}"></script>
     <!-- Data tables-->
-    <script src="{{ asset('backend/assets/vendor/libs/datatables/datatables.min.js') }}"></script>
     <script src="{{ asset('backend/assets/vendor/libs/datatables/jquery.datatables.min.js') }}"></script>
     <script>
-        $(function() {
-            $(".datatables").DataTable();
-        });
+        // $(function() {
+        //     $(".datatables").DataTable();
+        // });
     </script>
   </body>
 </html>

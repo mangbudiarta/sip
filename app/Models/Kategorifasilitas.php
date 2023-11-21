@@ -10,7 +10,8 @@ class Kategorifasilitas extends Model
     use HasFactory;
     protected $table = 'tb_kategorifasilitas';
     protected $primaryKey = 'id_kategori';
-
+    protected $guarded = ['id_kategori'];
+    
     // relasi 1 to N fasilitas
     public function fasilitas()
     {

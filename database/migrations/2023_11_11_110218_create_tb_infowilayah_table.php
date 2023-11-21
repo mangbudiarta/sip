@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('tb_infowilayah', function (Blueprint $table) {
             $table->integer('id_infowilayah')->autoIncrement();
-            $table->string('gambarcover', 15);
+            $table->string('gambarcover', 50);
             $table->string('judul', 25);
             $table->text('deskripsi');
             $table->timestamps();

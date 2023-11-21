@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('tb_umkmgambar', function (Blueprint $table) {
             $table->integer('id_gambar')->autoIncrement();
-            $table->string('gambar', 15);
+            $table->string('gambar', 50);
             $table->integer('id_umkm');
             $table->foreign('id_umkm')->references('id_umkm')->on('tb_umkm');
             $table->timestamps();
