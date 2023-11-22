@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('tb_umkm', function (Blueprint $table) {
             $table->integer('id_umkm')->autoIncrement();
-            $table->string('gambarcover', 15)->nullable();
+            $table->string('gambarcover', 50)->nullable();
             $table->string('namaumkm', 150);
             $table->text('deskripsi');
             $table->string('slug', 50)->unique();

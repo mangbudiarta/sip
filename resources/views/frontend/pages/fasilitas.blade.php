@@ -31,26 +31,36 @@
             <div class="row py-3 justify-content-center wow fadeInUp" data-wow-delay="0.5s">
                 <div class="col-lg-12">
                     <div class="row g-5">
-                        <div class="col-lg-4 col-md-12 mb-4 wow fadeInUp" data-wow-delay="0.1s">
-                            <div class="store-item position-relative text-center shadow-sm">
-                                <img class="img-fluid" src="{{ asset('frontend/img/store-product-1.jpg') }}"
-                                    alt="" />
-                                <div class="p-4">
-                                    <h4 class="mb-3">Kadek Homestay</h4>
-                                    <p class="deskripsi">
-                                        Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                                        Ipsam sapiente repellat repellendus, voluptatibus ullam unde?
-                                    </p>
-                                </div>
-                                <div class="store-overlay">
-                                    <a href="https://maps.app.goo.gl/KWBkuRuPTJ3dtdVq6"
-                                        class="btn btn-primary rounded-pill py-2 px-4 m-2" target="_blank">Lokasi<i
-                                            class="fa fa-map-marker-alt ms-2"></i></a>
-                                    <a href="" class="btn btn-dark rounded-pill py-2 px-4 m-2">Kontak<i
-                                            class="fa fa-phone-alt ms-2"></i></a>
+                        @forelse ($fasilitas as $item)
+                            <div class="col-lg-4 col-md-12 mb-4 wow fadeInUp" data-wow-delay="0.1s">
+                                <div class="h-100 store-item position-relative text-center shadow-sm">
+                                    <div style="max-height:350px;background-size: cover">
+                                        <img class="img-fluid" src="/storage/fasilitas_img/{{ $item->gambar }}"
+                                            alt="Gambar Fasilitas" />
+                                    </div>
+                                    <div class="p-4">
+                                        <h4 class="mb-3">{{ $item->namafasilitas }}</h4>
+                                        <p class="deskripsi">
+                                            {{ $item->deskripsi }}
+                                        </p>
+                                    </div>
+                                    <div class="store-overlay">
+                                        <a href="{{ $item->lokasi }}" class="btn btn-primary rounded-pill py-2 px-4 m-2"
+                                            target="_blank">Lokasi<i class="fa fa-map-marker-alt ms-2"></i></a>
+                                        @if (Str::contains($item->kontak, '+'))
+                                            <a href="https://wa.me/{{ $item->kontak }}"
+                                                class="btn btn-dark rounded-pill py-2 px-4 m-2" target="_blank">Kontak<i
+                                                    class="fa fa-phone-alt ms-2"></i></a>
+                                        @else
+                                            <a href="{{ $item->kontak }}" class="btn btn-dark rounded-pill py-2 px-4 m-2"
+                                                target="_blank">Kontak<i class="fa fa-phone-alt ms-2"></i></a>
+                                        @endif
+
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @empty
+                        @endforelse
                     </div>
                 </div>
             </div>

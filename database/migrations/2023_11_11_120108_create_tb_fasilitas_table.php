@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('id_fasilitas')->autoIncrement();
             $table->string('namafasilitas', 100);
             $table->string('deskripsi', 255)->nullable();
-            $table->string('gambar', 15)->nullable();
+            $table->string('gambar', 50)->nullable();
             $table->string('lokasi', 50)->nullable();
             $table->string('kontak', 50)->nullable();
             $table->integer('id_kategori');

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('judulberita', 150);
             $table->date('tanggalposting');
             $table->string('penulis', 10);
-            $table->string('gambarcover', 15)->nullable();
+            $table->string('gambarcover', 50)->nullable();
             $table->text('isiberita');
             $table->string('slug', 50)->unique();
             $table->integer('id_kategori');

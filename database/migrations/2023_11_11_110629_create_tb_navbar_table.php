@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('tb_navbar', function (Blueprint $table) {
             $table->integer('id_navbar')->autoIncrement();
-            $table->string('gambarnav',15);
+            $table->string('gambarnav',50);
             $table->timestamps();
         });
     }

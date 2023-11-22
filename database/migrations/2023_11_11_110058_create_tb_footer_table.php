@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('tb_footer', function (Blueprint $table) {
             $table->integer('id_footer')->autoIncrement();
-            $table->string('gambar',15);
+            $table->string('gambar',50);
             $table->text('deskripsi');
             $table->text('peta');
             $table->timestamps();
