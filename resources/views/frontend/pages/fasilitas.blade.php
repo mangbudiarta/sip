@@ -7,18 +7,20 @@
             </div>
             <div class="row justify-content-center wow fadeInUp" data-wow-delay="0.1s">
                 <div class="col-lg-8 justify-content-center">
-                    <form action="/" method="get">
+                    <form action="/fasilitas" method="get">
                         <div class="row mb-3 justify-content-center">
                             <div class="col-sm-5 mb-3">
                                 <input type="text" class="form-control" id="cari" name="keyword"
                                     placeholder="Pencarian">
                             </div>
                             <div class="col-sm-5 mb-3">
-                                <select class="form-select form-select">
-                                    <option>Kategori</option>
-                                    <option value="Hotel">Hotel</option>
-                                    <option value="Transportasi">Trabsportasi</option>
-                                    <option value="Rumah Sakit">Rumah Sakit</option>
+                                <select class="form-select form-select" name="id_kategori" id="kategori">
+                                    <option value="">Kategori</option>
+                                    @foreach ($kategori as $item)
+                                        <option value="{{ $item->id_kategori }}">
+                                            {{ $item->namakategori }}
+                                        </option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-sm-2">
@@ -60,6 +62,9 @@
                                 </div>
                             </div>
                         @empty
+                            <div class="text-center">
+                                {{ $message }}
+                            </div>
                         @endforelse
                     </div>
                 </div>

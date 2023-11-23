@@ -42,7 +42,7 @@
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="namafasilitas">Nama Fasilitas</label>
                                                 <input type="text" class="form-control" id="namafasilitas"
-                                                    name="namafasilitas" placeholder="ex : Kadek Homestay" />
+                                                    name="namafasilitas" placeholder="ex : Kadek Homestay" required />
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="deskripsi">Deskripsi</label>
@@ -66,7 +66,8 @@
                                                         class=" text-muted">(data kategori berasal dari menu
                                                         kategori)</span></label>
                                                 {{-- Select option value from database --}}
-                                                <select class="form-select form-select" name="id_kategori" id="kategori">
+                                                <select class="form-select form-select" name="id_kategori" id="kategori"
+                                                    required>
                                                     <option>-- Pilih Kategori --</option>
                                                     @foreach ($kategori as $item)
                                                         <option value="{{ $item->id_kategori }}">
@@ -118,7 +119,7 @@
                                                 <label class="col-form-label" for="namafasilitasedit">Nama
                                                     Fasilitas</label>
                                                 <input type="text" class="form-control" id="namafasilitasedit"
-                                                    name="namafasilitas" placeholder="ex : Kadek Homestay" />
+                                                    name="namafasilitas" placeholder="ex : Kadek Homestay" required />
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="edit">Deskripsi</label>
@@ -143,7 +144,7 @@
                                                         kategori)</span></label>
                                                 {{-- Select option value from database --}}
                                                 <select class="form-select form-select" name="id_kategori"
-                                                    id="kategoriedit">
+                                                    id="kategoriedit" required>
                                                     <option>-- Pilih Kategori --</option>
                                                     @foreach ($kategori as $item)
                                                         <option value="{{ $item->id_kategori }}">
