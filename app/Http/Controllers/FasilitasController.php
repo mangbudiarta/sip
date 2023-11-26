@@ -5,63 +5,67 @@ namespace App\Http\Controllers;
 use App\Models\Fasilitas;
 use App\Models\Kategorifasilitas;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class FasilitasController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Fungsi menampilkan view index pada folder admin/fasilitas
+     * @param -
+     * @return view index dengan array key:kategori dan key:title
      */
     public function index()
     {
-        // Get all kategorifasilitas
         return view('admin.fasilitas.index', [
+            // mengisi array key:kategori dengan semua data dari model Kategorifasilitas
             'kategori' => Kategorifasilitas::all(),
+            // mengisi array key: title dengan string 'Fasilitas'
             'title' => 'Fasilitas'
         ]);
     }
 
+    /**
+     * Fungsi mendapatkan semua data fasilitas
+     * @param -
+     * @return view datafasilitas dengan array key:fasilitas
+     */
     public function fetch()
     {
-        // Get all fasilitas
         return view('admin.fasilitas.datafasilitas', [
+            // mengisi array key:fasilitas dengan semua data dari model Fasilitas
             'fasilitas' => Fasilitas::all()
         ]);
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
+     * Fungsi menyimpan data fasilitas ke database
+     * @param obyek Request dengan $request berisi data formulir
+     * @return response json dengan array key:status
      */
     public function store(Request $request)
     {
+        // mengisi array validateData dengan data valid dari fungsi validasiRules (parameter data formulir)
         $validateData = $this->validasiRules($request);
         if ($request->file('gambar')) {
-            // Insert image if any
+            // ada input gambar, masukan nama gambar dari fungsi inputGambar (parameter data formulir)
             $fileNameToStore= $this->inputGambar($request);
         } else {
-            // Else add a dummy image
+            // tidak input gambar, masukan nama noimage.png ke database
             $fileNameToStore = 'noimage.png';
         }
+        // mengisi array validateData indeks gambar dengan nama gambar
         $validateData['gambar']=$fileNameToStore;
         
         try {
+            // input data ke database dari model Fasilitas
             $result = Fasilitas::create($validateData);
         } catch (\Throwable $th) {
-            // Failed insert
+            // gagal input data, return status 500
             return response()->json([
                 'status' => 500
             ]);
         }
 
-        // Success insert
+        // Berhasil input data, return status 200
         if($result){
             return response()->json([
                 'status' => 200,
@@ -70,56 +74,71 @@ class FasilitasController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Fungsi menampilkan data fasilitas sesuai id
+     * @param obyek Request $request berisi data formulir
+     * @return response json dengan array key: fasilitas dan key:kategori
      */
     public function show(Request $request)
     {
+        // mengisi $id dari data form dengan name:id_fasilitas
         $id = $request->id_fasilitas;
-        // Show fasilitas by id
+        // mengisi $data dengan data fasilitas sesuai id dari model Fasilitas
 		$data = Fasilitas::find($id);
 		return response()->json([
+            // mengisi array key:fasilitas dengan $data
             'fasilitas' => $data,
+            // mengisi array key:kategori dengan nama kategori dari relasi kategorifasilitas
             'kategori' =>$data->kategorifasilitas->namakategori,
         ]);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Fungsi menampilkan data fasilitas sesuai id untuk form edit
+     * @param obyek Request $request berisi data formulir
+     * @return response json dengan isi data fasilitas sesuai id
      */
     public function edit(Request $request)
     {
+        // mengisi $id dari data form dengan name:id_fasilitas
         $id = $request->id_fasilitas;
+        // mengisi $data dengan data fasilitas sesuai id dari model Fasilitas
 		$data = Fasilitas::find($id);
+        // mengirim isi $data dengan json
 		return response()->json($data);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Fungsi update data ke database
+     * @param obyek Request $request berisi data formulir
+     * @return response json dengan array key:status
      */
     public function update(Request $request)
     {
-
+        // mengisi array validateData dengan data valid dari fungsi validasiRules (parameter data formulir)
         $validateData = $this->validasiRules($request);
+        // mengiai $fasilitas dengan dari model Fasilitas sesuai id
         $fasilitas = Fasilitas::find($request->id_fasilitas);
         if ($request->file('gambar')) {
-            // Insert image if new image
+            // ada input gambar, masukan nama gambar dari fungsi inputGambar (parameter data formulir)
             $fileNameToStore= $this->inputGambar($request);
         } else {
-            // Else use old image
+            // tidak input gambar, pakai nama gambar sebelumnya
             $fileNameToStore = $fasilitas->gambar;
         }
+        // mengisi array validateData indeks gambar dengan nama gambar
         $validateData['gambar']=$fileNameToStore;
     
         try {
+            // update data ke database dari model Fasilitas
             $result = Fasilitas::where('id_fasilitas',$fasilitas->id_fasilitas)->update($validateData);
         } catch (\Throwable $th) {
-            // Failed update
+            // gagal update data, return status 500
             return response()->json([
                 'status' => 500,
             ]);
         }
 
-        // Success update
+        // Berhasil update data, return status 200
         if($result){
             return response()->json([
                 'status' => 200,
@@ -128,21 +147,25 @@ class FasilitasController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Fungsi delete data fasilitas sesuai id
+     * @param obyek Request $request berisi data formulir
+     * @return response json dengan array key:status
      */
     public function destroy(Request $request)
     {
+        // mengisi $id dari data form dengan name:id_fasilitas
         $id = $request->id_fasilitas;
         try {
+            // delete data pada database dari model Fasilitas
             $result = Fasilitas::destroy($id);
         } catch (\Throwable $th) {
-            // Failed delete
+            // Gagal delete data, return status 500
             return response()->json([
                 'status' => 500,
             ]);
         }
 
-        // Success Delete
+        // Berhasil delete data, return status 200
         if($result){
             return response()->json([
                 'status' => 200,
@@ -150,7 +173,11 @@ class FasilitasController extends Controller
         }
     }
 
-    // Function cek rules
+    /**
+     * Fungsi validasi form inputan user 
+     * @param obyek Request $request berisi data formulir
+     * @return data tervalidasi
+     */
     public function validasiRules(Request $request) {
         return $request->validate([
             'namafasilitas' => 'required|max:100',
@@ -162,17 +189,22 @@ class FasilitasController extends Controller
         ]);
     }
 
-    // Function input gambar
+    /**
+     * Fungsi input gambar dan validasi gambar
+     * @param obyek Request $request berisi data formulir
+     * @return nama gambar
+     */
     public function inputGambar(Request $request) {
-        // Get just extension
+        // mendapatkan ekstensi gambar
         $extension = $request->file('gambar')->getClientOriginalExtension();
-        // Get 6 charackter random name 
+        // mendapatkan 6 karakter ramdom dari $sumber
         $sumber = "ABCDEFGHIJKLMNPQRSTUVWXYZ";
         $randomName = substr(str_shuffle($sumber),0,6);
-        // Filename to store
+        // Nama gambar untuk disimpan
         $fileNameToStore = 'fasilitas-'.$randomName.'.'.$extension;
-        // Path upload image
+        // Lokasi penyimpanan gambar
         $path = $request->file('gambar')->storeAs('public/fasilitas_img', $fileNameToStore);
+        // return nama gambar
         return $fileNameToStore;
     }
 }

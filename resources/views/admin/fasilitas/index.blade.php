@@ -262,75 +262,114 @@
         $(function() {
 
             // add ajax request
+            // jika form dengan id add_fasilitas_form disubmit
             $("#add_fasilitas_form").submit(function(e) {
+                // jeda untuk melakukan proses pengecekan
                 e.preventDefault();
+                // simpan isi form dalam obyek dataForm
                 const dataForm = new FormData(this);
+                // ganti tulisan button simpan
                 $("#add_fasilitas_btn").text('Adding ...');
                 $.ajax({
+                    // panggil route name save.fasilitas
                     url: '{{ route('save.fasilitas') }}',
+                    // method pengiriman data POST
                     method: 'POST',
+                    // isi data: obyek dataForm
                     data: dataForm,
                     cache: false,
                     contentType: false,
                     processData: false,
                     dataType: 'json',
+                    // jika sukses return respon json
                     success: function(response) {
+                        // jika respon array key:status = 200
                         if (response.status == 200) {
+                            // tampilkan data dengan mengirimkan parameter array key:succes
                             fetch('success', 'Berhasil tambah data');
+                            // reset isi formulir tambah
                             $("#add_fasilitas_form")[0].reset();
                         } else {
+                            // jika respon array key:status selain 200
+                            // tampilkan data dengan mengirimkan parameter array key:danger
                             fetch('danger', 'Gagal tambah data');
                         }
+                        // kembalikan tulisan button simpan
                         $("#add_fasilitas_btn").text('Submit');
+                        // tutup tampilan modal fasilitas tambah
                         $("#FasilitasTambah").modal('hide');
                     }
                 });
             });
 
             // delete ajax request
+            // jika class deletefasilitas pada datafasilitas.blade di klik
             $(document).on('click', '.deletefasilitas', function(e) {
+                // jeda untuk melakukan proses pengecekan
                 e.preventDefault();
+                // buat variabel id dengan isi data dari atribut id pada class detelefasilitas
                 let id = $(this).attr('id');
+                // buat variabel csrf
                 let csrf = '{{ csrf_token() }}';
+                // jika confirm hapus true
                 if (confirm('Yakin hapus data ini ?')) {
                     $.ajax({
+                        // panggil route name delete.fasilitas
                         url: '{{ route('delete.fasilitas') }}',
+                        // methode DELETE
                         method: 'DELETE',
+                        // isi data : id_fasilitas dan token
                         data: {
                             id_fasilitas: id,
                             _token: csrf
                         },
+                        // jika sukses return respon json
                         success: function(response) {
+                            // jika respon array key:status = 200
                             if (response.status == 200) {
+                                // tampilkan data dengan mengirimkan parameter array key:succes
                                 fetch('success', 'Berhasil hapus data');
                             } else {
+                                // jika respon array key:status selain 200
+                                // tampilkan data dengan mengirimkan parameter array key:danger
                                 fetch('danger', 'Gagal hapus data');
                             }
                         }
                     });
                 } else {
+                    // jika confirm hapus false/ tidak hapus
+                    // tampilkan data dengan mengirimkan parameter array key:info
                     fetch('info', 'Data aman');
                 }
 
             });
 
             // detail ajax request
+            // jika class detailFasilitas pada datafasilitas.blade di klik
             $(document).on('click', '.detailFasilitas', function(e) {
+                // jeda untuk melakukan proses pengecekan
                 e.preventDefault();
+                // buat variabel id dengan isi data dari atribut id pada class detailFasilitas
                 let id = $(this).attr('id');
                 $.ajax({
+                    // panggil route name detail.fasilitas
                     url: '{{ route('detail.fasilitas') }}',
+                    // method GET
                     method: 'GET',
+                    // isi data : id_fasilitas dan token
                     data: {
                         id_fasilitas: id,
                         _token: '{{ csrf_token() }}'
                     },
+                    // jika sukses return respon json
                     success: function(response) {
+                        // tampilkan setiap value dari id inputan form
                         $("#namafasilitasdetail").val(response.fasilitas.namafasilitas);
                         $("#deskripsidetail").val(response.fasilitas.deskripsi);
                         $("#lokasidetail").val(response.fasilitas.lokasi);
                         $("#kontakdetail").val(response.fasilitas.kontak);
                         $("#id_kategoridetail").val(response.fasilitas.id_kategori);
+                        // id img-previewdetail menampilkan gambar dari lokasi penyimpanan
                         $("#img-previewdetail").html(
                             `<img src="{{ asset('/storage/fasilitas_img/${response.fasilitas.gambar}') }}" width="200" height="200" class="img-fluid img-thumbnail">`
                         );
@@ -339,17 +378,25 @@
             });
 
             // edit ajax request
+            // jika class editfasilitas pada datafasilitas.blade di klik
             $(document).on('click', '.editfasilitas', function(e) {
+                // jeda untuk melakukan proses pengecekan
                 e.preventDefault();
+                // buat variabel id dengan isi data dari atribut id pada class editFasilitas
                 let id = $(this).attr('id');
                 $.ajax({
+                    // panggil route name edit.fasilitas
                     url: '{{ route('edit.fasilitas') }}',
+                    // method GET
                     method: 'GET',
+                    // isi data : id_fasilitas dan token
                     data: {
                         id_fasilitas: id,
                         _token: '{{ csrf_token() }}'
                     },
+                    // jika sukses return respon json
                     success: function(response) {
+                        // tampilkan setiap value dari id inputan form
                         $("#id_fasilitasedit").val(response.id_fasilitas);
                         $("#namafasilitasedit").val(response.namafasilitas);
                         $("#deskripsiedit").val(response.deskripsi);
@@ -361,54 +408,75 @@
             });
 
             // update ajax request
+            // jika form dengan id edit_fasilitas_form disubmit
             $("#edit_fasilitas_form").submit(function(e) {
-                //stop submit the form, we will post it manually.
+                // jeda untuk melakukan proses pengecekan
                 e.preventDefault();
-                // Get form
+                // dapatkan form edit
                 var form = $('#edit_fasilitas_form')[0];
-                // FormData object
+                // simpan isi form dalam obyek dataForm
                 var dataForm = new FormData(form);
+                // ganti tulisan button simpan
                 $("#edit_fasilitas_btn").text('Updating ...');
                 $.ajax({
+                    // panggil route name update.fasilitas
                     url: '{{ route('update.fasilitas') }}',
+                    // method POST
                     method: 'POST',
+                    // isi data: obyek dataForm
                     data: dataForm,
                     cache: false,
                     contentType: false,
                     processData: false,
                     dataType: 'json',
+                    // jika sukses return respons json
                     success: function(response) {
+                        // jika respon array key:status = 200
                         if (response.status == 200) {
+                            // tampilkan data dengan mengirimkan parameter array key:succes
                             fetch('success', 'Berhasil edit data');
                         } else {
+                            // jika respon array key:status selain 200
+                            // tampilkan data dengan mengirimkan parameter array key:danger
                             fetch('danger', 'Gagal edit data');
 
                         }
+                        // kembalikan tulisan button simpan
                         $("#edit_fasilitas_btn").text('Submit');
+                        // tutup tampilan modal fasilitas edit
                         $("#FasilitasEdit").modal('hide');
                     }
                 });
             });
 
             //get record
-            fetch();
+            fetch('', '');
 
+            // fungsi menampilkan data
+            //parameter String type dan message
             function fetch(type = '', message = '') {
                 $.ajax({
+                    // panggil route name fetch.fasilitas
                     url: '{{ route('fetch.fasilitas') }}',
+                    // method GET
                     method: 'GET',
+                    // jika sukses return respons json
                     success: function(response) {
+                        // isi id dataPage dengan sintax html berisi response
                         $("#dataPage").html(response);
+                        // buat tag table menjadi datatable
                         $("table").DataTable({
                             order: [0, 'desc']
                         });
+                        // jika parameter type dan message tidak kosong
                         if (type && message) {
-                            // Create and append new alert
+                            // Buat element alert sesuai parameter
                             const alertHtml =
                                 `<div class="alert alert-${type} alert-dismissible fade show" role="alert">
                                 ${message}
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>`;
+                            // tampilkan element alert pada class .alert-notif pada view datafasilitas.blade
                             $(".alert-notif").append(alertHtml);
 
                         }
@@ -418,19 +486,25 @@
             }
         });
 
-        // preview image add
+        // fungsi menampilkan gambar pada form tambah
         function previewImage() {
+            // pilih gambar pada input file dengan id image
             const image = document.querySelector('#image');
+            // pilih tempat tampil gambar pada id img-preview
             const imgPreview = document.querySelector('#img-preview')
             const blob = URL.createObjectURL(image.files[0]);
             imgPreview.src = blob;
         }
 
-        // preview image edit
+        // fungsi menampilkan gambar pada form edit
         function previewImageEdit() {
+            // pilih gambar pada input file dengan id imageEdit
             const image = document.querySelector('#imageEdit');
+            // pilih tempat tampil gambar pada id img-previewEdit
             const imgPreview = document.querySelector('#img-previewEdit')
+            // buat blob dari const image
             const blob = URL.createObjectURL(image.files[0]);
+            // tampilkan blob pada imgPreview
             imgPreview.src = blob;
         }
     </script>
