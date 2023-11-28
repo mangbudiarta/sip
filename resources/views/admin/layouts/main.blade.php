@@ -123,14 +123,7 @@
     <!-- Page JS -->
     <script src="{{ asset('backend/assets/js/dashboards-analytics.js') }}"></script>
     
-    <!-- Chk Editor-->
-    <script src="{{ asset('backend/assets/vendor/libs/ckeditor/build/ckeditor.js') }}"></script>
     <!-- Data tables-->
     <script src="{{ asset('backend/assets/vendor/libs/datatables/jquery.datatables.min.js') }}"></script>
-    <script>
-        // $(function() {
-        //     $(".datatables").DataTable();
-        // });
-    </script>
   </body>
 </html>

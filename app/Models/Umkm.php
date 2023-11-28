@@ -10,6 +10,8 @@ class Umkm extends Model
     use HasFactory;
     protected $table = 'tb_umkm';
     protected $primaryKey = 'id_umkm';
+    // tidak perlu diinput manual
+    protected $guarded = ['id_umkm'];
     
     // relasi N to 1 kategoriumkm
     public function kategoriumkm()

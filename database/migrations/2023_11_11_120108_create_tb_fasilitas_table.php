@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('tb_fasilitas', function (Blueprint $table) {
             $table->integer('id_fasilitas')->autoIncrement();
-            $table->string('namafasilitas', 100);
+            $table->string('namafasilitas', 100)->unique();
             $table->string('deskripsi', 255)->nullable();
             $table->string('gambar', 50)->nullable();
             $table->string('lokasi', 50)->nullable();

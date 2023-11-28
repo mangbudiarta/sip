@@ -351,126 +351,46 @@
                 <p class="fs-5 fw-medium fst-italic text-primary">Berita</p>
                 <h2 class="display-6">Informasi Terbaru Dari Kami</h2>
             </div>
-            <div class="row justify-content-center wow fadeInUp" data-wow-delay="0.1s">
-                <div class="col-lg-4 col-md-12 mb-4">
-                    <div class="card">
-                        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                            <img src="{{ asset('frontend/img/product-1.jpg') }}" class="img-fluid" />
-                            <a href="#!">
-                                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Post title</h5>
-                            <p class="card-text deskripsi">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Error
-                                quas, corrupti est a odit nihil suscipit ipsam? Sequi, nostrum
-                                eaque?
-                            </p>
-                            <a href="/beritadetail" class="btn btn-outline-primary rounded-pill py-2 px-4">Baca</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-12 mb-4">
-                    <div class="card">
-                        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                            <img src="{{ asset('frontend/img/product-1.jpg') }}" class="img-fluid" />
-                            <a href="#!">
-                                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Post title</h5>
-                            <p class="card-text deskripsi">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Error
-                                quas, corrupti est a odit nihil suscipit ipsam? Sequi, nostrum
-                                eaque?
-                            </p>
-                            <a href="#!" class="btn btn-outline-primary rounded-pill py-2 px-4">Baca</a>
+            <div class="row wow fadeInUp" data-wow-delay="0.1s">
+                {{-- Perulangan data berita --}}
+                @forelse ($berita as $item)
+                    <div class="col-lg-4 col-md-12 mb-4">
+                        <div class="card h-100 d-flex flex-column">
+                            <div class="bg-image hover-overlay ripple max-height:350px;background-size: cover"
+                                data-mdb-ripple-color="light">
+                                {{-- gambar berita --}}
+                                <img class="img-fluid" src="/storage/berita_img/{{ $item->gambarcover }}"
+                                    alt="Gambar berita" />
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                {{-- judul berita --}}
+                                <h5 class="card-title">{{ $item->judulberita }}</h5>
+                                {{-- isi berita --}}
+                                <p class="card-text deskripsi flex-grow-1">
+                                    {{ $item->isiberita }}
+                                </p>
+                                {{-- route beritadetail dengan parameter slug --}}
+                                <a href="/beritadetail/{{ $item->slug }}"
+                                    class="btn btn-outline-primary mt-auto rounded-pill">Baca</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-12 mb-4">
-                    <div class="card">
-                        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                            <img src="{{ asset('frontend/img/product-1.jpg') }}" class="img-fluid" />
-                            <a href="#!">
-                                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Post title</h5>
-                            <p class="card-text deskripsi">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Error
-                                quas, corrupti est a odit nihil suscipit ipsam? Sequi, nostrum
-                                eaque?
-                            </p>
-                            <a href="#!" class="btn btn-outline-primary rounded-pill py-2 px-4">Baca</a>
-                        </div>
+                @empty
+                    {{-- jika data fasilitas kosong tampilkan pesan kosong --}}
+                    <div class="text-center">
+                        <p>Data Berita Kosong</p>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-12 mb-4">
-                    <div class="card">
-                        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                            <img src="{{ asset('frontend/img/product-1.jpg') }}" class="img-fluid" />
-                            <a href="#!">
-                                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Post title</h5>
-                            <p class="card-text deskripsi">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Error
-                                quas, corrupti est a odit nihil suscipit ipsam? Sequi, nostrum
-                                eaque?
-                            </p>
-                            <a href="#!" class="btn btn-outline-primary rounded-pill py-2 px-4">Baca</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-12 mb-4">
-                    <div class="card">
-                        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                            <img src="{{ asset('frontend/img/product-1.jpg') }}" class="img-fluid" />
-                            <a href="#!">
-                                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Post title</h5>
-                            <p class="card-text deskripsi">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Error
-                                quas, corrupti est a odit nihil suscipit ipsam? Sequi, nostrum
-                                eaque?
-                            </p>
-                            <a href="#!" class="btn btn-outline-primary rounded-pill py-2 px-4">Baca</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-12 mb-4">
-                    <div class="card">
-                        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                            <img src="{{ asset('frontend/img/product-1.jpg') }}" class="img-fluid" />
-                            <a href="#!">
-                                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Post title</h5>
-                            <p class="card-text deskripsi">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Error
-                                quas, corrupti est a odit nihil suscipit ipsam? Sequi, nostrum
-                                eaque?
-                            </p>
-                            <a href="#!" class="btn btn-outline-primary rounded-pill py-2 px-4">Baca</a>
-                        </div>
-                    </div>
-                </div>
+                @endforelse
+                {{-- akhir perulangan data berita --}}
             </div>
-            <a href="/berita" class="btn btn-primary rounded-pill py-2 px-4">Berita Lainnya</a>
+            {{-- Jika jumlah berita == 3, tampilkan tombol berita lainnya --}}
+            @if (count($berita) == 3)
+                <a href="/berita" class="btn btn-primary rounded-pill py-2 px-4">Berita Lainnya</a>
+            @endif
         </div>
     </div>
     <!-- Berita End -->
+
     <!-- Kontak Start -->
     <div class="container-xxl contact py-5">
         <div class="container">

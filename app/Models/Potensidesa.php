@@ -10,6 +10,8 @@ class Potensidesa extends Model
     use HasFactory;
     protected $table = 'tb_potensidesa';
     protected $primaryKey = 'id_potensidesa';
+    // tidak perlu diinput manual
+    protected $guarded = ['id_potensidesa'];
     
     // relasi N to 1 kategoripotensi
     public function kategoripotensi()

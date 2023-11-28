@@ -2,39 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kategorifasilitas;
+use App\Models\Kategoriberita;
 use Illuminate\Http\Request;
 
-class KategorifasilitasController extends Controller
+class KategoriberitaController extends Controller
 {
     /**
-     * Fungsi menampilkan view index pada folder fasilitas/kategorifasilitas
+     * Fungsi menampilkan view index pada folder berita/kategoriberita
      * @param -
      * @return view index dengan array key:title
      */
     public function index()
     {
-        return view('admin.fasilitas.kategorifasilitas', [
-            // mengisi array key: title dengan string 'Kategori Fasilitas'
-            'title' => "Kategori Fasilitas"
+        return view('admin.berita.kategoriberita', [
+            // mengisi array key: title dengan string 'Kategori Berita'
+            'title' => "Kategori Berita"
         ]);
     }
     
     /**
-     * Fungsi mendapatkan semua data kategori fasilitas
+     * Fungsi mendapatkan semua data kategori berita
      * @param -
-     * @return view datakategori dengan array key:kategorifasilitas
+     * @return view datakategori dengan array key:kategoriberita
      */
     public function fetch()
     {
-        return view('admin.fasilitas.datakategori', [
-            // mengisi array key:kategorifasilitas dengan beberapa data dari model Kategorifasilitas
-            'kategorifasilitas' => Kategorifasilitas::select('id_kategori', 'namakategori')->get()
+        return view('admin.berita.datakategori', [
+            // mengisi array key:kategoriberita dengan beberapa data dari model kategoriberita
+            'kategoriberita' => Kategoriberita::select('id_kategori', 'namakategori')->get()
         ]);
     }
 
     /**
-     * Fungsi menyimpan data kategorifasilitas ke database
+     * Fungsi menyimpan data kategoriberita ke database
      * @param obyek Request dengan $request berisi data formulir
      * @return response json dengan array key:status
      */
@@ -43,8 +43,8 @@ class KategorifasilitasController extends Controller
         // mengisi array validateData dengan data valid dari fungsi validasiRules (parameter data formulir)
         $validateData = $this->validasiRules($request);
         try {
-            // input data ke database dari model Kategorifasilitas
-            $result = Kategorifasilitas::create($validateData);
+            // input data ke database dari model kategoriberita
+            $result = Kategoriberita::create($validateData);
         } catch (\Throwable $th) {
             // gagal input data, return status 500
             return response()->json([
@@ -61,16 +61,16 @@ class KategorifasilitasController extends Controller
     }
 
     /**
-     * Fungsi menampilkan data kategorifasilitas sesuai id untuk form edit
+     * Fungsi menampilkan data kategoriberita sesuai id untuk form edit
      * @param obyek Request $request berisi data formulir
-     * @return response json dengan isi data kategorifasilitas sesuai id
+     * @return response json dengan isi data kategoriberita sesuai id
      */
     public function edit(Request $request)
     {
         // mengisi $id dari data form dengan name:id_kategori
         $id = $request->id_kategori;
-        // mengisi $data dengan data kategorifasilitas sesuai id dari model Kategorifasilitas
-		$data = Kategorifasilitas::find($id);
+        // mengisi $data dengan data kategoriberita sesuai id dari model kategoriberita
+		$data = Kategoriberita::find($id);
         // mengirim isi $data dengan json
 		return response()->json($data);
     }
@@ -84,12 +84,12 @@ class KategorifasilitasController extends Controller
     {
         // mengisi array validateData dengan data valid dari fungsi validasiRules (parameter data formulir)
         $validateData = $this->validasiRules($request);
-        // mengiai $category dengan dari model Kategorifasilitas sesuai id
-        $category = Kategorifasilitas::find($request->id_kategori);
+        // mengiai $category dengan dari model kategoriberita sesuai id
+        $category = Kategoriberita::find($request->id_kategori);
 
         try {
-            // update data ke database dari model Kategorifasilitas
-            $result = Kategorifasilitas::where('id_kategori', $category->id_kategori)->update($validateData);
+            // update data ke database dari model kategoriberita
+            $result = Kategoriberita::where('id_kategori', $category->id_kategori)->update($validateData);
         } catch (\Throwable $th) {
             // gagal update data, return status 500
             return response()->json([
@@ -106,7 +106,7 @@ class KategorifasilitasController extends Controller
     }
     
     /**
-     * Fungsi delete data kategorifasilitas sesuai id
+     * Fungsi delete data kategoriberita sesuai id
      * @param obyek Request $request berisi data formulir
      * @return response json dengan array key:status
      */
@@ -116,8 +116,8 @@ class KategorifasilitasController extends Controller
         $id = $request->id_kategori;
         
         try {
-            // delete data pada database dari model Kategorifasilitas
-            $result = Kategorifasilitas::destroy($id);
+            // delete data pada database dari model kategoriberita
+            $result = Kategoriberita::destroy($id);
         } catch (\Throwable $th) {
              // gagal delete data, return status 500
             return response()->json([
