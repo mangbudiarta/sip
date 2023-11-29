@@ -107,69 +107,107 @@
         $(function() {
 
             // add ajax request
+            // jika form dengan id add_kategori_form disubmit
             $("#add_kategori_form").submit(function(e) {
+                // jeda untuk melakukan proses pengecekan
                 e.preventDefault();
+                // simpan isi form dalam obyek dataForm
                 const dataForm = new FormData(this);
+                // ganti tulisan button simpan
                 $("#add_kategori_btn").text('Adding ...');
                 $.ajax({
+                    // panggil route name save.kategorifasilitas
                     url: '{{ route('save.kategorifasilitas') }}',
+                    // method pengiriman data POST
                     method: 'POST',
+                    // isi data: obyek dataForm
                     data: dataForm,
                     cache: false,
                     contentType: false,
                     processData: false,
                     dataType: 'json',
+                    // jika sukses return respon json
                     success: function(response) {
+                        // jika respon array key:status = 200
                         if (response.status == 200) {
+                            // tampilkan data dengan mengirimkan parameter array key:succes
                             fetch('success', 'Berhasil tambah data');
+                            // reset isi formulir tambah
                             $("#add_kategori_form")[0].reset();
                         } else {
+                            // jika respon array key:status selain 200
+                            // tampilkan data dengan mengirimkan parameter array key:danger
                             fetch('danger', 'Gagal tambah data');
                         }
+                        // kembalikan tulisan button simpan
                         $("#add_kategori_btn").text('Simpan');
+                        // tutup tampilan modal kategori tambah
                         $("#KategoriTambah").modal('hide');
                     }
                 });
             });
 
             // delete ajax request
+            // jika class deletekategori pada datakategori.blade di klik
             $(document).on('click', '.deletekategori', function(e) {
+                // jeda untuk melakukan proses pengecekan
                 e.preventDefault();
+                // buat variabel id dengan isi data dari atribut id pada class detelekategori
                 let id = $(this).attr('id');
+                // buat variabel csrf
                 let csrf = '{{ csrf_token() }}';
+                // jika confirm hapus true
                 if (confirm('Yakin hapus data ini ?')) {
                     $.ajax({
+                        // panggil route name delete.kategorifasilitas
                         url: '{{ route('delete.kategorifasilitas') }}',
+                        // method DELETE
                         method: 'DELETE',
+                        // isi data: id_kategori dan token
                         data: {
                             id_kategori: id,
                             _token: csrf
                         },
+                        // jika sukses return respon json
                         success: function(response) {
+                            // jika respon array key:status = 200
                             if (response.status == 200) {
+                                // tampilkan data dengan mengirimkan parameter array key:succes
                                 fetch('success', 'Berhasil hapus data');
                             } else {
+                                // jika respon array key:status selain 200
+                                // tampilkan data dengan mengirimkan parameter array key:danger
                                 fetch('danger', 'Gagal hapus data');
                             }
                         }
                     });
                 } else {
+                    // jika confirm hapus false/ tidak hapus
+                    // tampilkan data dengan mengirimkan parameter array key:info
                     fetch('info', 'Data aman');
                 }
             });
 
             // edit ajax request
+            // jika class editkategori pada datakategori.blade di klik
             $(document).on('click', '.editkategori', function(e) {
+                // jeda untuk melakukan proses pengecekan
                 e.preventDefault();
+                // buat variabel id dengan isi data dari atribut id pada class editkategori
                 let id = $(this).attr('id');
                 $.ajax({
+                    // panggil route name edit.kategorifasilitas
                     url: '{{ route('edit.kategorifasilitas') }}',
+                    // method GET
                     method: 'GET',
+                    // isi data : id_kategori dan token
                     data: {
                         id_kategori: id,
                         _token: '{{ csrf_token() }}'
                     },
+                    // jika sukses return respon json
                     success: function(response) {
+                        // tampilkan setiap value dari id inputan form
                         $("#namakategoriedit").val(response.namakategori);
                         $("#id_kategori").val(response.id_kategori);
                     }
@@ -177,57 +215,75 @@
             });
 
             // update ajax request
+            // jika form dengan id edit_kategori_form disubmit
             $("#edit_kategori_form").submit(function(e) {
-                //stop submit the form, we will post it manually.
+                // jeda untuk melakukan proses pengecekan
                 e.preventDefault();
                 // Get form
                 var form = $('#edit_kategori_form')[0];
-                // FormData object
+                // simpan isi form dalam obyek dataForm
                 var dataForm = new FormData(form);
+                // ganti tulisan button simpan
                 $("#edit_kategori_btn").text('Updating ...');
                 $.ajax({
+                    // panggil route name update.kategorifasilitas
                     url: '{{ route('update.kategorifasilitas') }}',
+                    // method POST
                     method: 'POST',
+                    // isi data: obyek dataForm
                     data: dataForm,
                     cache: false,
                     contentType: false,
                     processData: false,
                     dataType: 'json',
+                    // jika sukses return respon json
                     success: function(response) {
+                        // jika respon array key:status = 200
                         if (response.status == 200) {
+                            // tampilkan data dengan mengirimkan parameter array key:succes
                             fetch('success', 'Berhasil edit data');
                         } else {
+                            // jika respon array key:status selain 200
+                            // tampilkan data dengan mengirimkan parameter array key:danger
                             fetch('danger', 'Gagal edit data');
                         }
+                        // kembalikan tulisan button simpan
                         $("#edit_kategori_btn").text('Simpan');
+                        // tutup tampilan modal kategori edit
                         $("#KategoriEdit").modal('hide');
                     }
                 });
             });
 
             //get record
-            fetch();
+            fetch('', '');
 
+            // fungsi menampilkan data
+            //parameter String type dan message
             function fetch(type = '', message = '') {
                 $.ajax({
+                    // panggil route name fetch.kategorifasilitas
                     url: '{{ route('fetch.kategorifasilitas') }}',
+                    // method GET
                     method: 'GET',
                     success: function(response) {
+                        // isi id dataPage dengan sintax html berisi response
                         $("#dataPage").html(response);
+                        // buat tag table menjadi datatable
                         $("table").DataTable({
                             order: [0, 'desc']
                         });
+                        // jika parameter type dan message tidak kosong
                         if (type && message) {
-                            // Create and append new alert
+                            // Buat element alert sesuai parameter
                             const alertHtml =
                                 `<div class="alert alert-${type} alert-dismissible fade show" role="alert">
                                 ${message}
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>`;
+                            // tampilkan element alert pada class .alert-notif pada view datakategori.blade
                             $(".alert-notif").append(alertHtml);
-
                         }
-
                     }
                 });
             }

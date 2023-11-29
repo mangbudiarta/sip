@@ -9,7 +9,7 @@
         </tr>
     </thead>
     <tbody>
-        @forelse ($kategorifasilitas as $item)
+        @forelse ($kategoriberita as $item)
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $item->namakategori }}</td>

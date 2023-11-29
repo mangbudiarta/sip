@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\FasilitasController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\KategoriberitaController;
 use App\Http\Controllers\KategorifasilitasController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,11 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // route front end
-Route::get('/', function () {
-    return view('frontend/home',[
-        "title" => "Home"
-    ]);
-});
+Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/profil', function () {
     return view('frontend/pages/profil',[
@@ -49,12 +47,7 @@ Route::get('/umkmdetail', function () {
     ]);
 });
 
-Route::get('/berita', function () {
-    return view('frontend/berita/index',[
-        "title" => "Berita"
-    ]);
-});
-
+Route::get('/berita', [HomeController::class, 'berita']);
 Route::get('/fasilitas', [HomeController::class, 'fasilitas']);
 
 Route::get('/review', function () {
@@ -62,11 +55,7 @@ Route::get('/review', function () {
         "title" => "review"
     ]);
 });
-Route::get('/beritadetail', function () {
-    return view('frontend/berita/beritadetail',[
-        "title" => "Judul Berita"
-    ]);
-});
+Route::get('/beritadetail/{slug}', [BeritaController::class, 'detailberita']);
 
 // route admin
 Route::group(['prefix' => 'admin'], function () {
@@ -120,16 +109,20 @@ Route::group(['prefix' => 'admin'], function () {
             "title" => "Kategori UMKM"
         ]);
     });
-    Route::get('berita', function () {
-        return view('admin/berita/index',[
-            "title" => "Berita"
-        ]);
-    });
-    Route::get('kategoriberita', function () {
-        return view('admin/berita/kategoriberita',[
-            "title" => "Kategori Berita"
-        ]);
-    });
+    Route::get('berita', [BeritaController::class, 'index'])->name('berita');
+    Route::get('berita/fetch', [BeritaController::class, 'fetch'])->name('fetch.berita');
+    Route::get('berita/show', [BeritaController::class, 'show'])->name('detail.berita');
+    Route::post('berita/store', [BeritaController::class, 'store'])->name('save.berita');
+    Route::delete('berita/delete', [BeritaController::class, 'destroy'])->name('delete.berita');
+    Route::get('berita/edit', [BeritaController::class, 'edit'])->name('edit.berita');
+    Route::post('berita/update', [BeritaController::class, 'update'])->name('update.berita');
+
+    Route::get('kategoriberita', [KategoriberitaController::class, 'index'])->name('kategoriberita');
+    Route::get('kategoriberita/fetch', [KategoriberitaController::class, 'fetch'])->name('fetch.kategoriberita');
+    Route::post('kategoriberita/store', [KategoriberitaController::class, 'store'])->name('save.kategoriberita');
+    Route::delete('kategoriberita/delete', [KategoriberitaController::class, 'destroy'])->name('delete.kategoriberita');
+    Route::get('kategoriberita/edit', [KategoriberitaController::class, 'edit'])->name('edit.kategoriberita');
+    Route::post('kategoriberita/update', [KategoriberitaController::class, 'update'])->name('update.kategoriberita');
     Route::get('petugas', function () {
         return view('admin/pages/petugas',[
             "title" => "Petugas"

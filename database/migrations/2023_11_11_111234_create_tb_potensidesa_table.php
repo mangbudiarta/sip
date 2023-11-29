@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('tb_potensidesa', function (Blueprint $table) {
             $table->integer('id_potensidesa')->autoIncrement();
             $table->string('gambarcover', 50)->nullable();
-            $table->string('namapotensi', 150);
+            $table->string('namapotensi', 150)->unique();
             $table->string('lokasi', 50);
             $table->date('tanggalposting');
             $table->string('penulis', 10);
