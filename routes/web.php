@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\FasilitasController;
 use App\Http\Controllers\HomeController;
@@ -69,11 +70,13 @@ Route::group(['prefix' => 'admin'], function () {
             "title" => "Navbar"
         ]);
     });
-    Route::get('banner', function () {
-        return view('admin/pages/banner',[
-            "title" => "Banner"
-        ]);
-    });
+    Route::get('banner', [BannerController::class, 'index'])->name('banner');
+    Route::get('banner/fetch', [BannerController::class, 'fetch'])->name('fetch.banner');
+    Route::get('banner/show', [BannerController::class, 'show'])->name('detail.banner');
+    Route::post('banner/store', [BannerController::class, 'store'])->name('save.banner');
+    Route::delete('banner/delete', [BannerController::class, 'destroy'])->name('delete.banner');
+    Route::get('banner/edit', [BannerController::class, 'edit'])->name('edit.banner');
+    Route::post('banner/update', [BannerController::class, 'update'])->name('update.banner');
     Route::get('profildesa', function () {
         return view('admin/pages/profildesa',[
             "title" => "Profil Desa"
