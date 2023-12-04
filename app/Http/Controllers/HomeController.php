@@ -27,7 +27,7 @@ class HomeController extends Controller
             'berita' => Berita::take(3)->select('id_berita', 'judulberita', 'gambarcover','isiberita','slug','created_at')->orderBy('created_at','desc')->get(),
 
             // data from Infowilayah Model
-            'infowilayah' => Infowilayah::all()
+            'infowilayah' => Infowilayah::all(),
 
             //data from banner model
             'banner' => Banner::all()
