@@ -105,7 +105,7 @@
                                                 <input type="file" class="form-control" type="file" id="imageEdit"
                                                     name="gambarcover" onchange="previewImageEdit()" />
                                                 <div class="overflow-auto">
-                                                    <img id="img-previewEdit" class="my-2" alt="">
+                                                    <img id="img-previewEditimg-previewEdit" class="my-2" alt="">
                                                 </div>
                                             </div>
                                             <div class="row justify-content-end">
