@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
 use App\Models\Berita;
 use App\Models\Fasilitas;
 use App\Models\Infowilayah;
@@ -24,8 +25,13 @@ class HomeController extends Controller
             'title' => 'Home',
             //data from berita model
             'berita' => Berita::take(3)->select('id_berita', 'judulberita', 'gambarcover','isiberita','slug','created_at')->orderBy('created_at','desc')->get(),
+
             // data from Infowilayah Model
             'infowilayah' => Infowilayah::all()
+
+            //data from banner model
+            'banner' => Banner::all()
+
         ]);
     }
     
