@@ -3,6 +3,7 @@
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\FasilitasController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InfowilayahController;
 use App\Http\Controllers\KategoriberitaController;
 use App\Http\Controllers\KategorifasilitasController;
 use Illuminate\Support\Facades\Route;
@@ -79,11 +80,14 @@ Route::group(['prefix' => 'admin'], function () {
             "title" => "Profil Desa"
         ]);
     });
-    Route::get('infowilayah', function () {
-        return view('admin/pages/infowilayah',[
-            "title" => "Info Wilayah"
-        ]);
-    });
+    Route::get('infowilayah', [InfowilayahController::class, 'index'])->name('infowilayah');
+    Route::get('infowilayah/fetch', [InfowilayahController::class, 'fetch'])->name('fetch.infowilayah');
+    Route::get('infowilayah/show', [InfowilayahController::class, 'show'])->name('detail.infowilayah');
+    Route::post('infowilayah/store', [InfowilayahController::class, 'store'])->name('save.infowilayah');
+    Route::delete('infowilayah/delete', [InfowilayahController::class, 'destroy'])->name('delete.infowilayah');
+    Route::get('infowilayah/edit', [InfowilayahController::class, 'edit'])->name('edit.infowilayah');
+    Route::post('infowilayah/update', [InfowilayahController::class, 'update'])->name('update.infowilayah');
+
     Route::get('footer', function () {
         return view('admin/pages/footer',[
             "title" => "Footer"
