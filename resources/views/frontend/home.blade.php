@@ -122,25 +122,30 @@
     <!-- Video Modal End -->
 
     <!-- Info Wilayah Start -->
-    <div class="container-fluid product py-5 my-5" id="infowilayah">
-        <div class="container py-5">
-            <div class="section-title text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px">
-                <p class="fs-5 fw-medium fst-italic text-primary">Info Wilayah</p>
-                <h2 class="display-6">Desa Sejuk Nan Eksotis</h2>
-            </div>
-            <div class="border-top mb-4"></div>
-            <div class="row g-3">
-                <p class="mb-0 text-center">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut, odio.
-                    Eveniet voluptatibus dignissimos ex corporis, iusto natus harum
-                    eligendi doloremque illum hic possimus maxime, et magni cumque
-                    nobis, ipsum architecto molestiae! At, molestias in quia beatae
-                    animi, nihil ab quaerat, distinctio harum illum fugit ad? Soluta
-                    molestias placeat adipisci eos!
-                </p>
+    @forelse ($infowilayah as $item)
+        <div class="container-fluid product py-5 my-5" id="infowilayah" style="background: linear-gradient(rgba(245, 240, 240, 0.1), rgba(242, 245, 239, 0.1)),
+        url(/storage/infowilayah_img/{{ $item->gambarcover }}) left bottom no-repeat;
+      background-size: cover;">
+            <div class="container py-5">
+                <div class="section-title text-center mx-auto wow fadeInUp" data-wow-delay="0.1s"
+                    style="max-width: 500px">
+                    <p class="fs-5 fw-medium fst-italic text-primary">Info Wilayah</p>
+                    <h2 class="display-6">{{$item->judul}}</h2>
+                </div>
+                <div class="border-top mb-4"></div>
+                <div class="row g-3">
+                    <p class="mb-0 text-center">
+                        {{$item->deskripsi}}
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
+    @empty
+        {{-- jika data fasilitas kosong tampilkan pesan kosong --}}
+        <div class="text-center">
+            <p>Data Info Wilayah</p>
+        </div>
+    @endforelse
     <!-- Info Wilayah End -->
 
     <!-- Potensi Desa Start -->
