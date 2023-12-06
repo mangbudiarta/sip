@@ -43,14 +43,14 @@
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="judulTambah">Judul Banner</label>
                                                 <input type="text" class="form-control" id="judulTambah" name="judul"
-                                                    placeholder="ex : Desa Wisata & Indah" />
+                                                    placeholder="ex : Desa Wisata & Indah" required/>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="deskripsiTambah">Deskripsi Banner</label>
                                                 <textarea id="deskripsiTambah" class="form-control" name="deskripsi"
                                                     placeholder="ex: Desa Candikuning merupakan desa wisata yang ada di Tabanan"
                                                     aria-label="ex: Desa Candikuning merupakan desa wisata yang ada di Tabanan"
-                                                    aria-describedby="Deskrispi Banner Tambah"></textarea>
+                                                    aria-describedby="Deskrispi Banner Tambah" required></textarea>
                                             </div>
                                             <div>
                                                 <label for="formFileTambah" class="form-label">Gambar <span
@@ -94,21 +94,21 @@
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="judulEdit">Judul Banner</label>
                                                 <input type="text" class="form-control" id="judulEdit" name="judul"
-                                                    placeholder="ex : Desa Wisata & Indah" />
+                                                    placeholder="ex : Desa Wisata & Indah" required/>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="deskripsiEdit">Deskripsi Banner</label>
                                                 <textarea id="deskripsiEdit" class="form-control" name="deskripsi"
                                                     placeholder="ex: Desa Candikuning merupakan desa wisata yang ada di Tabanan"
                                                     aria-label="ex: Desa Candikuning merupakan desa wisata yang ada di Tabanan"
-                                                    aria-describedby="Deskripsi Banner Edit"></textarea>
+                                                    aria-describedby="Deskripsi Banner Edit" required></textarea>
                                             </div>
                                             <div>
                                                 <label for="formFileEdit" class="form-label">Gambar <span
                                                         class=" text-muted">(png/jpg)</span></label>
-                                                        <input type="file" class="form-control" type="file" id="image"
+                                                        <input type="file" class="form-control" type="file" id="imageEdit"
                                                     name="gambar" onchange="previewImageEdit()" />
-                                                <img id="img-preview" class="my-2 col-sm-5" alt="">
+                                                <img id="img-previewEdit" class="my-2 col-sm-5" alt="">
                                             </div>
                                             <div class="row justify-content-end">
                                                 <div class="col-sm-12">

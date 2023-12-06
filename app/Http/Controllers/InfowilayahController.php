@@ -118,7 +118,7 @@ class InfowilayahController extends Controller
             $fileNameToStore= $this->inputGambar($request);
         } else {
             // tidak input gambar, pakai nama gambar sebelumnya
-            $fileNameToStore = $infowilayah->gambar;
+            $fileNameToStore = $infowilayah->gambarcover;
         }
         // mengisi array validateData indeks gambar dengan nama gambar
         $validateData['gambarcover']=$fileNameToStore;
@@ -177,7 +177,7 @@ class InfowilayahController extends Controller
         return $request->validate([
             'judul' => 'required|max:25',
             'deskripsi' => 'max:255|required',
-            'gambarcover' => 'image|file|max:1024|required'
+            'gambarcover' => 'image|file|max:1024'
         ]);
     }
 
