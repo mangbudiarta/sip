@@ -42,12 +42,13 @@
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="judulberitatambah">Judul Berita</label>
                                                 <input type="text" class="form-control" id="judulberitatambah"
-                                                    name="judulberita" placeholder="ex : Pantai Kaca" required />
+                                                    name="judulberita" placeholder="ex : Pantai Kaca" required
+                                                    oninput="generateSlugTambah()" />
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="slug">Slug</label>
                                                 <input type="text" class="form-control" id="slug" name="slug"
-                                                    placeholder="ex : Pantai-Kaca" required />
+                                                    placeholder="ex : Pantai-Kaca" required readonly />
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="isiberita">Isi berita</label>
@@ -59,12 +60,12 @@
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="PenulisTambah">Penulis</label>
                                                 <input type="text" class="form-control" id="PenulisTambah" name="penulis"
-                                                    required />
+                                                    required value="Admin"readonly />
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="tglposting">Tanggal posting</label>
                                                 <input type="date" class="form-control" id="tglposting"
-                                                    name="tanggalposting" placeholder="ex :23/08/2023" required />
+                                                    name="tanggalposting" placeholder="ex :23/08/2023" required readonly />
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="kategori">Kategori <span
@@ -124,12 +125,13 @@
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="judulberitaedit">Judul Berita</label>
                                                 <input type="text" class="form-control" id="judulberitaedit"
-                                                    name="judulberita" placeholder="ex : Pantai Kaca" required />
+                                                    name="judulberita" placeholder="ex : Pantai Kaca" required
+                                                    oninput="generateSlugEdit()" />
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="slugedit">Slug</label>
                                                 <input type="text" class="form-control" id="slugedit" name="slug"
-                                                    placeholder="ex : Pantai-Kaca" required />
+                                                    placeholder="ex : Pantai-Kaca" required readonly />
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="isiberitaedit">Isi Berita</label>
@@ -141,12 +143,13 @@
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="penulisedit">Penulis</label>
                                                 <input type="text" class="form-control" id="penulisedit"
-                                                    name="penulis" required />
+                                                    name="penulis" required readonly />
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="tglpostingedit">Tanggal posting</label>
                                                 <input type="date" class="form-control" id="tglpostingedit"
-                                                    name="tanggalposting" placeholder="ex :23/08/2023" required />
+                                                    name="tanggalposting" placeholder="ex :23/08/2023" required
+                                                    readonly />
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="kategoriedit">KategoriKategori <span
@@ -521,6 +524,31 @@
             const blob = URL.createObjectURL(image.files[0]);
             // tampilkan blob pada imgPreview
             imgPreview.src = blob;
+        }
+
+
+        // fungsi set tanggal posting hari ini
+        document.getElementById('tglposting').valueAsDate = new Date();
+
+        // fungsi membuat slug otomatis
+        function generateSlugTambah() {
+            const titleInput = document.getElementById('judulberitatambah');
+            const slugInput = document.getElementById('slug');
+
+            const title = titleInput.value.trim().toLowerCase();
+            const slug = title.replace(/\s+/g, '-').slice(0, 50); // Mengambil hanya 50 karakter pertama
+
+            slugInput.value = slug;
+        }
+
+        function generateSlugEdit() {
+            const titleInput = document.getElementById('judulberitaedit');
+            const slugInput = document.getElementById('slugedit');
+
+            const title = titleInput.value.trim().toLowerCase();
+            const slug = title.replace(/\s+/g, '-').slice(0, 50); // Mengambil hanya 50 karakter pertama
+
+            slugInput.value = slug;
         }
     </script>
 @endsection
