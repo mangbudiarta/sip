@@ -1,68 +1,58 @@
 @extends('frontend.layouts.main')
 @section('content')
-<!-- Carousel Start -->
-<div class="container-fluid px-0 mb-5">
-    <div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img class="w-100" src="{{ asset('frontend/img/carousel-1.jpg') }}" alt="Image" />
-                <div class="carousel-caption">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-7 text-center">
-                                <p class="fs-4 text-white animated zoomIn">
-                                    Selamat Datang di
-                                    <strong class="text-dark">Desa Candikuning</strong>
-                                </p>
-                                <h2 class="display-1 text-dark mb-4 animated zoomIn">
-                                    Desa Wisata Budaya & Alam
-                                </h2>
-                                <a href="#about" class="btn btn-light rounded-pill py-3 px-5 animated zoomIn">Jelajahi
-                                    Sekarang</a>
+    <!-- Carousel Start -->
+    <div class="container-fluid px-0 mb-5">
+        <div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="w-100" style="height: 600px;" src="{{ asset('frontend/img/carousel-1.jpg') }}" alt="Image" />
+                    <div class="carousel-caption">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-7 text-center">
+                                    <p class="fs-4 text-white animated zoomIn">
+                                        Selamat Datang di
+                                        <strong class="text-dark">Desa Candikuning</strong>
+                                    </p>
+                                    <h2 class="display-1 text-dark mb-4 animated zoomIn">
+                                        Desa Wisata Budaya & Alam
+                                    </h2>
+                                    <a href="#about" class="btn btn-light rounded-pill py-3 px-5 animated zoomIn">Jelajahi
+                                        Sekarang</a>
+                                </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="carousel-item">
-                <img class="w-100" src="{{ asset('frontend/img/carousel-2.jpg') }}" alt="Image" />
-                <div class="carousel-caption">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-7 text-center">
-                                <h2 class="display-6 text-dark mb-4 animated zoomIn">
-                                    Desa Candikuning
-                                </h2>
-                                <p class="fs-4 text-white animated zoomIn">
-                                    Desa Candikuning terletak di ujung utara kecamatan
-                                    Baturiti, Kabupaten Tabanan, Bali, Indonesia. Desa ini
-                                    terkenal dengan objek wisata Pura Ulun Danu Bratan. Desa
-                                    ini terdiri dari enam banjar: Batusesa, Bukitcatu,
-                                    Candikuning I, Candikuning II, Kembangmerta, dan
-                                    Pemuteran.
-                                </p>
+                {{-- Perulangan data banner --}}
+                @forelse ($banner as $item)
+                <div class="carousel-item">
+                    {{-- gambar banner --}}
+                        <img class="w-100" style="height: 600px;" src="/storage/banner_img/{{ $item->gambar }}"
+                        alt="Gambar banner" />
+                    <div class="carousel-caption">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-7 text-center">
+                                    <h2 class="display-6 text-dark mb-4 animated zoomIn">
+                                        {{$item ->judul}}
+                                    </h2>
+                                    <p class="fs-4 text-white animated zoomIn">
+                                        {{$item ->deskripsi}}
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="carousel-item">
-                <img class="w-100" src="{{ asset('frontend/img/carousel-2.jpg') }}" alt="Image" />
-                <div class="carousel-caption">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-7 text-center">
-                                <h2 class="display-6 text-dark mb-4 animated zoomIn">
-                                    Sistem Informasi Pariwisata Desa Candikuning
-                                </h2>
-                                <p class="fs-4 text-white animated zoomIn">
-                                    Sistem informasi yang menyampaikan informasi wisata di
-                                    Desa Candikuning Tabanan
-                                </p>
-                            </div>
-                        </div>
+                @empty
+                    {{-- jika data fasilitas kosong tampilkan pesan kosong --}}
+                    <div class="text-center">
+                        <p>Data banner Kosong</p>
                     </div>
-                </div>
+                @endforelse
+                {{-- akhir perulangan data banner --}}
             </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel" data-bs-slide="prev">
@@ -133,27 +123,33 @@
 </div>
 <!-- Video Modal End -->
 
-<!-- Info Wilayah Start -->
-<div class="container-fluid product py-5 my-5" id="infowilayah">
-    <div class="container py-5">
-        <div class="section-title text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px">
-            <p class="fs-5 fw-medium fst-italic text-primary">Info Wilayah</p>
-            <h2 class="display-6">Desa Sejuk Nan Eksotis</h2>
+    <!-- Info Wilayah Start -->
+    @forelse ($infowilayah as $item)
+        <div class="container-fluid product py-5 my-5" id="infowilayah" style="background: linear-gradient(rgba(245, 240, 240, 0.1), rgba(242, 245, 239, 0.1)),
+        url(/storage/infowilayah_img/{{ $item->gambarcover }}) left bottom no-repeat;
+      background-size: cover;">
+            <div class="container py-5">
+                <div class="section-title text-center mx-auto wow fadeInUp" data-wow-delay="0.1s"
+                    style="max-width: 500px">
+                    <p class="fs-5 fw-medium fst-italic text-primary">Info Wilayah</p>
+                    <h2 class="display-6">{{$item->judul}}</h2>
+                </div>
+                <div class="border-top mb-4"></div>
+                <div class="row g-3">
+                    <p class="mb-0 text-center">
+                        {{$item->deskripsi}}
+                    </p>
+                </div>
+            </div>
         </div>
-        <div class="border-top mb-4"></div>
-        <div class="row g-3">
-            <p class="mb-0 text-center">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut, odio.
-                Eveniet voluptatibus dignissimos ex corporis, iusto natus harum
-                eligendi doloremque illum hic possimus maxime, et magni cumque
-                nobis, ipsum architecto molestiae! At, molestias in quia beatae
-                animi, nihil ab quaerat, distinctio harum illum fugit ad? Soluta
-                molestias placeat adipisci eos!
-            </p>
+    @empty
+        {{-- jika data fasilitas kosong tampilkan pesan kosong --}}
+        <div class="text-center">
+            <p>Data Info Wilayah</p>
         </div>
-    </div>
-</div>
-<!-- Info Wilayah End -->
+    @endforelse
+    <!-- Info Wilayah End -->
+
 
 <!-- Potensi Desa Start -->
 <div class="container-fluid product py-5 my-5" id="potensidesa">

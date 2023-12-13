@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\FasilitasController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InfowilayahController;
 use App\Http\Controllers\KategoriberitaController;
 use App\Http\Controllers\KategorifasilitasController;
 use App\Http\Controllers\ProfildesaController;
@@ -70,11 +72,7 @@ Route::group(['prefix' => 'admin'], function () {
             "title" => "Navbar"
         ]);
     });
-    Route::get('banner', function () {
-        return view('admin/pages/banner', [
-            "title" => "Banner"
-        ]);
-    });
+
     Route::get('profildesa', [ProfildesaController::class, 'index'])->name('profildesa');
     Route::get('profildesa/fetch', [ProfildesaController::class, 'fetch'])->name('fetch.profildesa');
     Route::get('profildesa/show', [ProfildesaController::class, 'show'])->name('detail.profildesa');
@@ -82,11 +80,23 @@ Route::group(['prefix' => 'admin'], function () {
     Route::delete('profildesa/delete', [ProfildesaController::class, 'destroy'])->name('delete.profildesa');
     Route::get('profildesa/edit', [ProfildesaController::class, 'edit'])->name('edit.profildesa');
     Route::post('profildesa/update', [ProfildesaController::class, 'update'])->name('update.profildesa');
-    Route::get('infowilayah', function () {
-        return view('admin/pages/infowilayah', [
-            "title" => "Info Wilayah"
-        ]);
-    });
+
+    Route::get('banner', [BannerController::class, 'index'])->name('banner');
+    Route::get('banner/fetch', [BannerController::class, 'fetch'])->name('fetch.banner');
+    Route::get('banner/show', [BannerController::class, 'show'])->name('detail.banner');
+    Route::post('banner/store', [BannerController::class, 'store'])->name('save.banner');
+    Route::delete('banner/delete', [BannerController::class, 'destroy'])->name('delete.banner');
+    Route::get('banner/edit', [BannerController::class, 'edit'])->name('edit.banner');
+    Route::post('banner/update', [BannerController::class, 'update'])->name('update.banner');
+
+    Route::get('infowilayah', [InfowilayahController::class, 'index'])->name('infowilayah');
+    Route::get('infowilayah/fetch', [InfowilayahController::class, 'fetch'])->name('fetch.infowilayah');
+    Route::get('infowilayah/show', [InfowilayahController::class, 'show'])->name('detail.infowilayah');
+    Route::post('infowilayah/store', [InfowilayahController::class, 'store'])->name('save.infowilayah');
+    Route::delete('infowilayah/delete', [InfowilayahController::class, 'destroy'])->name('delete.infowilayah');
+    Route::get('infowilayah/edit', [InfowilayahController::class, 'edit'])->name('edit.infowilayah');
+    Route::post('infowilayah/update', [InfowilayahController::class, 'update'])->name('update.infowilayah');
+
     Route::get('footer', function () {
         return view('admin/pages/footer', [
             "title" => "Footer"

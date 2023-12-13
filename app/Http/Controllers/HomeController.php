@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
 use App\Models\Berita;
 use App\Models\Fasilitas;
+use App\Models\Infowilayah;
 use App\Models\Kategoriberita;
 use App\Models\Kategorifasilitas;
 use App\Models\Profildesa;
@@ -23,9 +25,20 @@ class HomeController extends Controller
             // array title berisi string 'home'       
             'title' => 'Home',
             //data from berita model
+
             'berita' => Berita::take(3)->select('id_berita', 'judulberita', 'gambarcover', 'isiberita', 'slug', 'created_at')->orderBy('created_at', 'desc')->get(),
             //data from berita model
             'profildesa' => Profildesa::all(),
+
+            'berita' => Berita::take(3)->select('id_berita', 'judulberita', 'gambarcover','isiberita','slug','created_at')->orderBy('created_at','desc')->get(),
+
+            // data from Infowilayah Model
+            'infowilayah' => Infowilayah::all(),
+
+            //data from banner model
+            'banner' => Banner::all()
+
+
         ]);
     }
 
