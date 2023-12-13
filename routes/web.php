@@ -5,6 +5,7 @@ use App\Http\Controllers\FasilitasController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KategoriberitaController;
 use App\Http\Controllers\KategorifasilitasController;
+use App\Http\Controllers\ProfildesaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,27 +23,27 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/profil', function () {
-    return view('frontend/pages/profil',[
+    return view('frontend/pages/profil', [
         "title" => "Profil"
     ]);
 });
 Route::get('/potensi', function () {
-    return view('frontend/potensi/index',[
+    return view('frontend/potensi/index', [
         "title" => "Potensi"
     ]);
 });
 Route::get('/potensidetail', function () {
-    return view('frontend/potensi/potensidetail',[
+    return view('frontend/potensi/potensidetail', [
         "title" => "Potensi"
     ]);
 });
 Route::get('/umkm', function () {
-    return view('frontend/umkm/index',[
+    return view('frontend/umkm/index', [
         "title" => "Umkm"
     ]);
 });
 Route::get('/umkmdetail', function () {
-    return view('frontend/umkm/umkmdetail',[
+    return view('frontend/umkm/umkmdetail', [
         "title" => "Umkm"
     ]);
 });
@@ -51,7 +52,7 @@ Route::get('/berita', [HomeController::class, 'berita']);
 Route::get('/fasilitas', [HomeController::class, 'fasilitas']);
 
 Route::get('/review', function () {
-    return view('frontend/potensi/review',[
+    return view('frontend/potensi/review', [
         "title" => "review"
     ]);
 });
@@ -60,52 +61,54 @@ Route::get('/beritadetail/{slug}', [BeritaController::class, 'detailberita']);
 // route admin
 Route::group(['prefix' => 'admin'], function () {
     Route::get('dashboard', function () {
-        return view('admin/dashboard',[
+        return view('admin/dashboard', [
             "title" => "Dashboard"
         ]);
     });
     Route::get('navbar', function () {
-        return view('admin/pages/navbar',[
+        return view('admin/pages/navbar', [
             "title" => "Navbar"
         ]);
     });
     Route::get('banner', function () {
-        return view('admin/pages/banner',[
+        return view('admin/pages/banner', [
             "title" => "Banner"
         ]);
     });
-    Route::get('profildesa', function () {
-        return view('admin/pages/profildesa',[
-            "title" => "Profil Desa"
-        ]);
-    });
+    Route::get('profildesa', [ProfildesaController::class, 'index'])->name('profildesa');
+    Route::get('profildesa/fetch', [ProfildesaController::class, 'fetch'])->name('fetch.profildesa');
+    Route::get('profildesa/show', [ProfildesaController::class, 'show'])->name('detail.profildesa');
+    Route::post('profildesa/store', [ProfildesaController::class, 'store'])->name('save.profildesa');
+    Route::delete('profildesa/delete', [ProfildesaController::class, 'destroy'])->name('delete.profildesa');
+    Route::get('profildesa/edit', [ProfildesaController::class, 'edit'])->name('edit.profildesa');
+    Route::post('profildesa/update', [ProfildesaController::class, 'update'])->name('update.profildesa');
     Route::get('infowilayah', function () {
-        return view('admin/pages/infowilayah',[
+        return view('admin/pages/infowilayah', [
             "title" => "Info Wilayah"
         ]);
     });
     Route::get('footer', function () {
-        return view('admin/pages/footer',[
+        return view('admin/pages/footer', [
             "title" => "Footer"
         ]);
     });
     Route::get('potensidesa', function () {
-        return view('admin/potensidesa/index',[
+        return view('admin/potensidesa/index', [
             "title" => "Potensi Desa"
         ]);
     });
     Route::get('kategoripotensi', function () {
-        return view('admin/potensidesa/kategoripotensi',[
+        return view('admin/potensidesa/kategoripotensi', [
             "title" => "Kategori Potensi Desa"
         ]);
     });
     Route::get('umkm', function () {
-        return view('admin/umkm/index',[
+        return view('admin/umkm/index', [
             "title" => "UMKM"
         ]);
     });
     Route::get('kategoriumkm', function () {
-        return view('admin/umkm/kategoriumkm',[
+        return view('admin/umkm/kategoriumkm', [
             "title" => "Kategori UMKM"
         ]);
     });
@@ -124,22 +127,22 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('kategoriberita/edit', [KategoriberitaController::class, 'edit'])->name('edit.kategoriberita');
     Route::post('kategoriberita/update', [KategoriberitaController::class, 'update'])->name('update.kategoriberita');
     Route::get('petugas', function () {
-        return view('admin/pages/petugas',[
+        return view('admin/pages/petugas', [
             "title" => "Petugas"
         ]);
     });
     Route::get('wisatawan', function () {
-        return view('admin/pages/wisatawan',[
+        return view('admin/pages/wisatawan', [
             "title" => "wisatawan"
         ]);
     });
     Route::get('potensigambar', function () {
-        return view('admin/potensidesa/potensigambar',[
+        return view('admin/potensidesa/potensigambar', [
             "title" => "Gambar"
         ]);
     });
     Route::get('umkmgambar', function () {
-        return view('admin/umkm/umkmgambar',[
+        return view('admin/umkm/umkmgambar', [
             "title" => "Gambar"
         ]);
     });

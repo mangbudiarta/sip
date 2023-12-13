@@ -6,6 +6,7 @@ use App\Models\Berita;
 use App\Models\Fasilitas;
 use App\Models\Kategoriberita;
 use App\Models\Kategorifasilitas;
+use App\Models\Profildesa;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -22,10 +23,12 @@ class HomeController extends Controller
             // array title berisi string 'home'       
             'title' => 'Home',
             //data from berita model
-            'berita' => Berita::take(3)->select('id_berita', 'judulberita', 'gambarcover','isiberita','slug','created_at')->orderBy('created_at','desc')->get(),
+            'berita' => Berita::take(3)->select('id_berita', 'judulberita', 'gambarcover', 'isiberita', 'slug', 'created_at')->orderBy('created_at', 'desc')->get(),
+            //data from berita model
+            'profildesa' => Profildesa::all(),
         ]);
     }
-    
+
     /**
      * Fungsi menampilkan semua data fasilitas dan hasil pencarian 
      * @param obyek Request dengan $request berisi data formulir pencarian
@@ -46,7 +49,7 @@ class HomeController extends Controller
             // lakukan query pencarian namafasilitas berdasarkan $keyword
             $query->where('namafasilitas', 'like', '%' . $keyword . '%');
         }
-        
+
         // jika $kategori berisi data
         if ($kategori) {
             // lakukan query pencarian id_kategori berdasarkan $kategori
@@ -54,7 +57,7 @@ class HomeController extends Controller
         }
 
         // masukan hasil pencarian ke $results dengan urutkan data dari yang terbaru
-        $results = $query->orderBy('created_at','desc')->get();
+        $results = $query->orderBy('created_at', 'desc')->get();
         // return view fasilitas dengan mengirmkan data array
         return view('frontend.pages.fasilitas', [
             // array key fasilitas berisi $results, jika kosong key fasilitas berisi array kosong
@@ -83,14 +86,14 @@ class HomeController extends Controller
 
         // query builder model Berita, return beberapa data sesuai colom
         $query = Berita::query();
-        $query->select('id_berita', 'judulberita','gambarcover','isiberita','slug');
+        $query->select('id_berita', 'judulberita', 'gambarcover', 'isiberita', 'slug');
 
         // jika $keyword berisi data
         if ($keyword) {
             // lakukan query pencarian judulberita berdasarkan $keyword
             $query->where('judulberita', 'like', '%' . $keyword . '%');
         }
-        
+
         // jika $kategori berisi data
         if ($kategori) {
             // lakukan query pencarian id_kategori berdasarkan $kategori
@@ -98,7 +101,7 @@ class HomeController extends Controller
         }
 
         // masukan hasil pencarian ke $results dengan urutkan data dari yang terbaru
-        $results = $query->orderBy('created_at','desc')->get();
+        $results = $query->orderBy('created_at', 'desc')->get();
         // return view berita dengan mengirmkan data array
         return view('frontend.berita.index', [
             // array key berita berisi $results, jika kosong key berita berisi array kosong
