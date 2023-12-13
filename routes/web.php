@@ -24,11 +24,8 @@ use Illuminate\Support\Facades\Route;
 // route front end
 Route::get('/', [HomeController::class, 'index']);
 
-Route::get('/profil', function () {
-    return view('frontend/pages/profil', [
-        "title" => "Profil"
-    ]);
-});
+Route::get('/profil', [ProfildesaController::class, 'detailprofil']);
+
 Route::get('/potensi', function () {
     return view('frontend/potensi/index', [
         "title" => "Potensi"

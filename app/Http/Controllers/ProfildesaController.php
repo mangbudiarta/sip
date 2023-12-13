@@ -202,4 +202,17 @@ class ProfildesaController extends Controller
         // return nama gambar
         return $fileNameToStore;
     }
+        /**
+     * Fungsi menampilkan isi profildesa
+     * @param $slug dari tombol baca
+     * @return view beritadetail dengan data
+     */
+    public function detailprofil() {
+        $profildesa = Profildesa::all();
+        return view('frontend.pages.profil',[
+            "title" => "profil desa",
+            "profildetail"=> $profildesa
+        ]);
+        
+    }
 }
