@@ -7,7 +7,11 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfowilayahController;
 use App\Http\Controllers\KategoriberitaController;
 use App\Http\Controllers\KategorifasilitasController;
+use App\Http\Controllers\KategoripotensiController;
+use App\Http\Controllers\PotensidesaController;
+use App\Http\Controllers\PotensidesagambarController;
 use App\Http\Controllers\ProfildesaController;
+use App\Models\Potensidesagambar;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,17 +29,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/profil', [ProfildesaController::class, 'detailprofil']);
-
-Route::get('/potensi', function () {
-    return view('frontend/potensi/index', [
-        "title" => "Potensi"
-    ]);
-});
-Route::get('/potensidetail', function () {
-    return view('frontend/potensi/potensidetail', [
-        "title" => "Potensi"
-    ]);
-});
+Route::get('/potensi', [HomeController::class, 'potensidesa']);
+Route::get('/potensidetail/{slug}', [PotensidesaController::class, 'detailpotensi']);
 Route::get('/umkm', function () {
     return view('frontend/umkm/index', [
         "title" => "Umkm"
@@ -99,16 +94,20 @@ Route::group(['prefix' => 'admin'], function () {
             "title" => "Footer"
         ]);
     });
-    Route::get('potensidesa', function () {
-        return view('admin/potensidesa/index', [
-            "title" => "Potensi Desa"
-        ]);
-    });
-    Route::get('kategoripotensi', function () {
-        return view('admin/potensidesa/kategoripotensi', [
-            "title" => "Kategori Potensi Desa"
-        ]);
-    });
+    Route::get('potensidesa', [PotensidesaController::class, 'index'])->name('potensidesa');
+    Route::get('potensidesa/fetch', [PotensidesaController::class, 'fetch'])->name('fetch.potensidesa');
+    Route::get('potensidesa/show', [PotensidesaController::class, 'show'])->name('detail.potensidesa');
+    Route::post('potensidesa/store', [PotensidesaController::class, 'store'])->name('save.potensidesa');
+    Route::delete('potensidesa/delete', [PotensidesaController::class, 'destroy'])->name('delete.potensidesa');
+    Route::get('potensidesa/edit', [PotensidesaController::class, 'edit'])->name('edit.potensidesa');
+    Route::post('potensidesa/update', [PotensidesaController::class, 'update'])->name('update.potensidesa');
+
+    Route::get('kategoripotensi', [KategoripotensiController::class, 'index'])->name('kategoripotensi');
+    Route::get('kategoripotensi/fetch', [KategoripotensiController::class, 'fetch'])->name('fetch.kategoripotensi');
+    Route::post('kategoripotensi/store', [KategoripotensiController::class, 'store'])->name('save.kategoripotensi');
+    Route::delete('kategoripotensi/delete', [KategoripotensiController::class, 'destroy'])->name('delete.kategoripotensi');
+    Route::get('kategoripotensi/edit', [KategoripotensiController::class, 'edit'])->name('edit.kategoripotensi');
+    Route::post('kategoripotensi/update', [KategoripotensiController::class, 'update'])->name('update.kategoripotensi');
     Route::get('umkm', function () {
         return view('admin/umkm/index', [
             "title" => "UMKM"
@@ -143,11 +142,13 @@ Route::group(['prefix' => 'admin'], function () {
             "title" => "wisatawan"
         ]);
     });
-    Route::get('potensigambar', function () {
-        return view('admin/potensidesa/potensigambar', [
-            "title" => "Gambar"
-        ]);
-    });
+    Route::get('/potensigambar/{id_potensidesa}', [PotensidesagambarController::class, 'index'])->name('potensigambar');
+    Route::get('potensigambar/7/fetch', [PotensidesagambarController::class, 'fetch'])->name('fetch.potensigambar');
+    Route::post('potensigambar/store', [PotensidesagambarController::class, 'store'])->name('save.potensigambar');
+    Route::delete('potensigambar/delete', [PotensidesagambarController::class, 'destroy'])->name('delete.potensigambar');
+    Route::get('potensigambar/7/edit', [PotensidesagambarController::class, 'edit'])->name('edit.potensigambar');
+    Route::post('potensigambar/update', [PotensidesagambarController::class, 'update'])->name('update.potensigambar');
+
     Route::get('umkmgambar', function () {
         return view('admin/umkm/umkmgambar', [
             "title" => "Gambar"

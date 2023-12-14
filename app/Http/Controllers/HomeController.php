@@ -8,6 +8,8 @@ use App\Models\Fasilitas;
 use App\Models\Infowilayah;
 use App\Models\Kategoriberita;
 use App\Models\Kategorifasilitas;
+use App\Models\Kategoripotensi;
+use App\Models\Potensidesa;
 use App\Models\Profildesa;
 use Illuminate\Http\Request;
 
@@ -24,19 +26,21 @@ class HomeController extends Controller
         return view('frontend.home', [
             // array title berisi string 'home'       
             'title' => 'Home',
-            //data from berita model
 
+            //data from berita model
             'berita' => Berita::take(3)->select('id_berita', 'judulberita', 'gambarcover', 'isiberita', 'slug', 'created_at')->orderBy('created_at', 'desc')->get(),
-            //data from berita model
+            
+            //data from profildesa model
             'profildesa' => Profildesa::all(),
-
-            'berita' => Berita::take(3)->select('id_berita', 'judulberita', 'gambarcover','isiberita','slug','created_at')->orderBy('created_at','desc')->get(),
-
+            
             // data from Infowilayah Model
             'infowilayah' => Infowilayah::all(),
 
             //data from banner model
-            'banner' => Banner::all()
+            'banner' => Banner::all(),
+
+            //data from potensidesa model
+            'potensidesa' => Potensidesa::take(5)->select('id_potensidesa', 'namapotensi', 'gambarcover', 'deskripsi', 'slug', 'created_at')->orderBy('created_at', 'desc')->get(),
 
 
         ]);
@@ -123,6 +127,50 @@ class HomeController extends Controller
             'kategori' => Kategoriberita::all(),
             // array key title berisi string 'Berita'
             'title' => 'Berita',
+            // array key message berisi string 'Data tidak ditemukan' jika kosong, dan null jika tidak kosong
+            'message' => $results->isEmpty() ? 'Data tidak ditemukan' : null,
+        ]);
+
+    }
+
+    /**
+     * Fungsi menampilkan semua data potensidesa dan hasil pencarian 
+     * @param obyek Request dengan $request berisi data formulir pencarian
+     * @return view potensidesa dengan data array
+     */
+    public function potensidesa(Request $request)
+    {
+        // mengisi $keyword dari form cari name:keyword
+        $keyword = $request->input('keyword');
+        // mengisi $kategori dari form cari name:id_kategori
+        $kategori = $request->input('id_kategori');
+
+        // query builder model potensidesa, return beberapa data sesuai colom
+        $query = Potensidesa::query();
+        $query->select('id_potensidesa', 'namapotensi', 'gambarcover', 'deskripsi', 'slug','created_at');
+
+        // jika $keyword berisi data
+        if ($keyword) {
+            // lakukan query pencarian namapotensi berdasarkan $keyword
+            $query->where('namapotensi', 'like', '%' . $keyword . '%');
+        }
+
+        // jika $kategori berisi data
+        if ($kategori) {
+            // lakukan query pencarian id_kategori berdasarkan $kategori
+            $query->where('id_kategori', $kategori);
+        }
+
+        // masukan hasil pencarian ke $results dengan urutkan data dari yang terbaru
+        $results = $query->orderBy('created_at', 'desc')->get();
+        // return view potensi dengan mengirmkan data array
+        return view('frontend.potensi.index', [
+            // array key potensi berisi $results, jika kosong key potensi berisi array kosong
+            'potensidesa' => $results->isEmpty() ? [] : $results,
+            // array key kategori berisi semua data dari potensi
+            'kategori' => Kategoripotensi::all(),
+            // array key title berisi string 'potensi'
+            'title' => 'potensi desa',
             // array key message berisi string 'Data tidak ditemukan' jika kosong, dan null jika tidak kosong
             'message' => $results->isEmpty() ? 'Data tidak ditemukan' : null,
         ]);
