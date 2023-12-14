@@ -11,6 +11,7 @@ use App\Http\Controllers\NavbarController;
 use App\Http\Controllers\KategoriumkmController;
 use App\Http\Controllers\KategoriberitaController;
 use App\Http\Controllers\KategorifasilitasController;
+use App\Http\Controllers\ProfildesaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,21 +28,19 @@ use Illuminate\Support\Facades\Route;
 // route front end
 Route::get('/', [HomeController::class, 'index']);
 
-Route::get('/profil', function () {
-    return view('frontend/pages/profil',[
-        "title" => "Profil"
-    ]);
-});
+Route::get('/profil', [ProfildesaController::class, 'detailprofil']);
+
 Route::get('/potensi', function () {
-    return view('frontend/potensi/index',[
+    return view('frontend/potensi/index', [
         "title" => "Potensi"
     ]);
 });
 Route::get('/potensidetail', function () {
-    return view('frontend/potensi/potensidetail',[
+    return view('frontend/potensi/potensidetail', [
         "title" => "Potensi"
     ]);
 });
+
 Route::get('/umkm', [HomeController::class, 'umkm']);
 Route::get('/umkmdetail/{slug}', [UmkmController::class, 'detailumkm']);
 
@@ -49,7 +48,7 @@ Route::get('/berita', [HomeController::class, 'berita']);
 Route::get('/fasilitas', [HomeController::class, 'fasilitas']);
 
 Route::get('/review', function () {
-    return view('frontend/potensi/review',[
+    return view('frontend/potensi/review', [
         "title" => "review"
     ]);
 });
@@ -58,16 +57,25 @@ Route::get('/beritadetail/{slug}', [BeritaController::class, 'detailberita']);
 // route admin
 Route::group(['prefix' => 'admin'], function () {
     Route::get('dashboard', function () {
-        return view('admin/dashboard',[
+        return view('admin/dashboard', [
             "title" => "Dashboard"
         ]);
     });
+
     Route::get('navbar', [NavbarController::class, 'index'])->name('navbar');
     Route::get('navbar/fetch', [NavbarController::class, 'fetch'])->name('fetch.navbar');
     Route::post('navbar/store', [NavbarController::class, 'store'])->name('save.navbar');
     Route::delete('navbar/delete', [NavbarController::class, 'destroy'])->name('delete.navbar');
     Route::get('navbar/edit', [NavbarController::class, 'edit'])->name('edit.navbar');
     Route::post('navbar/update', [NavbarController::class, 'update'])->name('update.navbar');
+
+    Route::get('profildesa', [ProfildesaController::class, 'index'])->name('profildesa');
+    Route::get('profildesa/fetch', [ProfildesaController::class, 'fetch'])->name('fetch.profildesa');
+    Route::get('profildesa/show', [ProfildesaController::class, 'show'])->name('detail.profildesa');
+    Route::post('profildesa/store', [ProfildesaController::class, 'store'])->name('save.profildesa');
+    Route::delete('profildesa/delete', [ProfildesaController::class, 'destroy'])->name('delete.profildesa');
+    Route::get('profildesa/edit', [ProfildesaController::class, 'edit'])->name('edit.profildesa');
+    Route::post('profildesa/update', [ProfildesaController::class, 'update'])->name('update.profildesa');
 
     Route::get('banner', [BannerController::class, 'index'])->name('banner');
     Route::get('banner/fetch', [BannerController::class, 'fetch'])->name('fetch.banner');
@@ -76,11 +84,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::delete('banner/delete', [BannerController::class, 'destroy'])->name('delete.banner');
     Route::get('banner/edit', [BannerController::class, 'edit'])->name('edit.banner');
     Route::post('banner/update', [BannerController::class, 'update'])->name('update.banner');
-    Route::get('profildesa', function () {
-        return view('admin/pages/profildesa',[
-            "title" => "Profil Desa"
-        ]);
-    });
+
     Route::get('infowilayah', [InfowilayahController::class, 'index'])->name('infowilayah');
     Route::get('infowilayah/fetch', [InfowilayahController::class, 'fetch'])->name('fetch.infowilayah');
     Route::get('infowilayah/show', [InfowilayahController::class, 'show'])->name('detail.infowilayah');
@@ -90,20 +94,21 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('infowilayah/update', [InfowilayahController::class, 'update'])->name('update.infowilayah');
 
     Route::get('footer', function () {
-        return view('admin/pages/footer',[
+        return view('admin/pages/footer', [
             "title" => "Footer"
         ]);
     });
     Route::get('potensidesa', function () {
-        return view('admin/potensidesa/index',[
+        return view('admin/potensidesa/index', [
             "title" => "Potensi Desa"
         ]);
     });
     Route::get('kategoripotensi', function () {
-        return view('admin/potensidesa/kategoripotensi',[
+        return view('admin/potensidesa/kategoripotensi', [
             "title" => "Kategori Potensi Desa"
         ]);
     });
+
     Route::get('umkm', [UmkmController::class, 'index'])->name('umkm');
     Route::get('umkm/fetch', [UmkmController::class, 'fetch'])->name('fetch.umkm');
     Route::get('umkm/show', [UmkmController::class, 'show'])->name('detail.umkm');
@@ -134,17 +139,17 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('kategoriberita/edit', [KategoriberitaController::class, 'edit'])->name('edit.kategoriberita');
     Route::post('kategoriberita/update', [KategoriberitaController::class, 'update'])->name('update.kategoriberita');
     Route::get('petugas', function () {
-        return view('admin/pages/petugas',[
+        return view('admin/pages/petugas', [
             "title" => "Petugas"
         ]);
     });
     Route::get('wisatawan', function () {
-        return view('admin/pages/wisatawan',[
+        return view('admin/pages/wisatawan', [
             "title" => "wisatawan"
         ]);
     });
     Route::get('potensigambar', function () {
-        return view('admin/potensidesa/potensigambar',[
+        return view('admin/potensidesa/potensigambar', [
             "title" => "Gambar"
         ]);
     });

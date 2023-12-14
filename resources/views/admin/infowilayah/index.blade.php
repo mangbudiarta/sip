@@ -46,7 +46,7 @@
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="deskripsi">Deskripsi</label>
                                                 <textarea id="deskripsi" class="form-control" name="deskripsi" placeholder="ex: Homestay Terbaik Di Candikuning"
-                                                    aria-label="ex: Homestay Terbaik Di Candikuning" aria-describedby="basic-icon-default-message2"></textarea>
+                                                    aria-label="ex: Homestay Terbaik Di Candikuning" aria-describedby="basic-icon-default-message2" required></textarea>
                                             </div>
                                             <div>
                                                 <label for="formFile1" class="form-label">Gambar Cover<span
@@ -90,23 +90,21 @@
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="judulinfo">Judul</label>
                                                 <input type="text" class="form-control" id="judulinfo" name="judul"
-                                                    placeholder="ex : Desa Wisata & Indah" />
+                                                    placeholder="ex : Desa Wisata & Indah" required/>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="deskripsi">Deskripsi</label>
                                                 <textarea id="deskripsiedit" class="form-control" name="deskripsi"
                                                     placeholder="ex: Desa Candikuning merupakan desa wisata yang ada di Tabanan"
                                                     aria-label="ex: Desa Candikuning merupakan desa wisata yang ada di Tabanan"
-                                                    aria-describedby="basic-icon-default-message2"></textarea>
+                                                    aria-describedby="basic-icon-default-message2" required></textarea>
                                             </div>
                                             <div>
                                                 <label for="formFile" class="form-label">Gambar Cover<span
                                                         class=" text-muted">(png/jpg)</span></label>
                                                 <input type="file" class="form-control" type="file" id="imageEdit"
                                                     name="gambarcover" onchange="previewImageEdit()" />
-                                                <div class="overflow-auto">
-                                                    <img id="img-previewEditimg-previewEdit" class="my-2" alt="">
-                                                </div>
+                                                    <img id="img-previewEdit" class="my-2 col-sm-5" alt="">
                                             </div>
                                             <div class="row justify-content-end">
                                                 <div class="col-sm-12">

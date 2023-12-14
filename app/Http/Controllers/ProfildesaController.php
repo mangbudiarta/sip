@@ -2,39 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Infowilayah;
+use App\Models\Profildesa;
 use Illuminate\Http\Request;
 
-class InfowilayahController extends Controller
+class ProfildesaController extends Controller
 {
     /**
-     * Fungsi menampilkan view index pada folder admin/infowilayah
+     * Fungsi menampilkan view index pada folder admin/profildesa
      * @param -
      * @return view index dengan array key:kategori dan key:title
      */
     public function index()
     {
-        return view('admin.infowilayah.index', [
-            // mengisi array key: title dengan string 'Info Wilayah'
-            'title' => 'Infowilayah'
+        return view('admin.profildesa.index', [
+            // mengisi array key: title dengan string 'profildesa'
+            'title' => 'profildesa'
         ]);
     }
 
     /**
-     * Fungsi mendapatkan semua Info wailayah
+     * Fungsi mendapatkan semua data profildesa
      * @param -
-     * @return view datainfowilayah dengan array key:infowilayah
+     * @return view dataprofildesa dengan array key:profildesa
      */
     public function fetch()
     {
-        return view('admin.infowilayah.datainfowilayah', [
-            // mengisi array key:infowilayah dengan semua data dari model infowilayah
-            'infowilayah' => Infowilayah::all()
+        return view('admin.profildesa.dataprofildesa', [
+            // mengisi array key:profildesa dengan semua data dari model profildesa
+            'profildesa' => Profildesa::select('id_profildesa', 'judul', 'gambarcover')->get()
         ]);
     }
 
     /**
-     * Fungsi menyimpan data infowilayah ke database
+     * Fungsi menyimpan data profildesa ke database
      * @param obyek Request dengan $request berisi data formulir
      * @return response json dengan array key:status
      */
@@ -44,17 +44,17 @@ class InfowilayahController extends Controller
         $validateData = $this->validasiRules($request);
         if ($request->file('gambarcover')) {
             // ada input gambar, masukan nama gambar dari fungsi inputGambar (parameter data formulir)
-            $fileNameToStore= $this->inputGambar($request);
+            $fileNameToStore = $this->inputGambar($request);
         } else {
             // tidak input gambar, masukan nama noimage.png ke database
             $fileNameToStore = 'noimage.png';
         }
         // mengisi array validateData indeks gambar dengan nama gambar
-        $validateData['gambarcover']=$fileNameToStore;
-        
+        $validateData['gambarcover'] = $fileNameToStore;
+
         try {
-            // input data ke database dari model infowilayah
-            $result = Infowilayah::create($validateData);
+            // input data ke database dari model profildesa
+            $result = Profildesa::create($validateData);
         } catch (\Throwable $th) {
             // gagal input data, return status 500
             return response()->json([
@@ -63,7 +63,7 @@ class InfowilayahController extends Controller
         }
 
         // Berhasil input data, return status 200
-        if($result){
+        if ($result) {
             return response()->json([
                 'status' => 200,
             ]);
@@ -71,35 +71,35 @@ class InfowilayahController extends Controller
     }
 
     /**
-     * Fungsi menampilkan data infowilayah sesuai id
+     * Fungsi menampilkan data profildesa sesuai id
      * @param obyek Request $request berisi data formulir
-     * @return response json dengan array key: infowilayah dan key:kategori
+     * @return response json dengan array key: profildesa dan key:kategori
      */
     public function show(Request $request)
     {
-        // mengisi $id dari data form dengan name:id_infowilayah
-        $id = $request->id_infowilayah;
-        // mengisi $data dengan data infowilayah sesuai id dari model infowilayah
-		$data = Infowilayah::find($id);
-		return response()->json([
-            // mengisi array key:infowilayah dengan $data
-            'infowilayah' => $data
+        // mengisi $id dari data form dengan name:id_profildesa
+        $id = $request->id_profildesa;
+        // mengisi $data dengan data profildesa sesuai id dari model profildesa
+        $data = Profildesa::find($id);
+        return response()->json([
+            // mengisi array key:profildesa dengan $data
+            'profildesa' => $data,
         ]);
     }
 
     /**
-     * Fungsi menampilkan data infowilayah sesuai id untuk form edit
+     * Fungsi menampilkan data profildesa sesuai id untuk form edit
      * @param obyek Request $request berisi data formulir
-     * @return response json dengan isi data infowilayah sesuai id
+     * @return response json dengan isi data profildesa sesuai id
      */
     public function edit(Request $request)
     {
-        // mengisi $id dari data form dengan name:id_infowilayah
-        $id = $request->id_infowilayah;
-        // mengisi $data dengan data infowilayah sesuai id dari model infowilayah
-		$data = Infowilayah::find($id);
+        // mengisi $id dari data form dengan name:id_profildesa
+        $id = $request->id_profildesa;
+        // mengisi $data dengan data profildesa sesuai id dari model profildesa
+        $data = Profildesa::find($id);
         // mengirim isi $data dengan json
-		return response()->json($data);
+        return response()->json($data);
     }
 
     /**
@@ -109,23 +109,23 @@ class InfowilayahController extends Controller
      */
     public function update(Request $request)
     {
-        // mengisi array validateData dengan data valid dari fungsi validasiRules (parameter data formulir)
+       // mengisi array validateData dengan data valid dari fungsi validasiRules (parameter data formulir)
         $validateData = $this->validasiRules($request);
-        // mengiai $infowilayah dengan dari model infowilayah sesuai id
-        $infowilayah = Infowilayah::find($request->id_infowilayah);
+        // mengiai $fasilitas dengan dari model Fasilitas sesuai id
+        $profildesa = Profildesa::find($request->id_profildesa);
         if ($request->file('gambarcover')) {
             // ada input gambar, masukan nama gambar dari fungsi inputGambar (parameter data formulir)
             $fileNameToStore= $this->inputGambar($request);
         } else {
             // tidak input gambar, pakai nama gambar sebelumnya
-            $fileNameToStore = $infowilayah->gambarcover;
+            $fileNameToStore = $profildesa->gambarcover;
         }
         // mengisi array validateData indeks gambar dengan nama gambar
         $validateData['gambarcover']=$fileNameToStore;
-    
+
         try {
-            // update data ke database dari model infowilayah
-            $result = infowilayah::where('id_infowilayah',$infowilayah->id_infowilayah)->update($validateData);
+            // update data ke database dari model profildesa
+            $result = Profildesa::where('id_profildesa', $profildesa->id_profildesa)->update($validateData);
         } catch (\Throwable $th) {
             // gagal update data, return status 500
             return response()->json([
@@ -134,7 +134,7 @@ class InfowilayahController extends Controller
         }
 
         // Berhasil update data, return status 200
-        if($result){
+        if ($result) {
             return response()->json([
                 'status' => 200,
             ]);
@@ -142,17 +142,17 @@ class InfowilayahController extends Controller
     }
 
     /**
-     * Fungsi delete data infowilayah sesuai id
+     * Fungsi delete data profildesa sesuai id
      * @param obyek Request $request berisi data formulir
      * @return response json dengan array key:status
      */
     public function destroy(Request $request)
     {
-        // mengisi $id dari data form dengan name:id_infowilayah
-        $id = $request->id_infowilayah;
+        // mengisi $id dari data form dengan name:id_profildesa
+        $id = $request->id_profildesa;
         try {
-            // delete data pada database dari model infowilayah
-            $result = Infowilayah::destroy($id);
+            // delete data pada database dari model profildesa
+            $result = Profildesa::destroy($id);
         } catch (\Throwable $th) {
             // Gagal delete data, return status 500
             return response()->json([
@@ -161,7 +161,7 @@ class InfowilayahController extends Controller
         }
 
         // Berhasil delete data, return status 200
-        if($result){
+        if ($result) {
             return response()->json([
                 'status' => 200,
             ]);
@@ -173,11 +173,13 @@ class InfowilayahController extends Controller
      * @param obyek Request $request berisi data formulir
      * @return data tervalidasi
      */
-    public function validasiRules(Request $request) {
+    public function validasiRules(Request $request)
+    {
         return $request->validate([
             'judul' => 'required|max:25',
-            'deskripsi' => 'max:255|required',
-            'gambarcover' => 'image|file|max:1024'
+            'deskripsi' => 'required',
+            'video' => 'max:60|required',
+            'gambar' => 'image|file|max:1024|nullable'
         ]);
     }
 
@@ -186,17 +188,31 @@ class InfowilayahController extends Controller
      * @param obyek Request $request berisi data formulir
      * @return nama gambar
      */
-    public function inputGambar(Request $request) {
+    public function inputGambar(Request $request)
+    {
         // mendapatkan ekstensi gambar
         $extension = $request->file('gambarcover')->getClientOriginalExtension();
         // mendapatkan 6 karakter ramdom dari $sumber
         $sumber = "ABCDEFGHIJKLMNPQRSTUVWXYZ";
-        $randomName = substr(str_shuffle($sumber),0,6);
+        $randomName = substr(str_shuffle($sumber), 0, 6);
         // Nama gambar untuk disimpan
-        $fileNameToStore = 'infowilayah-'.$randomName.'.'.$extension;
+        $fileNameToStore = 'profildesa-' . $randomName . '.' . $extension;
         // Lokasi penyimpanan gambar
-        $path = $request->file('gambarcover')->storeAs('public/infowilayah_img', $fileNameToStore);
+        $path = $request->file('gambarcover')->storeAs('public/profildesa_img', $fileNameToStore);
         // return nama gambar
         return $fileNameToStore;
+    }
+        /**
+     * Fungsi menampilkan isi profildesa
+     * @param $slug dari tombol baca
+     * @return view beritadetail dengan data
+     */
+    public function detailprofil() {
+        $profildesa = Profildesa::all();
+        return view('frontend.pages.profil',[
+            "title" => "profil desa",
+            "profildetail"=> $profildesa
+        ]);
+        
     }
 }
