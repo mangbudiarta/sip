@@ -7,18 +7,21 @@
             </div>
             <div class="row justify-content-center wow fadeInUp" data-wow-delay="0.1s">
                 <div class="col-lg-8 justify-content-center">
-                    <form action="/" method="get">
+                    <form action="/umkm" method="get">
                         <div class="row mb-3 justify-content-center">
                             <div class="col-sm-5 mb-3">
                                 <input type="text" class="form-control" id="cari" name="keyword"
                                     placeholder="Pencarian">
                             </div>
                             <div class="col-sm-5 mb-3">
-                                <select class="form-select form-select">
-                                    <option>Kategori</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                <select class="form-select form-select" name="id_kategori">
+                                {{-- list nama kategori --}}
+                                    <option value="">Kategori</option>
+                                    @foreach ($kategori as $item)
+                                        <option value="{{ $item->id_kategori }}">
+                                            {{ $item->namakategori }}
+                                        </option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-sm-2">
@@ -29,24 +32,43 @@
                 </div>
             </div>
             <div class="row wow fadeInUp" data-wow-delay="0.1s">
+            {{-- perulangan data umkm --}}
+                @forelse ($umkm as $item)
                 <div class="col-lg-4 col-md-12 mb-4 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="store-item position-relative text-center shadow-sm">
-                        <img class="img-fluid" src="{{ asset('frontend/img/store-product-1.jpg') }}" alt="" />
+                        <img class="img-fluid" src="/storage/umkm_img/{{ $item->gambarcover }}" alt="gambar umkm" />
                         <div class="p-4">
-                            <h4 class="mb-3">UMKM SATU</h4>
+                            <!-- nama umkm -->
+                            <h4 class="mb-3">{{ $item->namaumkm }}</h4>
+                            <!-- deskripsi umkm -->
                             <p class="deskripsi">
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                                Ipsam sapiente repellat repellendus, voluptatibus ullam unde?
+                                {{$item->deskripsi}}
                             </p>
                         </div>
                         <div class="store-overlay">
-                            <a href="/umkmdetail" class="btn btn-primary rounded-pill py-2 px-4 m-2">Info
+                            <a href="/umkmdetail/{{ $item->slug }}" class="btn btn-primary rounded-pill py-2 px-4 m-2">Info
                                 Selengkapnya<i class="fa fa-arrow-right ms-2"></i></a>
-                            <a href="" class="btn btn-dark rounded-pill py-2 px-4 m-2">Hubungi Pemilik <i
-                                    class="fa fa-phone-alt ms-2"></i></a>
+                                {{-- jika infopemilik berisi karakter '+' --}}
+                                        @if (Str::contains($item->infopemilik, '+'))
+                                            {{-- tambahkan link wa dan no wa --}}
+                                            <a href="https://wa.me/{{ $item->infopemilik }}"
+                                                class="btn btn-dark rounded-pill py-2 px-4 m-2" target="_blank">Info Pemilik<i
+                                                    class="fa fa-phone-alt ms-2"></i></a>
+                                        @else
+                                            {{-- jika infopemilik tidak berisi karakter '+', gunakan isi infopemilik --}}
+                                            <a href="{{ $item->infopemilik }}" class="btn btn-dark rounded-pill py-2 px-4 m-2"
+                                                target="_blank">Info Pemilik<i class="fa fa-phone-alt ms-2"></i></a>
+                                        @endif
                         </div>
                     </div>
                 </div>
+                @empty
+                    {{-- jika data umkm kosong tampilkan $pesan --}}
+                    <div class="text-center">
+                        {{ $message }}
+                    </div>
+                @endforelse
+                {{-- akhir perulangan data umkm --}}
             </div>
         </div>
     </div>

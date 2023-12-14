@@ -55,8 +55,11 @@
         <div class="container">
             <nav class="navbar navbar-expand-lg bg-white navbar-light py-2 py-lg-0">
                 <a href="/" class="navbar-brand">
-                    <img class="img-fluid" src="{{ asset('frontend/img/logo.png') }}" alt="Logo Desa Candikuning"
+                @forelse ($navbar as $item)
+                    <img class="img-fluid" src="/storage/navbar_img/{{ $item->gambarnav }}" alt="Logo Desa Candikuning"
                         style="width: 250px" />
+                @empty
+                @endforelse
                 </a>
                 <button type="button" class="navbar-toggler ms-auto me-0" data-bs-toggle="collapse"
                     data-bs-target="#navbarCollapse">
