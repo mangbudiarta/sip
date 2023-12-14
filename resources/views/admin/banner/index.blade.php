@@ -43,7 +43,7 @@
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="judulTambah">Judul Banner</label>
                                                 <input type="text" class="form-control" id="judulTambah" name="judul"
-                                                    placeholder="ex : Desa Wisata & Indah" required/>
+                                                    placeholder="ex : Desa Wisata & Indah" required />
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="deskripsiTambah">Deskripsi Banner</label>
@@ -55,7 +55,7 @@
                                             <div>
                                                 <label for="formFileTambah" class="form-label">Gambar <span
                                                         class=" text-muted">(png/jpg)</span></label>
-                                                        <input type="file" class="form-control" type="file" id="image"
+                                                <input type="file" class="form-control" type="file" id="image"
                                                     name="gambar" onchange="previewImage()" />
                                                 <img id="img-preview" class="my-2 col-sm-5" alt="">
                                             </div>
@@ -94,7 +94,7 @@
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="judulEdit">Judul Banner</label>
                                                 <input type="text" class="form-control" id="judulEdit" name="judul"
-                                                    placeholder="ex : Desa Wisata & Indah" required/>
+                                                    placeholder="ex : Desa Wisata & Indah" required />
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="deskripsiEdit">Deskripsi Banner</label>
@@ -106,7 +106,7 @@
                                             <div>
                                                 <label for="formFileEdit" class="form-label">Gambar <span
                                                         class=" text-muted">(png/jpg)</span></label>
-                                                        <input type="file" class="form-control" type="file" id="imageEdit"
+                                                <input type="file" class="form-control" type="file" id="imageEdit"
                                                     name="gambar" onchange="previewImageEdit()" />
                                                 <img id="img-previewEdit" class="my-2 col-sm-5" alt="">
                                             </div>
@@ -130,217 +130,217 @@
                     </div>
                 </div>
                 <script>
-        $(function() {
+                    $(function() {
 
-            // add ajax request
-            // jika form dengan id add_banner_form disubmit
-            $("#add_banner_form").submit(function(e) {
-                // jeda untuk melakukan proses pengecekan
-                e.preventDefault();
-                // simpan isi form dalam obyek dataForm
-                const dataForm = new FormData(this);
-                // ganti tulisan button simpan
-                $("#add_banner_btn").text('Adding ...');
-                $.ajax({
-                    // panggil route name save.banner
-                    url: '{{ route('save.banner') }}',
-                    // method pengiriman data POST
-                    method: 'POST',
-                    // isi data: obyek dataForm
-                    data: dataForm,
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    dataType: 'json',
-                    // jika sukses return respon json
-                    success: function(response) {
-                        // jika respon array key:status = 200
-                        if (response.status == 200) {
-                            // tampilkan data dengan mengirimkan parameter array key:succes
-                            fetch('success', 'Berhasil tambah data');
-                            // reset isi formulir tambah
-                            $("#add_banner_form")[0].reset();
-                        } else {
-                            // jika respon array key:status selain 200
-                            // tampilkan data dengan mengirimkan parameter array key:danger
-                            fetch('danger', 'Gagal tambah data');
-                        }
-                        // kembalikan tulisan button simpan
-                        $("#add_banner_btn").text('Submit');
-                        // tutup tampilan modal banner tambah
-                        $("#BannerTambah").modal('hide');
-                    }
-                });
-            });
-
-            // delete ajax request
-            // jika class deletebanner pada databanner.blade di klik
-            $(document).on('click', '.deletebanner', function(e) {
-                // jeda untuk melakukan proses pengecekan
-                e.preventDefault();
-                // buat variabel id dengan isi data dari atribut id pada class detelebanner
-                let id = $(this).attr('id');
-                // buat variabel csrf
-                let csrf = '{{ csrf_token() }}';
-                // jika confirm hapus true
-                if (confirm('Yakin hapus data ini ?')) {
-                    $.ajax({
-                        // panggil route name delete.banner
-                        url: '{{ route('delete.banner') }}',
-                        // methode DELETE
-                        method: 'DELETE',
-                        // isi data : id_banner dan token
-                        data: {
-                            id_banner: id,
-                            _token: csrf
-                        },
-                        // jika sukses return respon json
-                        success: function(response) {
-                            // jika respon array key:status = 200
-                            if (response.status == 200) {
-                                // tampilkan data dengan mengirimkan parameter array key:succes
-                                fetch('success', 'Berhasil hapus data');
-                            } else {
-                                // jika respon array key:status selain 200
-                                // tampilkan data dengan mengirimkan parameter array key:danger
-                                fetch('danger', 'Gagal hapus data');
-                            }
-                        }
-                    });
-                } else {
-                    // jika confirm hapus false/ tidak hapus
-                    // tampilkan data dengan mengirimkan parameter array key:info
-                    fetch('info', 'Data aman');
-                }
-
-            });
-
-            // edit ajax request
-            // jika class editbanner pada databanner.blade di klik
-            $(document).on('click', '.editbanner', function(e) {
-                // jeda untuk melakukan proses pengecekan
-                e.preventDefault();
-                // buat variabel id dengan isi data dari atribut id pada class editbanner
-                let id = $(this).attr('id');
-                $.ajax({
-                    // panggil route name edit.banner
-                    url: '{{ route('edit.banner') }}',
-                    // method GET
-                    method: 'GET',
-                    // isi data : id_banner dan token
-                    data: {
-                        id_banner: id,
-                        _token: '{{ csrf_token() }}'
-                    },
-                    // jika sukses return respon json
-                    success: function(response) {
-                        // tampilkan setiap value dari id inputan form
-                        $("#id_banneredit").val(response.id_banner);
-                        $("#judulEdit").val(response.judul);
-                        $("#deskripsiEdit").val(response.deskripsi);
-                    }
-                });
-            });
-
-            // update ajax request
-            // jika form dengan id edit_banner_form disubmit
-            $("#edit_banner_form").submit(function(e) {
-                // jeda untuk melakukan proses pengecekan
-                e.preventDefault();
-                // dapatkan form edit
-                var form = $('#edit_banner_form')[0];
-                // simpan isi form dalam obyek dataForm
-                var dataForm = new FormData(form);
-                // ganti tulisan button simpan
-                $("#edit_banner_btn").text('Updating ...');
-                $.ajax({
-                    // panggil route name update.banner
-                    url: '{{ route('update.banner') }}',
-                    // method POST
-                    method: 'POST',
-                    // isi data: obyek dataForm
-                    data: dataForm,
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    dataType: 'json',
-                    // jika sukses return respons json
-                    success: function(response) {
-                        // jika respon array key:status = 200
-                        if (response.status == 200) {
-                            // tampilkan data dengan mengirimkan parameter array key:succes
-                            fetch('success', 'Berhasil edit data');
-                        } else {
-                            // jika respon array key:status selain 200
-                            // tampilkan data dengan mengirimkan parameter array key:danger
-                            fetch('danger', 'Gagal edit data');
-
-                        }
-                        // kembalikan tulisan button simpan
-                        $("#edit_banner_btn").text('Submit');
-                        // tutup tampilan modal banner edit
-                        $("#BannerEdit").modal('hide');
-                    }
-                });
-            });
-
-            //get record
-            fetch('', '');
-
-            // fungsi menampilkan data
-            //parameter String type dan message
-            function fetch(type = '', message = '') {
-                $.ajax({
-                    // panggil route name fetch.banner
-                    url: '{{ route('fetch.banner') }}',
-                    // method GET
-                    method: 'GET',
-                    // jika sukses return respons json
-                    success: function(response) {
-                        // isi id dataPage dengan sintax html berisi response
-                        $("#dataPage").html(response);
-                        // buat tag table menjadi datatable
-                        $("table").DataTable({
-                            order: [0, 'desc']
+                        // add ajax request
+                        // jika form dengan id add_banner_form disubmit
+                        $("#add_banner_form").submit(function(e) {
+                            // jeda untuk melakukan proses pengecekan
+                            e.preventDefault();
+                            // simpan isi form dalam obyek dataForm
+                            const dataForm = new FormData(this);
+                            // ganti tulisan button simpan
+                            $("#add_banner_btn").text('Adding ...');
+                            $.ajax({
+                                // panggil route name save.banner
+                                url: '{{ route('save.banner') }}',
+                                // method pengiriman data POST
+                                method: 'POST',
+                                // isi data: obyek dataForm
+                                data: dataForm,
+                                cache: false,
+                                contentType: false,
+                                processData: false,
+                                dataType: 'json',
+                                // jika sukses return respon json
+                                success: function(response) {
+                                    // jika respon array key:status = 200
+                                    if (response.status == 200) {
+                                        // tampilkan data dengan mengirimkan parameter array key:succes
+                                        fetch('success', 'Berhasil tambah data');
+                                        // reset isi formulir tambah
+                                        $("#add_banner_form")[0].reset();
+                                    } else {
+                                        // jika respon array key:status selain 200
+                                        // tampilkan data dengan mengirimkan parameter array key:danger
+                                        fetch('danger', 'Gagal tambah data');
+                                    }
+                                    // kembalikan tulisan button simpan
+                                    $("#add_banner_btn").text('Submit');
+                                    // tutup tampilan modal banner tambah
+                                    $("#BannerTambah").modal('hide');
+                                }
+                            });
                         });
-                        // jika parameter type dan message tidak kosong
-                        if (type && message) {
-                            // Buat element alert sesuai parameter
-                            const alertHtml =
-                                `<div class="alert alert-${type} alert-dismissible fade show" role="alert">
+
+                        // delete ajax request
+                        // jika class deletebanner pada databanner.blade di klik
+                        $(document).on('click', '.deletebanner', function(e) {
+                            // jeda untuk melakukan proses pengecekan
+                            e.preventDefault();
+                            // buat variabel id dengan isi data dari atribut id pada class detelebanner
+                            let id = $(this).attr('id');
+                            // buat variabel csrf
+                            let csrf = '{{ csrf_token() }}';
+                            // jika confirm hapus true
+                            if (confirm('Yakin hapus data ini ?')) {
+                                $.ajax({
+                                    // panggil route name delete.banner
+                                    url: '{{ route('delete.banner') }}',
+                                    // methode DELETE
+                                    method: 'DELETE',
+                                    // isi data : id_banner dan token
+                                    data: {
+                                        id_banner: id,
+                                        _token: csrf
+                                    },
+                                    // jika sukses return respon json
+                                    success: function(response) {
+                                        // jika respon array key:status = 200
+                                        if (response.status == 200) {
+                                            // tampilkan data dengan mengirimkan parameter array key:succes
+                                            fetch('success', 'Berhasil hapus data');
+                                        } else {
+                                            // jika respon array key:status selain 200
+                                            // tampilkan data dengan mengirimkan parameter array key:danger
+                                            fetch('danger', 'Gagal hapus data');
+                                        }
+                                    }
+                                });
+                            } else {
+                                // jika confirm hapus false/ tidak hapus
+                                // tampilkan data dengan mengirimkan parameter array key:info
+                                fetch('info', 'Data aman');
+                            }
+
+                        });
+
+                        // edit ajax request
+                        // jika class editbanner pada databanner.blade di klik
+                        $(document).on('click', '.editbanner', function(e) {
+                            // jeda untuk melakukan proses pengecekan
+                            e.preventDefault();
+                            // buat variabel id dengan isi data dari atribut id pada class editbanner
+                            let id = $(this).attr('id');
+                            $.ajax({
+                                // panggil route name edit.banner
+                                url: '{{ route('edit.banner') }}',
+                                // method GET
+                                method: 'GET',
+                                // isi data : id_banner dan token
+                                data: {
+                                    id_banner: id,
+                                    _token: '{{ csrf_token() }}'
+                                },
+                                // jika sukses return respon json
+                                success: function(response) {
+                                    // tampilkan setiap value dari id inputan form
+                                    $("#id_banneredit").val(response.id_banner);
+                                    $("#judulEdit").val(response.judul);
+                                    $("#deskripsiEdit").val(response.deskripsi);
+                                }
+                            });
+                        });
+
+                        // update ajax request
+                        // jika form dengan id edit_banner_form disubmit
+                        $("#edit_banner_form").submit(function(e) {
+                            // jeda untuk melakukan proses pengecekan
+                            e.preventDefault();
+                            // dapatkan form edit
+                            var form = $('#edit_banner_form')[0];
+                            // simpan isi form dalam obyek dataForm
+                            var dataForm = new FormData(form);
+                            // ganti tulisan button simpan
+                            $("#edit_banner_btn").text('Updating ...');
+                            $.ajax({
+                                // panggil route name update.banner
+                                url: '{{ route('update.banner') }}',
+                                // method POST
+                                method: 'POST',
+                                // isi data: obyek dataForm
+                                data: dataForm,
+                                cache: false,
+                                contentType: false,
+                                processData: false,
+                                dataType: 'json',
+                                // jika sukses return respons json
+                                success: function(response) {
+                                    // jika respon array key:status = 200
+                                    if (response.status == 200) {
+                                        // tampilkan data dengan mengirimkan parameter array key:succes
+                                        fetch('success', 'Berhasil edit data');
+                                    } else {
+                                        // jika respon array key:status selain 200
+                                        // tampilkan data dengan mengirimkan parameter array key:danger
+                                        fetch('danger', 'Gagal edit data');
+
+                                    }
+                                    // kembalikan tulisan button simpan
+                                    $("#edit_banner_btn").text('Submit');
+                                    // tutup tampilan modal banner edit
+                                    $("#BannerEdit").modal('hide');
+                                }
+                            });
+                        });
+
+                        //get record
+                        fetch('', '');
+
+                        // fungsi menampilkan data
+                        //parameter String type dan message
+                        function fetch(type = '', message = '') {
+                            $.ajax({
+                                // panggil route name fetch.banner
+                                url: '{{ route('fetch.banner') }}',
+                                // method GET
+                                method: 'GET',
+                                // jika sukses return respons json
+                                success: function(response) {
+                                    // isi id dataPage dengan sintax html berisi response
+                                    $("#dataPage").html(response);
+                                    // buat tag table menjadi datatable
+                                    $("table").DataTable({
+                                        order: [0, 'desc']
+                                    });
+                                    // jika parameter type dan message tidak kosong
+                                    if (type && message) {
+                                        // Buat element alert sesuai parameter
+                                        const alertHtml =
+                                            `<div class="alert alert-${type} alert-dismissible fade show" role="alert">
                                 ${message}
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>`;
-                            // tampilkan element alert pada class .alert-notif pada view databanner.blade
-                            $(".alert-notif").append(alertHtml);
+                                        // tampilkan element alert pada class .alert-notif pada view databanner.blade
+                                        $(".alert-notif").append(alertHtml);
 
+                                    }
+
+                                }
+                            });
                         }
+                    });
 
+                    // fungsi menampilkan gambar pada form tambah
+                    function previewImage() {
+                        // pilih gambar pada input file dengan id image
+                        const image = document.querySelector('#image');
+                        // pilih tempat tampil gambar pada id img-preview
+                        const imgPreview = document.querySelector('#img-preview')
+                        const blob = URL.createObjectURL(image.files[0]);
+                        imgPreview.src = blob;
                     }
-                });
-            }
-        });
 
-        // fungsi menampilkan gambar pada form tambah
-        function previewImage() {
-            // pilih gambar pada input file dengan id image
-            const image = document.querySelector('#image');
-            // pilih tempat tampil gambar pada id img-preview
-            const imgPreview = document.querySelector('#img-preview')
-            const blob = URL.createObjectURL(image.files[0]);
-            imgPreview.src = blob;
-        }
-
-        // fungsi menampilkan gambar pada form edit
-        function previewImageEdit() {
-            // pilih gambar pada input file dengan id imageEdit
-            const image = document.querySelector('#imageEdit');
-            // pilih tempat tampil gambar pada id img-previewEdit
-            const imgPreview = document.querySelector('#img-previewEdit')
-            // buat blob dari const image
-            const blob = URL.createObjectURL(image.files[0]);
-            // tampilkan blob pada imgPreview
-            imgPreview.src = blob;
-        }
-    </script>
+                    // fungsi menampilkan gambar pada form edit
+                    function previewImageEdit() {
+                        // pilih gambar pada input file dengan id imageEdit
+                        const image = document.querySelector('#imageEdit');
+                        // pilih tempat tampil gambar pada id img-previewEdit
+                        const imgPreview = document.querySelector('#img-previewEdit')
+                        // buat blob dari const image
+                        const blob = URL.createObjectURL(image.files[0]);
+                        // tampilkan blob pada imgPreview
+                        imgPreview.src = blob;
+                    }
+                </script>
             @endsection

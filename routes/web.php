@@ -11,7 +11,11 @@ use App\Http\Controllers\NavbarController;
 use App\Http\Controllers\KategoriumkmController;
 use App\Http\Controllers\KategoriberitaController;
 use App\Http\Controllers\KategorifasilitasController;
+use App\Http\Controllers\KategoripotensiController;
+use App\Http\Controllers\PotensidesaController;
+use App\Http\Controllers\PotensidesagambarController;
 use App\Http\Controllers\ProfildesaController;
+use App\Models\Potensidesagambar;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,19 +31,10 @@ use Illuminate\Support\Facades\Route;
 
 // route front end
 Route::get('/', [HomeController::class, 'index']);
-
 Route::get('/profil', [ProfildesaController::class, 'detailprofil']);
 
-Route::get('/potensi', function () {
-    return view('frontend/potensi/index', [
-        "title" => "Potensi"
-    ]);
-});
-Route::get('/potensidetail', function () {
-    return view('frontend/potensi/potensidetail', [
-        "title" => "Potensi"
-    ]);
-});
+Route::get('/potensi', [HomeController::class, 'potensidesa']);
+Route::get('/potensidetail/{slug}', [PotensidesaController::class, 'detailpotensi']);
 
 Route::get('/umkm', [HomeController::class, 'umkm']);
 Route::get('/umkmdetail/{slug}', [UmkmController::class, 'detailumkm']);
@@ -52,10 +47,12 @@ Route::get('/review', function () {
         "title" => "review"
     ]);
 });
+
 Route::get('/beritadetail/{slug}', [BeritaController::class, 'detailberita']);
 
 // route admin
 Route::group(['prefix' => 'admin'], function () {
+  
     Route::get('dashboard', function () {
         return view('admin/dashboard', [
             "title" => "Dashboard"
@@ -98,16 +95,21 @@ Route::group(['prefix' => 'admin'], function () {
             "title" => "Footer"
         ]);
     });
-    Route::get('potensidesa', function () {
-        return view('admin/potensidesa/index', [
-            "title" => "Potensi Desa"
-        ]);
-    });
-    Route::get('kategoripotensi', function () {
-        return view('admin/potensidesa/kategoripotensi', [
-            "title" => "Kategori Potensi Desa"
-        ]);
-    });
+
+    Route::get('potensidesa', [PotensidesaController::class, 'index'])->name('potensidesa');
+    Route::get('potensidesa/fetch', [PotensidesaController::class, 'fetch'])->name('fetch.potensidesa');
+    Route::get('potensidesa/show', [PotensidesaController::class, 'show'])->name('detail.potensidesa');
+    Route::post('potensidesa/store', [PotensidesaController::class, 'store'])->name('save.potensidesa');
+    Route::delete('potensidesa/delete', [PotensidesaController::class, 'destroy'])->name('delete.potensidesa');
+    Route::get('potensidesa/edit', [PotensidesaController::class, 'edit'])->name('edit.potensidesa');
+    Route::post('potensidesa/update', [PotensidesaController::class, 'update'])->name('update.potensidesa');
+
+    Route::get('kategoripotensi', [KategoripotensiController::class, 'index'])->name('kategoripotensi');
+    Route::get('kategoripotensi/fetch', [KategoripotensiController::class, 'fetch'])->name('fetch.kategoripotensi');
+    Route::post('kategoripotensi/store', [KategoripotensiController::class, 'store'])->name('save.kategoripotensi');
+    Route::delete('kategoripotensi/delete', [KategoripotensiController::class, 'destroy'])->name('delete.kategoripotensi');
+    Route::get('kategoripotensi/edit', [KategoripotensiController::class, 'edit'])->name('edit.kategoripotensi');
+    Route::post('kategoripotensi/update', [KategoripotensiController::class, 'update'])->name('update.kategoripotensi');
 
     Route::get('umkm', [UmkmController::class, 'index'])->name('umkm');
     Route::get('umkm/fetch', [UmkmController::class, 'fetch'])->name('fetch.umkm');
@@ -138,21 +140,25 @@ Route::group(['prefix' => 'admin'], function () {
     Route::delete('kategoriberita/delete', [KategoriberitaController::class, 'destroy'])->name('delete.kategoriberita');
     Route::get('kategoriberita/edit', [KategoriberitaController::class, 'edit'])->name('edit.kategoriberita');
     Route::post('kategoriberita/update', [KategoriberitaController::class, 'update'])->name('update.kategoriberita');
+    
     Route::get('petugas', function () {
         return view('admin/pages/petugas', [
             "title" => "Petugas"
         ]);
     });
+  
     Route::get('wisatawan', function () {
         return view('admin/pages/wisatawan', [
             "title" => "wisatawan"
         ]);
     });
-    Route::get('potensigambar', function () {
-        return view('admin/potensidesa/potensigambar', [
-            "title" => "Gambar"
-        ]);
-    });
+
+    Route::get('/potensigambar/{id_potensidesa}', [PotensidesagambarController::class, 'index'])->name('potensigambar');
+    Route::get('potensigambar/7/fetch', [PotensidesagambarController::class, 'fetch'])->name('fetch.potensigambar');
+    Route::post('potensigambar/store', [PotensidesagambarController::class, 'store'])->name('save.potensigambar');
+    Route::delete('potensigambar/delete', [PotensidesagambarController::class, 'destroy'])->name('delete.potensigambar');
+    Route::get('potensigambar/7/edit', [PotensidesagambarController::class, 'edit'])->name('edit.potensigambar');
+    Route::post('potensigambar/update', [PotensidesagambarController::class, 'update'])->name('update.potensigambar');
 
     Route::get('umkmgambar/{id_umkm}', [UmkmGambarController::class, 'index'])->name('umkmgambar');
     Route::get('umkmgambar/7/fetch', [UmkmGambarController::class, 'fetch'])->name('fetch.umkmgambar');

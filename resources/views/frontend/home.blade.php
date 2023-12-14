@@ -159,74 +159,27 @@
                 <h2 class="display-6">Temukan Tempat yang Indah Bagaikan Surga</h2>
             </div>
             <div class="owl-carousel product-carousel wow fadeInUp" data-wow-delay="0.5s">
-                <div class="product-item rounded">
-                    <img src="{{ asset('frontend/img/product-1.jpg') }}" alt="" />
-                    <div class="bg-white shadow-sm text-center p-4 position-relative mt-n5 mx-4">
-                        <a href="/review" class="text-center mb-3 rating-star">
-                            <small class="fa fa-star text-warning"></small>
-                            <small class="fa fa-star text-warning"></small>
-                            <small class="fa fa-star text-warning"></small>
-                            <small class="fa fa-star text-warning"></small>
-                            <small class="fa fa-star text-warning"></small>
-                            <small>(5)</small>
-                        </a>
-                        <a href="/potensidetail" class="h4 d-block text-primary">Potensi Satu</a>
-                        <span class="text-body deskripsi">Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                            Corrupti vitae magnam quia praesentium eum quae vero ipsa
-                            tempore quidem officiis.</span>
+                {{-- Perulangan data potensidesa --}}
+                @forelse ($potensidesa as $item)
+                    <div class="product-item rounded">
+                        <img src="/storage/potensi_img/{{ $item->gambarcover }}" alt=""
+                            style="height: 300px;" />
+                        <div class="bg-white shadow-sm text-center p-4 position-relative mt-n5 mx-4">
+                            <a href="/review/{{ $item->slug }}" class="text-center mb-3 rating-star">
+                                <small class="fa fa-star text-warning"></small>
+                                <small class="fa fa-star text-warning"></small>
+                                <small class="fa fa-star text-warning"></small>
+                                <small class="fa fa-star text-warning"></small>
+                                <small class="fa fa-star text-warning"></small>
+                                <small>(5)</small>
+                            </a>
+                            <a href="/potensidetail/{{ $item->slug }}" class="h4 d-block text-primary"
+                                target="_blank">{{ $item->namapotensi }}</a>
+                            <span class="text-body deskripsi">{{ $item->deskripsi }}</span>
+                        </div>
                     </div>
-                </div>
-                <div class="product-item rounded">
-                    <img src="{{ asset('frontend/img/product-1.jpg') }}" alt="" />
-                    <div class="bg-white shadow-sm text-center p-4 position-relative mt-n5 mx-4">
-                        <a href="/review" class="text-center mb-3 rating-star">
-                            <small class="fa fa-star text-warning"></small>
-                            <small class="fa fa-star text-warning"></small>
-                            <small class="fa fa-star text-warning"></small>
-                            <small class="fa fa-star text-warning"></small>
-                            <small class="fa fa-star text-warning"></small>
-                            <small>(5)</small>
-                        </a>
-                        <a href="/kontak" class="h4 d-block text-primary">Potensi Dua</a>
-                        <span class="text-body deskripsi">Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                            Corrupti vitae magnam quia praesentium eum quae vero ipsa
-                            tempore quidem officiis.</span>
-                    </div>
-                </div>
-                <div class="product-item rounded">
-                    <img src="{{ asset('frontend/img/product-1.jpg') }}" alt="" />
-                    <div class="bg-white shadow-sm text-center p-4 position-relative mt-n5 mx-4">
-                        <a href="/review" class="text-center mb-3 rating-star">
-                            <small class="fa fa-star text-warning"></small>
-                            <small class="fa fa-star text-warning"></small>
-                            <small class="fa fa-star text-warning"></small>
-                            <small class="fa fa-star text-warning"></small>
-                            <small class="fa fa-star text-warning"></small>
-                            <small>(5)</small>
-                        </a>
-                        <a href="/kontak" class="h4 d-block text-primary">Potensi Tiga</a>
-                        <span class="text-body deskripsi">Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                            Corrupti vitae magnam quia praesentium eum quae vero ipsa
-                            tempore quidem officiis.</span>
-                    </div>
-                </div>
-                <div class="product-item rounded">
-                    <img src="{{ asset('frontend/img/product-1.jpg') }}" alt="" />
-                    <div class="bg-white shadow-sm text-center p-4 position-relative mt-n5 mx-4">
-                        <a href="/review" class="text-center mb-3 rating-star">
-                            <small class="fa fa-star text-warning"></small>
-                            <small class="fa fa-star text-warning"></small>
-                            <small class="fa fa-star text-warning"></small>
-                            <small class="fa fa-star text-warning"></small>
-                            <small class="fa fa-star text-warning"></small>
-                            <small>(5)</small>
-                        </a>
-                        <a href="/kontak" class="h4 d-block text-primary">Potensi Empat</a>
-                        <span class="text-body deskripsi">Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                            Corrupti vitae magnam quia praesentium eum quae vero ipsa
-                            tempore quidem officiis.</span>
-                    </div>
-                </div>
+                @empty
+                @endforelse
             </div>
         </div>
     </div>
@@ -281,10 +234,7 @@
             </div>
         </div>
     </div>
-    </div>
-    <!-- UMKM End -->
-
-    <!-- Fasilitas Start -->
+    
     <div class="container-fluid video my-5">
         <div class="container">
             <div class="row g-0 justify-content-center">
