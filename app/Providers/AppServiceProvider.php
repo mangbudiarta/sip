@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Navbar;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +24,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // Menggunakan share method untuk mengirim data ke semua view
+        view()->share([
+            //data from navbar model
+            'navbar' => Navbar::all()
+         ]);
     }
 }

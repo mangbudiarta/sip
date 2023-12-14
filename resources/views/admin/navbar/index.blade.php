@@ -5,27 +5,12 @@
             <div class="col-lg-12 mb-4 order-0">
                 <div class="row">
                     <div class="col-xxl">
-                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">UMKM/</span> Gambar</h4>
-                        <div class="card mb-4">
-                            <div class="card-header d-flex align-items-center justify-content-between">
-                                <h5 class="mb-0">Data UMKM Gambar</h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="mb-3">
-                                    <label class="col-form-label" for="namaumkm">Nama UMKM</label>
-                                    <input type="text" class="form-control" id="namaumkm" name="namaumkm" disabled
-                                        readonly value="{{ $umkm->namaumkm }}" />
-                                </div>
-                            </div>
-                        </div>
-
+                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Layouts/</span> Navbar</h4>
+                        <!-- Table Layout Start -->
                         <div class="card mb-4">
                             <div class="table-responsive p-3">
-                                <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal"
-                                    data-bs-target="#GambarTambah">
-                                    <i class="menu-icon tf-icons bx bx-plus m-0"></i>Tambah
-                                </button>
-                                <input type="hidden" class="id_umkm" data-id="{{ $umkm->id_umkm }}">
+                            
+
                                 <!-- Tabel  Start-->
                                 <div id="dataPage">
                                     <div class="d-flex justify-content-center mt-3">
@@ -35,39 +20,35 @@
                                     </div>
                                 </div>
                                 <!-- Tabel End-->
-
                             </div>
                         </div>
+                        <!-- Table Layout End -->
                         <!-- Modal Tambah Start -->
-                        <div class="modal fade" id="GambarTambah" tabindex="-1" aria-hidden="true">
+                        <div class="modal fade" id="NavbarTambah" tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="ModalTambah">Tambah Gambar</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel3">Tambah Navbar</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <!-- Form Layout Start-->
-                                        <form action="" method="post" id="add_gambar_form">
-                                            @csrf
-                                            <input type="hidden" name="id_umkm" id="id_umkm"
-                                                value="{{ $umkm->id_umkm }}">
+                                        <form action="" method="post" id="add_navbar_form">
+                                            @csrf 
                                             <div>
-                                                <label for="image" class="form-label">Gambar <span
+                                                <label for="formFile1" class="form-label">Gambar <span
                                                         class=" text-muted">(png/jpg)</span></label>
                                                 <input type="file" class="form-control" type="file" id="image"
-                                                    name="gambar" onchange="previewImage()" />
+                                                    name="gambarnav" onchange="previewImage()" />
                                                 <img id="img-preview" class="my-2 col-sm-5" alt="">
                                             </div>
                                             <div class="row justify-content-end">
                                                 <div class="col-sm-12">
-                                                    <button type="submit" class="btn btn-primary" id="add_gambar_btn"
-                                                        name="simpan">Simpan</button>
+                                                    <button type="submit" class="btn btn-primary"
+                                                        name="simpan" id="add_navbar_btn" >Simpan</button>
                                                     <button type="button" class="btn btn-outline-secondary"
-                                                        data-bs-dismiss="modal">
-                                                        Close
-                                                    </button>
+                                                        data-bs-dismiss="modal">Batal</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -77,38 +58,33 @@
                             </div>
                         </div>
                         <!-- Modal Tambah End -->
-
                         <!-- Modal Edit Start -->
-                        <div class="modal fade" id="GambarEdit" tabindex="-1" aria-hidden="true">
+                        <div class="modal fade" id="NavbarEdit" tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="ModalEdit">Edit Gambar</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel3">Edit Navbar</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <!-- Form Layout Start-->
-                                        <form action="" method="post" id="edit_gambar_form">
-                                            @csrf
-                                            <input type="hidden" name="id_umkm" id="id_umkmedit"
-                                                value="{{ $umkm->id_umkm }}">
-                                            <input type="hidden" name="id_gambar" id="id_gambaredit">
+                                        <form action="" method="post" id="edit_navbar_form">
+                                            @csrf 
+                                            <input type ="hidden" name="id_navbar" id="id_navbar">
                                             <div>
-                                                <label for="image" class="form-label">Gambar <span
+                                                <label for="formFile1" class="form-label">Gambar <span
                                                         class=" text-muted">(png/jpg)</span></label>
                                                 <input type="file" class="form-control" type="file" id="imageEdit"
-                                                    name="gambar" onchange="previewImageEdit()" />
+                                                    name="gambarnav" onchange="previewImageEdit()" />
                                                 <img id="img-previewEdit" class="my-2 col-sm-5" alt="">
                                             </div>
                                             <div class="row justify-content-end">
                                                 <div class="col-sm-12">
-                                                    <button type="submit" class="btn btn-primary" id="edit_gambar_btn"
-                                                        name="simpan">Simpan</button>
+                                                    <button type="submit" class="btn btn-primary"
+                                                        name="simpan" id="edit_navbar_btn" >Simpan</button>
                                                     <button type="button" class="btn btn-outline-secondary"
-                                                        data-bs-dismiss="modal">
-                                                        Close
-                                                    </button>
+                                                        data-bs-dismiss="modal">Batal</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -117,8 +93,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Modal Tambah End -->
-
+                        <!-- Modal Edit End -->
                     </div>
                 </div>
             </div>
@@ -128,17 +103,17 @@
         $(function() {
 
             // add ajax request
-            // jika form dengan id add_gambar_form disubmit
-            $("#add_gambar_form").submit(function(e) {
+            // jika form dengan id add_navbar_form disubmit
+            $("#add_navbar_form").submit(function(e) {
                 // jeda untuk melakukan proses pengecekan
                 e.preventDefault();
                 // simpan isi form dalam obyek dataForm
                 const dataForm = new FormData(this);
                 // ganti tulisan button simpan
-                $("#add_gambar_btn").text('Adding ...');
+                $("#add_navbar_btn").text('Adding ...');
                 $.ajax({
-                    // panggil route name save.umkmgambar
-                    url: '{{ route('save.umkmgambar') }}',
+                    // panggil route name save.navbar
+                    url: '{{ route('save.navbar') }}',
                     // method pengiriman data POST
                     method: 'POST',
                     // isi data: obyek dataForm
@@ -154,39 +129,39 @@
                             // tampilkan data dengan mengirimkan parameter array key:succes
                             fetch('success', 'Berhasil tambah data');
                             // reset isi formulir tambah
-                            $("#add_gambar_form")[0].reset();
+                            $("#add_navbar_form")[0].reset();
                         } else {
                             // jika respon array key:status selain 200
                             // tampilkan data dengan mengirimkan parameter array key:danger
                             fetch('danger', 'Gagal tambah data');
                         }
                         // kembalikan tulisan button simpan
-                        $("#add_gambar_btn").text('Submit');
-                        // tutup tampilan modal gambar tambah
-                        $("#GambarTambah").modal('hide');
+                        $("#add_navbar_btn").text('Submit');
+                        // tutup tampilan modal navbar tambah
+                        $("#NavbarTambah").modal('hide');
                     }
                 });
             });
 
             // delete ajax request
-            // jika class deletegambar pada datagambar.blade di klik
-            $(document).on('click', '.deletegambar', function(e) {
+            // jika class deletenavbar pada datanavbar.blade di klik
+            $(document).on('click', '.deletenavbar', function(e) {
                 // jeda untuk melakukan proses pengecekan
                 e.preventDefault();
-                // buat variabel id dengan isi data dari atribut id pada class detelegambar
+                // buat variabel id dengan isi data dari atribut id pada class detelenavbar
                 let id = $(this).attr('id');
                 // buat variabel csrf
                 let csrf = '{{ csrf_token() }}';
                 // jika confirm hapus true
                 if (confirm('Yakin hapus data ini ?')) {
                     $.ajax({
-                        // panggil route name delete.umkmgambar
-                        url: '{{ route('delete.umkmgambar') }}',
+                        // panggil route name delete.navbar
+                        url: '{{ route('delete.navbar') }}',
                         // methode DELETE
                         method: 'DELETE',
-                        // isi data : id_gambar dan token
+                        // isi data : id_navbar dan token
                         data: {
-                            id_gambar: id,
+                            id_navbar: id,
                             _token: csrf
                         },
                         // jika sukses return respon json
@@ -211,45 +186,44 @@
             });
 
             // edit ajax request
-            // jika class editgambar pada datagambar.blade di klik
-            $(document).on('click', '.editgambar', function(e) {
+            // jika class editnavbar pada datanavbar.blade di klik
+            $(document).on('click', '.editnavbar', function(e) {
                 // jeda untuk melakukan proses pengecekan
                 e.preventDefault();
-                // buat variabel id dengan isi data dari atribut id pada class editgambar
+                // buat variabel id dengan isi data dari atribut id pada class editNavbar
                 let id = $(this).attr('id');
                 $.ajax({
-                    // panggil route name edit.umkmgambar
-                    url: '{{ route('edit.umkmgambar') }}',
+                    // panggil route name edit.navbar
+                    url: '{{ route('edit.navbar') }}',
                     // method GET
                     method: 'GET',
-                    // isi data : id_gambar dan token
+                    // isi data : id_navbar dan token
                     data: {
-                        id_gambar: id,
+                        id_navbar: id,
                         _token: '{{ csrf_token() }}'
                     },
                     // jika sukses return respon json
                     success: function(response) {
                         // tampilkan setiap value dari id inputan form
-                        $("#id_gambaredit").val(response.id_gambar);
-                        $("#id_umkmedit").val(response.id_umkm);
+                        $("#id_navbar").val(response.id_navbar);
                     }
                 });
             });
 
             // update ajax request
-            // jika form dengan id edit_gambar_form disubmit
-            $("#edit_gambar_form").submit(function(e) {
+            // jika form dengan id edit_navbar_form disubmit
+            $("#edit_navbar_form").submit(function(e) {
                 // jeda untuk melakukan proses pengecekan
                 e.preventDefault();
                 // dapatkan form edit
-                var form = $('#edit_gambar_form')[0];
+                var form = $('#edit_navbar_form')[0];
                 // simpan isi form dalam obyek dataForm
                 var dataForm = new FormData(form);
                 // ganti tulisan button simpan
-                $("#edit_gambar_btn").text('Updating ...');
+                $("#edit_navbar_btn").text('Updating ...');
                 $.ajax({
-                    // panggil route name update.umkmgambar
-                    url: '{{ route('update.umkmgambar') }}',
+                    // panggil route name update.navbar
+                    url: '{{ route('update.navbar') }}',
                     // method POST
                     method: 'POST',
                     // isi data: obyek dataForm
@@ -271,9 +245,9 @@
 
                         }
                         // kembalikan tulisan button simpan
-                        $("#edit_gambar_btn").text('Submit');
-                        // tutup tampilan modal gambar edit
-                        $("#GambarEdit").modal('hide');
+                        $("#edit_navbar_btn").text('Submit');
+                        // tutup tampilan modal fasilitas edit
+                        $("#NavbarEdit").modal('hide');
                     }
                 });
             });
@@ -284,16 +258,11 @@
             // fungsi menampilkan data
             //parameter String type dan message
             function fetch(type = '', message = '') {
-                // buat variabel id dengan isi data dari atribut id pada class detelegambar
-                let id = $('.id_umkm').data('id');
                 $.ajax({
-                    // panggil route name fetch.umkmgambar
-                    url: '{{ route('fetch.umkmgambar') }}',
+                    // panggil route name fetch.navbar
+                    url: '{{ route('fetch.navbar') }}',
                     // method GET
                     method: 'GET',
-                    data: {
-                        id_umkm: id
-                    },
                     // jika sukses return respons json
                     success: function(response) {
                         // isi id dataPage dengan sintax html berisi response
@@ -307,10 +276,10 @@
                             // Buat element alert sesuai parameter
                             const alertHtml =
                                 `<div class="alert alert-${type} alert-dismissible fade show" role="alert">
-                                    ${message}
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                </div>`;
-                            // tampilkan element alert pada class .alert-notif pada view datagambar.blade
+                                ${message}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>`;
+                            // tampilkan element alert pada class .alert-notif pada view datafasilitas.blade
                             $(".alert-notif").append(alertHtml);
 
                         }

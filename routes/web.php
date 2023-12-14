@@ -5,6 +5,10 @@ use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\FasilitasController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfowilayahController;
+use App\Http\Controllers\UmkmController;
+use App\Http\Controllers\UmkmGambarController;
+use App\Http\Controllers\NavbarController;
+use App\Http\Controllers\KategoriumkmController;
 use App\Http\Controllers\KategoriberitaController;
 use App\Http\Controllers\KategorifasilitasController;
 use App\Http\Controllers\ProfildesaController;
@@ -12,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| Web Routes 
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
@@ -36,16 +40,9 @@ Route::get('/potensidetail', function () {
         "title" => "Potensi"
     ]);
 });
-Route::get('/umkm', function () {
-    return view('frontend/umkm/index', [
-        "title" => "Umkm"
-    ]);
-});
-Route::get('/umkmdetail', function () {
-    return view('frontend/umkm/umkmdetail', [
-        "title" => "Umkm"
-    ]);
-});
+
+Route::get('/umkm', [HomeController::class, 'umkm']);
+Route::get('/umkmdetail/{slug}', [UmkmController::class, 'detailumkm']);
 
 Route::get('/berita', [HomeController::class, 'berita']);
 Route::get('/fasilitas', [HomeController::class, 'fasilitas']);
@@ -64,11 +61,13 @@ Route::group(['prefix' => 'admin'], function () {
             "title" => "Dashboard"
         ]);
     });
-    Route::get('navbar', function () {
-        return view('admin/pages/navbar', [
-            "title" => "Navbar"
-        ]);
-    });
+
+    Route::get('navbar', [NavbarController::class, 'index'])->name('navbar');
+    Route::get('navbar/fetch', [NavbarController::class, 'fetch'])->name('fetch.navbar');
+    Route::post('navbar/store', [NavbarController::class, 'store'])->name('save.navbar');
+    Route::delete('navbar/delete', [NavbarController::class, 'destroy'])->name('delete.navbar');
+    Route::get('navbar/edit', [NavbarController::class, 'edit'])->name('edit.navbar');
+    Route::post('navbar/update', [NavbarController::class, 'update'])->name('update.navbar');
 
     Route::get('profildesa', [ProfildesaController::class, 'index'])->name('profildesa');
     Route::get('profildesa/fetch', [ProfildesaController::class, 'fetch'])->name('fetch.profildesa');
@@ -109,16 +108,22 @@ Route::group(['prefix' => 'admin'], function () {
             "title" => "Kategori Potensi Desa"
         ]);
     });
-    Route::get('umkm', function () {
-        return view('admin/umkm/index', [
-            "title" => "UMKM"
-        ]);
-    });
-    Route::get('kategoriumkm', function () {
-        return view('admin/umkm/kategoriumkm', [
-            "title" => "Kategori UMKM"
-        ]);
-    });
+
+    Route::get('umkm', [UmkmController::class, 'index'])->name('umkm');
+    Route::get('umkm/fetch', [UmkmController::class, 'fetch'])->name('fetch.umkm');
+    Route::get('umkm/show', [UmkmController::class, 'show'])->name('detail.umkm');
+    Route::post('umkm/store', [UmkmController::class, 'store'])->name('save.umkm');
+    Route::delete('umkm/delete', [UmkmController::class, 'destroy'])->name('delete.umkm');
+    Route::get('umkm/edit', [UmkmController::class, 'edit'])->name('edit.umkm');
+    Route::post('umkm/update', [UmkmController::class, 'update'])->name('update.umkm');
+
+    Route::get('kategoriumkm', [KategoriumkmController::class, 'index'])->name('kategoriumkm');
+    Route::get('kategoriumkm/fetch', [KategoriumkmController::class, 'fetch'])->name('fetch.kategoriumkm');
+    Route::post('kategoriumkm/store', [KategoriumkmController::class, 'store'])->name('save.kategoriumkm');
+    Route::delete('kategoriumkm/delete', [KategoriumkmController::class, 'destroy'])->name('delete.kategoriumkm');
+    Route::get('kategoriumkm/edit', [KategoriumkmController::class, 'edit'])->name('edit.kategoriumkm');
+    Route::post('kategoriumkm/update', [KategoriumkmController::class, 'update'])->name('update.kategoriumkm');
+
     Route::get('berita', [BeritaController::class, 'index'])->name('berita');
     Route::get('berita/fetch', [BeritaController::class, 'fetch'])->name('fetch.berita');
     Route::get('berita/show', [BeritaController::class, 'show'])->name('detail.berita');
@@ -148,11 +153,14 @@ Route::group(['prefix' => 'admin'], function () {
             "title" => "Gambar"
         ]);
     });
-    Route::get('umkmgambar', function () {
-        return view('admin/umkm/umkmgambar', [
-            "title" => "Gambar"
-        ]);
-    });
+
+    Route::get('umkmgambar/{id_umkm}', [UmkmGambarController::class, 'index'])->name('umkmgambar');
+    Route::get('umkmgambar/7/fetch', [UmkmGambarController::class, 'fetch'])->name('fetch.umkmgambar');
+    Route::post('umkmgambar/store', [UmkmGambarController::class, 'store'])->name('save.umkmgambar');
+    Route::delete('umkmgambar/delete', [UmkmGambarController::class, 'destroy'])->name('delete.umkmgambar');
+    Route::get('umkmgambar/7/edit', [UmkmGambarController::class, 'edit'])->name('edit.umkmgambar');
+    Route::post('umkmgambar/update', [UmkmGambarController::class, 'update'])->name('update.umkmgambar');
+
     Route::get('fasilitas', [FasilitasController::class, 'index'])->name('fasilitas');
     Route::get('fasilitas/fetch', [FasilitasController::class, 'fetch'])->name('fetch.fasilitas');
     Route::get('fasilitas/show', [FasilitasController::class, 'show'])->name('detail.fasilitas');

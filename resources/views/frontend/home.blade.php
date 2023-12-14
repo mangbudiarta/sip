@@ -232,92 +232,58 @@
 </div>
 <!-- Potensi Desa End -->
 
-<!-- UMKM Start -->
-<div class="container-xxl py-5" id="umkm">
-    <div class="container">
-        <div class="section-title text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px">
-            <p class="fs-5 fw-medium fst-italic text-primary">UMKM</p>
-            <h2 class="display-6">Jelajahi Tempat Keajaiban Disini!</h2>
-        </div>
-        <div class="owl-carousel product-carousel wow fadeInUp" data-wow-delay="0.5s">
-            <div class="wow fadeInUp" data-wow-delay="0.1s">
-                <div class="store-item position-relative text-center">
-                    <img class="img-fluid" src="{{ asset('frontend/img/store-product-1.jpg') }}" alt="" />
-                    <div class="p-4">
-                        <h4 class="mb-3">UMKM SATU</h4>
-                        <p class="deskripsi">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                            Ipsam sapiente repellat repellendus, voluptatibus ullam unde?
-                        </p>
-                    </div>
-                    <div class="store-overlay">
-                        <a href="/umkmdetail" class="btn btn-primary rounded-pill py-2 px-4 m-2">Info Selengkapnya<i
-                                class="fa fa-arrow-right ms-2"></i></a>
-                        <a href="" class="btn btn-dark rounded-pill py-2 px-4 m-2">Hubungi Pemilik <i
-                                class="fa fa-phone-alt ms-2"></i></a>
-                    </div>
-                </div>
+    <!-- UMKM Start -->
+    <div class="container-xxl py-5" id="umkm">
+        <div class="container">
+            <div class="section-title text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px">
+                <p class="fs-5 fw-medium fst-italic text-primary">UMKM</p>
+                <h2 class="display-6">Jelajahi Tempat dengan Keajaiban di Sini!</h2>
             </div>
-            <div class="wow fadeInUp" data-wow-delay="0.3s">
-                <div class="store-item position-relative text-center">
-                    <img class="img-fluid" src="{{ asset('frontend/img/store-product-2.jpg') }}" alt="" />
-                    <div class="p-4">
-                        <h4 class="mb-3">UMKM DUA</h4>
-                        <p class="deskripsi">
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                            Tempore, sit quasi commodi consequatur totam quo!
-                        </p>
-                    </div>
-                    <div class="store-overlay">
-                        <a href="" class="btn btn-primary rounded-pill py-2 px-4 m-2">Info Selengkapnya<i
-                                class="fa fa-arrow-right ms-2"></i></a>
-                        <a href="" class="btn btn-dark rounded-pill py-2 px-4 m-2">Hubungi Pemilik <i
-                                class="fa fa-phone-alt ms-2"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="wow fadeInUp" data-wow-delay="0.5s">
-                <div class="store-item position-relative text-center">
-                    <img class="img-fluid" src="{{ asset('frontend/img/store-product-3.jpg') }}" alt="" />
-                    <div class="p-4">
-                        <h4 class="mb-3">UMKM TIGA</h4>
-                        <p class="deskripsi">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            Mollitia quod odit obcaecati officiis id dolorem.
-                        </p>
-                    </div>
-                    <div class="store-overlay">
-                        <a href="" class="btn btn-primary rounded-pill py-2 px-4 m-2">Info Selengkapnya<i
-                                class="fa fa-arrow-right ms-2"></i></a>
-                        <a href="" class="btn btn-dark rounded-pill py-2 px-4 m-2">Hubungi Pemilik <i
-                                class="fa fa-phone-alt ms-2"></i></a>
+            <div class="owl-carousel product-carousel wow fadeInUp" data-wow-delay="0.5s">
+            {{-- perulangan data umkm --}}
+                @forelse ($umkm as $item)
+                <div class="wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="store-item position-relative text-center">
+                    <img class="img-fluid" src="/storage/umkm_img/{{ $item->gambarcover }}" alt="gambar umkm" />
+                        <div class="p-4">
+                            <!-- nama umkm -->
+                            <h4 class="mb-3">{{ $item->namaumkm}}</h4>
+                            <!-- deskripsi umkm -->
+                            <p class="deskripsi">
+                                {{$item->deskripsi}}
+                            </p>
+                        </div>
+                        <div class="store-overlay">
+                            <a href="/umkmdetail/{{ $item->slug }}" class="btn btn-primary rounded-pill py-2 px-4 m-2">Info
+                                Selengkapnya<i class="fa fa-arrow-right ms-2"></i></a>
+                                {{-- jika infopemilik berisi karakter '+' --}}
+                                        @if (Str::contains($item->infopemilik, '+'))
+                                            {{-- tambahkan link wa dan no wa --}}
+                                            <a href="https://wa.me/{{ $item->infopemilik }}"
+                                                class="btn btn-dark rounded-pill py-2 px-4 m-2" target="_blank">Info Pemilik<i
+                                                    class="fa fa-phone-alt ms-2"></i></a>
+                                        @else
+                                            {{-- jika infopemilik tidak berisi karakter '+', gunakan isi infopemilik --}}
+                                            <a href="{{ $item->infopemilik }}" class="btn btn-dark rounded-pill py-2 px-4 m-2"
+                                                target="_blank">Info Pemilik<i class="fa fa-phone-alt ms-2"></i></a>
+                                        @endif
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="wow fadeInUp" data-wow-delay="0.5s">
-                <div class="store-item position-relative text-center">
-                    <img class="img-fluid" src="{{ asset('frontend/img/store-product-3.jpg') }}" alt="" />
-                    <div class="p-4">
-                        <h4 class="mb-3">UMKM EMPAT</h4>
-                        <p class="deskripsi">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Non
-                            hic itaque earum ab mollitia voluptatem!
-                        </p>
+                @empty
+                    {{-- jika data umkm kosong tampilkan $pesan --}}
+                    <div class="text-center">
+                        {{ $message }}
                     </div>
-                    <div class="store-overlay">
-                        <a href="" class="btn btn-primary rounded-pill py-2 px-4 m-2">Info Selengkapnya<i
-                                class="fa fa-arrow-right ms-2"></i></a>
-                        <a href="" class="btn btn-dark rounded-pill py-2 px-4 m-2">Hubungi Pemilik <i
-                                class="fa fa-phone-alt ms-2"></i></a>
-                    </div>
-                </div>
+                @endforelse
+                {{-- akhir perulangan data umkm --}}
             </div>
         </div>
     </div>
 </div>
 <!-- UMKM End -->
 
-<!-- Langganan Start -->
+<!-- Fasilitas Start -->
 <div class="container-fluid video my-5">
     <div class="container">
         <div class="row g-0 justify-content-center">
@@ -338,7 +304,7 @@
         </div>
     </div>
 </div>
-<!-- Langganan End -->
+<!-- Fasilitas End -->
 
 <!-- Berita Start -->
 <div class="container-xxl contact py-5" id="berita">
