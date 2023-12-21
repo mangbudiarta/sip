@@ -38,11 +38,22 @@
 </head>
 
 <body>
-    <!-- Spinner Start -->
-    <!-- <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-        <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;"></div>
-    </div> -->
-    <!-- Spinner End -->
+
+@if(session('error'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Error:</strong> {{ session('error') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
+<!-- Menampilkan pesan sukses -->
+@if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Success:</strong> {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
 
     <!-- Navbar Start -->
     <div class="container-fluid bg-white sticky-top">
@@ -66,7 +77,17 @@
                             class="nav-item nav-link {{ $title == 'Fasilitas' ? 'active' : '' }}">Fasilitas</a>
                         <a href="/berita" class="nav-item nav-link {{ $title == 'Berita' ? 'active' : '' }}">Berita</a>
                     </div>
-                    <a href="/" class="btn btn-outline-primary rounded-pill py-2 px-4">LOGIN</a>
+                    @auth
+                    <a href="{{ route('logout') }}" class="btn btn-outline-primary rounded-pill py-2 px-4 animated zoomIn">
+                        Logout
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                    @else
+                        <a href="{{ route('auth') }}" class="btn btn-outline-primary rounded-pill py-2 px-4 animated zoomIn">Login</a>
+                    @endauth
+
                 </div>
             </nav>
         </div>

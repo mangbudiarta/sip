@@ -1,13 +1,21 @@
 <?php
 
+use App\Models\Loginpetugas;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\FooterController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FasilitasController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\InfowilayahController;
+use App\Http\Controllers\LoginPetugasController;
 use App\Http\Controllers\KategoriberitaController;
 use App\Http\Controllers\KategorifasilitasController;
-use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,31 +28,70 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+// Auth
+Route::get('auth', [GoogleAuthController::class, 'index'])->name('auth');
+Route::get('auth/google', [GoogleAuthController::class, 'redirect'])->name('google-auth');
+Route::get('auth/google/call-back', [GoogleAuthController::class, 'callbackGoogle']);
+
+// Register Send Mail
+Route::get('/register', [AuthController::class, 'register']);
+Route::post('/register', [AuthController::class, 'registerProses']);
+
+// Login Wisatawan
+Route::get('/login', [AuthController::class, 'login']);
+Route::post('/login', [AuthController::class, 'loginProses']);
+
+// Email Verify
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect('/');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+// Logout
+Route::get('logout', [GoogleAuthController::class, 'logout'])->name('logout');
+
+
+
+
+// Auth Petugas
+// Route::get('/login', [LoginPetugasController::class, 'showLoginForm'])->name('login');
+// Route::post('/login', [LoginPetugasController::class, 'login']);
+
+
+
+
+
 // route front end
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->middleware(['auth', 'verified']);
 
 Route::get('/profil', function () {
-    return view('frontend/pages/profil',[
+    return view('frontend/pages/profil', [
         "title" => "Profil"
     ]);
 });
 Route::get('/potensi', function () {
-    return view('frontend/potensi/index',[
+    return view('frontend/potensi/index', [
         "title" => "Potensi"
     ]);
 });
 Route::get('/potensidetail', function () {
-    return view('frontend/potensi/potensidetail',[
+    return view('frontend/potensi/potensidetail', [
         "title" => "Potensi"
     ]);
 });
 Route::get('/umkm', function () {
-    return view('frontend/umkm/index',[
+    return view('frontend/umkm/index', [
         "title" => "Umkm"
     ]);
 });
 Route::get('/umkmdetail', function () {
-    return view('frontend/umkm/umkmdetail',[
+    return view('frontend/umkm/umkmdetail', [
         "title" => "Umkm"
     ]);
 });
@@ -53,24 +100,27 @@ Route::get('/berita', [HomeController::class, 'berita']);
 Route::get('/fasilitas', [HomeController::class, 'fasilitas']);
 
 Route::get('/review', function () {
-    return view('frontend/potensi/review',[
+    return view('frontend/potensi/review', [
         "title" => "review"
     ]);
 });
 Route::get('/beritadetail/{slug}', [BeritaController::class, 'detailberita']);
 
+
+
+
 // route admin
 Route::group(['prefix' => 'admin'], function () {
-    Route::get('dashboard', function () {
-        return view('admin/dashboard',[
-            "title" => "Dashboard"
-        ]);
-    });
+
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+
     Route::get('navbar', function () {
-        return view('admin/pages/navbar',[
+        return view('admin/pages/navbar', [
             "title" => "Navbar"
         ]);
     });
+
     Route::get('banner', [BannerController::class, 'index'])->name('banner');
     Route::get('banner/fetch', [BannerController::class, 'fetch'])->name('fetch.banner');
     Route::get('banner/show', [BannerController::class, 'show'])->name('detail.banner');
@@ -78,11 +128,13 @@ Route::group(['prefix' => 'admin'], function () {
     Route::delete('banner/delete', [BannerController::class, 'destroy'])->name('delete.banner');
     Route::get('banner/edit', [BannerController::class, 'edit'])->name('edit.banner');
     Route::post('banner/update', [BannerController::class, 'update'])->name('update.banner');
+
     Route::get('profildesa', function () {
-        return view('admin/pages/profildesa',[
+        return view('admin/pages/profildesa', [
             "title" => "Profil Desa"
         ]);
     });
+
     Route::get('infowilayah', [InfowilayahController::class, 'index'])->name('infowilayah');
     Route::get('infowilayah/fetch', [InfowilayahController::class, 'fetch'])->name('fetch.infowilayah');
     Route::get('infowilayah/show', [InfowilayahController::class, 'show'])->name('detail.infowilayah');
@@ -91,28 +143,32 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('infowilayah/edit', [InfowilayahController::class, 'edit'])->name('edit.infowilayah');
     Route::post('infowilayah/update', [InfowilayahController::class, 'update'])->name('update.infowilayah');
 
-    Route::get('footer', function () {
-        return view('admin/pages/footer',[
-            "title" => "Footer"
-        ]);
-    });
+    Route::get('footer', [FooterController::class, 'index'])->name('footer');
+    Route::get('footer/fetch', [FooterController::class, 'fetch'])->name('fetch.footer');
+    Route::get('footer/show', [FooterController::class, 'show'])->name('detail.footer');
+    Route::post('footer/store', [FooterController::class, 'store'])->name('save.footer');
+    Route::delete('footer/delete', [FooterController::class, 'destroy'])->name('delete.footer');
+    Route::get('footer/edit', [FooterController::class, 'edit'])->name('edit.footer');
+    Route::post('footer/update', [FooterController::class, 'update'])->name('update.footer');
+
+
     Route::get('potensidesa', function () {
-        return view('admin/potensidesa/index',[
+        return view('admin/potensidesa/index', [
             "title" => "Potensi Desa"
         ]);
     });
     Route::get('kategoripotensi', function () {
-        return view('admin/potensidesa/kategoripotensi',[
+        return view('admin/potensidesa/kategoripotensi', [
             "title" => "Kategori Potensi Desa"
         ]);
     });
     Route::get('umkm', function () {
-        return view('admin/umkm/index',[
+        return view('admin/umkm/index', [
             "title" => "UMKM"
         ]);
     });
     Route::get('kategoriumkm', function () {
-        return view('admin/umkm/kategoriumkm',[
+        return view('admin/umkm/kategoriumkm', [
             "title" => "Kategori UMKM"
         ]);
     });
@@ -131,22 +187,22 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('kategoriberita/edit', [KategoriberitaController::class, 'edit'])->name('edit.kategoriberita');
     Route::post('kategoriberita/update', [KategoriberitaController::class, 'update'])->name('update.kategoriberita');
     Route::get('petugas', function () {
-        return view('admin/pages/petugas',[
+        return view('admin/pages/petugas', [
             "title" => "Petugas"
         ]);
     });
     Route::get('wisatawan', function () {
-        return view('admin/pages/wisatawan',[
+        return view('admin/pages/wisatawan', [
             "title" => "wisatawan"
         ]);
     });
     Route::get('potensigambar', function () {
-        return view('admin/potensidesa/potensigambar',[
+        return view('admin/potensidesa/potensigambar', [
             "title" => "Gambar"
         ]);
     });
     Route::get('umkmgambar', function () {
-        return view('admin/umkm/umkmgambar',[
+        return view('admin/umkm/umkmgambar', [
             "title" => "Gambar"
         ]);
     });
