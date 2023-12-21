@@ -6,7 +6,6 @@ use App\Models\Banner;
 use App\Models\Berita;
 use App\Models\Fasilitas;
 use App\Models\Infowilayah;
-use Illuminate\Http\Request;
 use App\Models\Kategoriberita;
 use App\Models\Kategorifasilitas;
 
@@ -14,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Kategoripotensi;
 use App\Models\Potensidesa;
 use App\Models\Umkm;
-use App\Models\Kategoriumkm; 
+use App\Models\Kategoriumkm;
 use App\Models\Profildesa;
 use Illuminate\Http\Request;
 
@@ -34,10 +33,10 @@ class HomeController extends Controller
 
             //data from berita model
             'berita' => Berita::take(3)->select('id_berita', 'judulberita', 'gambarcover', 'isiberita', 'slug', 'created_at')->orderBy('created_at', 'desc')->get(),
-            
+
             //data from profildesa model
             'profildesa' => Profildesa::all(),
-            
+
             // data from Infowilayah Model
             'infowilayah' => Infowilayah::all(),
 
@@ -145,29 +144,29 @@ class HomeController extends Controller
      * @return view potensidesa dengan data array
      */
     public function potensidesa(Request $request)
-   {
+    {
         // mengisi $keyword dari form cari name:keyword
         $keyword = $request->input('keyword');
         // mengisi $kategori dari form cari name:id_kategori
         $kategori = $request->input('id_kategori');
-  
+
         // query builder model potensidesa, return beberapa data sesuai colom
         $query = Potensidesa::query();
-        $query->select('id_potensidesa', 'namapotensi', 'gambarcover', 'deskripsi', 'slug','created_at');
+        $query->select('id_potensidesa', 'namapotensi', 'gambarcover', 'deskripsi', 'slug', 'created_at');
 
         // jika $keyword berisi data
         if ($keyword) {
             // lakukan query pencarian namapotensi berdasarkan $keyword
             $query->where('namapotensi', 'like', '%' . $keyword . '%');
         }
-  
+
         // jika $kategori berisi data
         if ($kategori) {
             // lakukan query pencarian id_kategori berdasarkan $kategori
             $query->where('id_kategori', $kategori);
         }
-  
-         // masukan hasil pencarian ke $results dengan urutkan data dari yang terbaru
+
+        // masukan hasil pencarian ke $results dengan urutkan data dari yang terbaru
         $results = $query->orderBy('created_at', 'desc')->get();
         // return view potensi dengan mengirmkan data array
         return view('frontend.potensi.index', [
@@ -177,12 +176,12 @@ class HomeController extends Controller
             'kategori' => Kategoripotensi::all(),
             // array key title berisi string 'potensi'
             'title' => 'potensi desa',
-           // array key message berisi string 'Data tidak ditemukan' jika kosong, dan null jika tidak kosong
+            // array key message berisi string 'Data tidak ditemukan' jika kosong, dan null jika tidak kosong
             'message' => $results->isEmpty() ? 'Data tidak ditemukan' : null,
         ]);
     }
 
-        /**
+    /**
      * Fungsi menampilkan semua data umkm dan hasil pencarian 
      * @param obyek Request dengan $request berisi data formulir pencarian
      * @return view umkm dengan data array
@@ -202,7 +201,7 @@ class HomeController extends Controller
             // lakukan query pencarian namaumkm berdasarkan $keyword
             $query->where('namaumkm', 'like', '%' . $keyword . '%');
         }
-        
+
         // jika $kategori berisi data
         if ($kategori) {
             // lakukan query pencarian id_kategori berdasarkan $kategori
@@ -210,7 +209,7 @@ class HomeController extends Controller
         }
 
         // masukan hasil pencarian ke $results dengan urutkan data dari yang terbaru
-        $results = $query->orderBy('created_at','desc')->get();
+        $results = $query->orderBy('created_at', 'desc')->get();
         // return view umkm dengan mengirmkan data array
         return view('frontend.umkm.index', [
             // array key umkm berisi $results, jika kosong key umkm berisi array kosong

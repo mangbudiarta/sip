@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Loginpetugas;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
@@ -189,13 +188,13 @@ Route::group(['prefix' => 'admin'], function () {
     Route::delete('kategoriberita/delete', [KategoriberitaController::class, 'destroy'])->name('delete.kategoriberita');
     Route::get('kategoriberita/edit', [KategoriberitaController::class, 'edit'])->name('edit.kategoriberita');
     Route::post('kategoriberita/update', [KategoriberitaController::class, 'update'])->name('update.kategoriberita');
-    
+
     Route::get('petugas', function () {
         return view('admin/pages/petugas', [
             "title" => "Petugas"
         ]);
     });
-  
+
     Route::get('wisatawan', function () {
         return view('admin/pages/wisatawan', [
             "title" => "wisatawan"
