@@ -9,6 +9,10 @@
                         <!-- Table Layout Start -->
                         <div class="card mb-4">
                             <div class="card-datatable table-responsive p-3">
+                                <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal"
+                                    data-bs-target="#BannerTambah">
+                                    <i class="menu-icon tf-icons bx bx-plus m-0"></i>Tambah
+                                </button>
                                 <table class="datatables table border-top">
                                     <thead>
                                         <tr>
@@ -28,7 +32,7 @@
                                             <td>https://maps.google.com/maps?q=candikuning&t=&z=13&ie=UTF8&iwloc=&output=embed
                                             </td>
                                             <td>
-                                                <a href="/#footer" class="btn btn-info btn-sm"><i
+                                                <a href="/" class="btn btn-info btn-sm"><i
                                                         class="menu-icon tf-icons bx bx-show m-0"></i></a>
                                                 <a href="#" class="btn btn-warning btn-sm" data-bs-toggle="modal"
                                                     data-bs-target="#FooterEdit"><i

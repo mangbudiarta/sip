@@ -6,8 +6,11 @@ use App\Models\Banner;
 use App\Models\Berita;
 use App\Models\Fasilitas;
 use App\Models\Infowilayah;
+use Illuminate\Http\Request;
 use App\Models\Kategoriberita;
 use App\Models\Kategorifasilitas;
+
+use Illuminate\Support\Facades\Auth;
 use App\Models\Kategoripotensi;
 use App\Models\Potensidesa;
 use App\Models\Umkm;
@@ -91,7 +94,6 @@ class HomeController extends Controller
             // array key message berisi string 'Data tidak ditemukan' jika kosong, dan null jika tidak kosong
             'message' => $results->isEmpty() ? 'Data tidak ditemukan' : null,
         ]);
-
     }
 
     /**
@@ -135,7 +137,6 @@ class HomeController extends Controller
             // array key message berisi string 'Data tidak ditemukan' jika kosong, dan null jika tidak kosong
             'message' => $results->isEmpty() ? 'Data tidak ditemukan' : null,
         ]);
-
     }
 
     /**

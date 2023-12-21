@@ -1,10 +1,19 @@
 <?php
 
+use App\Models\Loginpetugas;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\FooterController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FasilitasController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\InfowilayahController;
+use App\Http\Controllers\LoginPetugasController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\UmkmController;
 use App\Http\Controllers\UmkmGambarController;
 use App\Http\Controllers\NavbarController;
@@ -18,6 +27,7 @@ use App\Http\Controllers\ProfildesaController;
 use App\Models\Potensidesagambar;
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes 
@@ -29,7 +39,47 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+// Auth
+Route::get('auth', [GoogleAuthController::class, 'index'])->name('auth');
+Route::get('auth/google', [GoogleAuthController::class, 'redirect'])->name('google-auth');
+Route::get('auth/google/call-back', [GoogleAuthController::class, 'callbackGoogle']);
+
+// Register Send Mail
+Route::get('/register', [AuthController::class, 'register']);
+Route::post('/register', [AuthController::class, 'registerProses']);
+
+// Login Wisatawan
+Route::get('/login', [AuthController::class, 'login']);
+Route::post('/login', [AuthController::class, 'loginProses']);
+
+// Email Verify
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect('/');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+// Logout
+Route::get('logout', [GoogleAuthController::class, 'logout'])->name('logout');
+
+
+
+
+// Auth Petugas
+// Route::get('/login', [LoginPetugasController::class, 'showLoginForm'])->name('login');
+// Route::post('/login', [LoginPetugasController::class, 'login']);
+
+
+
+
+
 // route front end
+Route::get('/', [HomeController::class, 'index'])->middleware(['auth', 'verified']);
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/profil', [ProfildesaController::class, 'detailprofil']);
 
@@ -50,15 +100,12 @@ Route::get('/review', function () {
 
 Route::get('/beritadetail/{slug}', [BeritaController::class, 'detailberita']);
 
+
+
+
 // route admin
 Route::group(['prefix' => 'admin'], function () {
-  
-    Route::get('dashboard', function () {
-        return view('admin/dashboard', [
-            "title" => "Dashboard"
-        ]);
-    });
-
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('navbar', [NavbarController::class, 'index'])->name('navbar');
     Route::get('navbar/fetch', [NavbarController::class, 'fetch'])->name('fetch.navbar');
     Route::post('navbar/store', [NavbarController::class, 'store'])->name('save.navbar');
@@ -90,11 +137,13 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('infowilayah/edit', [InfowilayahController::class, 'edit'])->name('edit.infowilayah');
     Route::post('infowilayah/update', [InfowilayahController::class, 'update'])->name('update.infowilayah');
 
-    Route::get('footer', function () {
-        return view('admin/pages/footer', [
-            "title" => "Footer"
-        ]);
-    });
+    Route::get('footer', [FooterController::class, 'index'])->name('footer');
+    Route::get('footer/fetch', [FooterController::class, 'fetch'])->name('fetch.footer');
+    Route::get('footer/show', [FooterController::class, 'show'])->name('detail.footer');
+    Route::post('footer/store', [FooterController::class, 'store'])->name('save.footer');
+    Route::delete('footer/delete', [FooterController::class, 'destroy'])->name('delete.footer');
+    Route::get('footer/edit', [FooterController::class, 'edit'])->name('edit.footer');
+    Route::post('footer/update', [FooterController::class, 'update'])->name('update.footer');
 
     Route::get('potensidesa', [PotensidesaController::class, 'index'])->name('potensidesa');
     Route::get('potensidesa/fetch', [PotensidesaController::class, 'fetch'])->name('fetch.potensidesa');
