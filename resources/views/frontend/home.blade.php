@@ -6,7 +6,8 @@
         <div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="w-100" style="height: 600px;" src="{{ asset('frontend/img/carousel-1.jpg') }}" alt="Image" />
+                    <img class="w-100" style="height: 600px;" src="{{ asset('frontend/img/carousel-1.jpg') }}"
+                        alt="Image" />
                     <div class="carousel-caption">
                         <div class="container">
                             <div class="row justify-content-center">
@@ -21,6 +22,7 @@
                                     <a href="#about" class="btn btn-light rounded-pill py-3 px-5 animated zoomIn">Jelajahi
                                         Sekarang</a>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -28,25 +30,25 @@
                 
                 {{-- Perulangan data banner --}}
                 @forelse ($banner as $item)
-                <div class="carousel-item">
-                    {{-- gambar banner --}}
+                    <div class="carousel-item">
+                        {{-- gambar banner --}}
                         <img class="w-100" style="height: 600px;" src="/storage/banner_img/{{ $item->gambar }}"
-                        alt="Gambar banner" />
-                    <div class="carousel-caption">
-                        <div class="container">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-7 text-center">
-                                    <h2 class="display-6 text-dark mb-4 animated zoomIn">
-                                        {{$item ->judul}}
-                                    </h2>
-                                    <p class="fs-4 text-white animated zoomIn">
-                                        {{$item ->deskripsi}}
-                                    </p>
+                            alt="Gambar banner" />
+                        <div class="carousel-caption">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-7 text-center">
+                                        <h2 class="display-6 text-dark mb-4 animated zoomIn">
+                                            {{ $item->judul }}
+                                        </h2>
+                                        <p class="fs-4 text-white animated zoomIn">
+                                            {{ $item->deskripsi }}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 @empty
                     {{-- jika data fasilitas kosong tampilkan pesan kosong --}}
                     <div class="text-center">
@@ -55,15 +57,16 @@
                 @endforelse
                 {{-- akhir perulangan data banner --}}
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#header-carousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
         </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#header-carousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
     </div>
     <!-- Carousel End -->
 
@@ -71,33 +74,32 @@
     <div class="container-xxl py-5" id="about">
         <div class="container">
             <div class="row g-5">
-                <div class="col-lg-6 position-relative">
-                    <button type="button" class="btn-play position-absolute top-50 start-50 z-index-1"
-                        data-bs-toggle="modal" data-src="https://www.youtube.com/embed/wRxxUSAkGZ4?si=RAKxwrMtuf6LhjdI"
-                        data-bs-target="#videoModal">
-                        <span></span>
-                    </button>
-                    <img style="width: 510px" class="img-fluid bg-white mb-3 wow fadeIn" data-wow-delay="0.1s"
-                        src="{{ asset('frontend/img/profildesa.png') }}" alt="profil desa Candikuning" />
-                </div>
-                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
-                    <div class="section-title">
-                        <p class="fs-5 fw-medium fst-italic text-primary">Profil Desa</p>
-                        <h1 class="display-6">Desa Wisata Candikuning</h1>
+                {{-- Perulangan data berita --}}
+                @forelse ($profildesa as $item)
+                    <div class="col-lg-6 position-relative">
+                        <button type="button" class="btn-play position-absolute top-50 start-50 z-index-1"
+                            data-bs-toggle="modal" data-src="{{ $item->video }}" data-bs-target="#videoModal">
+                            <span></span>
+                        </button>
+                        <img style="width: 510px" class="img-fluid bg-white mb-3 wow fadeIn" data-wow-delay="0.1s"
+                            src="/storage/profildesa_img/{{ $item->gambarcover }}" alt="profil desa Candikuning" />
                     </div>
-                    <div class="row g-3 mb-3">
-                        <p class="mb-0 deskripsi-large">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            Excepturi, corporis blanditiis. Consequatur optio minus impedit
-                            adipisci, amet reiciendis dolor officiis eligendi voluptatum
-                            dolore laboriosam aliquid eius! Ratione molestiae quod
-                            cupiditate.
-                        </p>
+                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                        <div class="section-title">
+                            <p class="fs-5 fw-medium fst-italic text-primary">Profil Desa</p>
+                            <h1 class="display-6"> {{ $item->judul }}</h1>
+                        </div>
+                        <div class="row g-3 mb-3">
+                            <p class="mb-0 deskripsi-large">
+                                {{ $item->deskripsi }}
+                            </p>
+                        </div>
+                        <a href="/profil"
+                            class="btn btn-outline-primary rounded-pill py-2 px-4 animated zoomIn">Selengkapnya</a>
                     </div>
-                    <a href="/profil"
-                        class="btn btn-outline-primary rounded-pill py-2 px-4 animated zoomIn">Selengkapnya</a>
-                </div>
             </div>
+        @empty
+            @endforelse
         </div>
     </div>
     <!-- About End -->
@@ -125,19 +127,19 @@
 
     <!-- Info Wilayah Start -->
     @forelse ($infowilayah as $item)
-        <div class="container-fluid product py-5 my-5" id="infowilayah" style="background: linear-gradient(rgba(245, 240, 240, 0.1), rgba(242, 245, 239, 0.1)),
+        <div class="container-fluid product py-5 my-5" id="infowilayah"
+            style="background: linear-gradient(rgba(245, 240, 240, 0.1), rgba(242, 245, 239, 0.1)),
         url(/storage/infowilayah_img/{{ $item->gambarcover }}) left bottom no-repeat;
       background-size: cover;">
             <div class="container py-5">
-                <div class="section-title text-center mx-auto wow fadeInUp" data-wow-delay="0.1s"
-                    style="max-width: 500px">
+                <div class="section-title text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px">
                     <p class="fs-5 fw-medium fst-italic text-primary">Info Wilayah</p>
-                    <h2 class="display-6">{{$item->judul}}</h2>
+                    <h2 class="display-6">{{ $item->judul }}</h2>
                 </div>
                 <div class="border-top mb-4"></div>
                 <div class="row g-3">
                     <p class="mb-0 text-center">
-                        {{$item->deskripsi}}
+                        {{ $item->deskripsi }}
                     </p>
                 </div>
             </div>
@@ -150,6 +152,7 @@
     @endforelse
     <!-- Info Wilayah End -->
 
+
     <!-- Potensi Desa Start -->
     <div class="container-fluid product py-5 my-5" id="potensidesa">
         <div class="container py-5">
@@ -158,74 +161,27 @@
                 <h2 class="display-6">Temukan Tempat yang Indah Bagaikan Surga</h2>
             </div>
             <div class="owl-carousel product-carousel wow fadeInUp" data-wow-delay="0.5s">
-                <div class="product-item rounded">
-                    <img src="{{ asset('frontend/img/product-1.jpg') }}" alt="" />
-                    <div class="bg-white shadow-sm text-center p-4 position-relative mt-n5 mx-4">
-                        <a href="/review" class="text-center mb-3 rating-star">
-                            <small class="fa fa-star text-warning"></small>
-                            <small class="fa fa-star text-warning"></small>
-                            <small class="fa fa-star text-warning"></small>
-                            <small class="fa fa-star text-warning"></small>
-                            <small class="fa fa-star text-warning"></small>
-                            <small>(5)</small>
-                        </a>
-                        <a href="/potensidetail" class="h4 d-block text-primary">Potensi Satu</a>
-                        <span class="text-body deskripsi">Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                            Corrupti vitae magnam quia praesentium eum quae vero ipsa
-                            tempore quidem officiis.</span>
+                {{-- Perulangan data potensidesa --}}
+                @forelse ($potensidesa as $item)
+                    <div class="product-item rounded">
+                        <img src="/storage/potensi_img/{{ $item->gambarcover }}" alt=""
+                            style="height: 300px;" />
+                        <div class="bg-white shadow-sm text-center p-4 position-relative mt-n5 mx-4">
+                            <a href="/review/{{ $item->slug }}" class="text-center mb-3 rating-star">
+                                <small class="fa fa-star text-warning"></small>
+                                <small class="fa fa-star text-warning"></small>
+                                <small class="fa fa-star text-warning"></small>
+                                <small class="fa fa-star text-warning"></small>
+                                <small class="fa fa-star text-warning"></small>
+                                <small>(5)</small>
+                            </a>
+                            <a href="/potensidetail/{{ $item->slug }}" class="h4 d-block text-primary"
+                                target="_blank">{{ $item->namapotensi }}</a>
+                            <span class="text-body deskripsi">{{ $item->deskripsi }}</span>
+                        </div>
                     </div>
-                </div>
-                <div class="product-item rounded">
-                    <img src="{{ asset('frontend/img/product-1.jpg') }}" alt="" />
-                    <div class="bg-white shadow-sm text-center p-4 position-relative mt-n5 mx-4">
-                        <a href="/review" class="text-center mb-3 rating-star">
-                            <small class="fa fa-star text-warning"></small>
-                            <small class="fa fa-star text-warning"></small>
-                            <small class="fa fa-star text-warning"></small>
-                            <small class="fa fa-star text-warning"></small>
-                            <small class="fa fa-star text-warning"></small>
-                            <small>(5)</small>
-                        </a>
-                        <a href="/kontak" class="h4 d-block text-primary">Potensi Dua</a>
-                        <span class="text-body deskripsi">Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                            Corrupti vitae magnam quia praesentium eum quae vero ipsa
-                            tempore quidem officiis.</span>
-                    </div>
-                </div>
-                <div class="product-item rounded">
-                    <img src="{{ asset('frontend/img/product-1.jpg') }}" alt="" />
-                    <div class="bg-white shadow-sm text-center p-4 position-relative mt-n5 mx-4">
-                        <a href="/review" class="text-center mb-3 rating-star">
-                            <small class="fa fa-star text-warning"></small>
-                            <small class="fa fa-star text-warning"></small>
-                            <small class="fa fa-star text-warning"></small>
-                            <small class="fa fa-star text-warning"></small>
-                            <small class="fa fa-star text-warning"></small>
-                            <small>(5)</small>
-                        </a>
-                        <a href="/kontak" class="h4 d-block text-primary">Potensi Tiga</a>
-                        <span class="text-body deskripsi">Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                            Corrupti vitae magnam quia praesentium eum quae vero ipsa
-                            tempore quidem officiis.</span>
-                    </div>
-                </div>
-                <div class="product-item rounded">
-                    <img src="{{ asset('frontend/img/product-1.jpg') }}" alt="" />
-                    <div class="bg-white shadow-sm text-center p-4 position-relative mt-n5 mx-4">
-                        <a href="/review" class="text-center mb-3 rating-star">
-                            <small class="fa fa-star text-warning"></small>
-                            <small class="fa fa-star text-warning"></small>
-                            <small class="fa fa-star text-warning"></small>
-                            <small class="fa fa-star text-warning"></small>
-                            <small class="fa fa-star text-warning"></small>
-                            <small>(5)</small>
-                        </a>
-                        <a href="/kontak" class="h4 d-block text-primary">Potensi Empat</a>
-                        <span class="text-body deskripsi">Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                            Corrupti vitae magnam quia praesentium eum quae vero ipsa
-                            tempore quidem officiis.</span>
-                    </div>
-                </div>
+                @empty
+                @endforelse
             </div>
         </div>
     </div>
@@ -236,87 +192,51 @@
         <div class="container">
             <div class="section-title text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px">
                 <p class="fs-5 fw-medium fst-italic text-primary">UMKM</p>
-                <h2 class="display-6">Jelajahi Tempat Keajaiban Disini!</h2>
+                <h2 class="display-6">Jelajahi Tempat dengan Keajaiban di Sini!</h2>
             </div>
             <div class="owl-carousel product-carousel wow fadeInUp" data-wow-delay="0.5s">
-                <div class="wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="store-item position-relative text-center">
-                        <img class="img-fluid" src="{{ asset('frontend/img/store-product-1.jpg') }}" alt="" />
-                        <div class="p-4">
-                            <h4 class="mb-3">UMKM SATU</h4>
-                            <p class="deskripsi">
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                                Ipsam sapiente repellat repellendus, voluptatibus ullam unde?
-                            </p>
-                        </div>
-                        <div class="store-overlay">
-                            <a href="/umkmdetail" class="btn btn-primary rounded-pill py-2 px-4 m-2">Info Selengkapnya<i
-                                    class="fa fa-arrow-right ms-2"></i></a>
-                            <a href="" class="btn btn-dark rounded-pill py-2 px-4 m-2">Hubungi Pemilik <i
-                                    class="fa fa-phone-alt ms-2"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="store-item position-relative text-center">
-                        <img class="img-fluid" src="{{ asset('frontend/img/store-product-2.jpg') }}" alt="" />
-                        <div class="p-4">
-                            <h4 class="mb-3">UMKM DUA</h4>
-                            <p class="deskripsi">
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                                Tempore, sit quasi commodi consequatur totam quo!
-                            </p>
-                        </div>
-                        <div class="store-overlay">
-                            <a href="" class="btn btn-primary rounded-pill py-2 px-4 m-2">Info Selengkapnya<i
-                                    class="fa fa-arrow-right ms-2"></i></a>
-                            <a href="" class="btn btn-dark rounded-pill py-2 px-4 m-2">Hubungi Pemilik <i
-                                    class="fa fa-phone-alt ms-2"></i></a>
+                {{-- perulangan data umkm --}}
+                @forelse ($umkm as $item)
+                    <div class="wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="store-item position-relative text-center">
+                            <img class="img-fluid" src="/storage/umkm_img/{{ $item->gambarcover }}" alt="gambar umkm" />
+                            <div class="p-4">
+                                <!-- nama umkm -->
+                                <h4 class="mb-3">{{ $item->namaumkm }}</h4>
+                                <!-- deskripsi umkm -->
+                                <p class="deskripsi">
+                                    {{ $item->deskripsi }}
+                                </p>
+                            </div>
+                            <div class="store-overlay">
+                                <a href="/umkmdetail/{{ $item->slug }}"
+                                    class="btn btn-primary rounded-pill py-2 px-4 m-2">Info
+                                    Selengkapnya<i class="fa fa-arrow-right ms-2"></i></a>
+                                {{-- jika infopemilik berisi karakter '+' --}}
+                                @if (Str::contains($item->infopemilik, '+'))
+                                    {{-- tambahkan link wa dan no wa --}}
+                                    <a href="https://wa.me/{{ $item->infopemilik }}"
+                                        class="btn btn-dark rounded-pill py-2 px-4 m-2" target="_blank">Info Pemilik<i
+                                            class="fa fa-phone-alt ms-2"></i></a>
+                                @else
+                                    {{-- jika infopemilik tidak berisi karakter '+', gunakan isi infopemilik --}}
+                                    <a href="{{ $item->infopemilik }}" class="btn btn-dark rounded-pill py-2 px-4 m-2"
+                                        target="_blank">Info Pemilik<i class="fa fa-phone-alt ms-2"></i></a>
+                                @endif
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="store-item position-relative text-center">
-                        <img class="img-fluid" src="{{ asset('frontend/img/store-product-3.jpg') }}" alt="" />
-                        <div class="p-4">
-                            <h4 class="mb-3">UMKM TIGA</h4>
-                            <p class="deskripsi">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Mollitia quod odit obcaecati officiis id dolorem.
-                            </p>
-                        </div>
-                        <div class="store-overlay">
-                            <a href="" class="btn btn-primary rounded-pill py-2 px-4 m-2">Info Selengkapnya<i
-                                    class="fa fa-arrow-right ms-2"></i></a>
-                            <a href="" class="btn btn-dark rounded-pill py-2 px-4 m-2">Hubungi Pemilik <i
-                                    class="fa fa-phone-alt ms-2"></i></a>
-                        </div>
+                @empty
+                    {{-- jika data umkm kosong tampilkan $pesan --}}
+                    <div class="text-center">
+                        <p>Data UMKM Kosong</p>
                     </div>
-                </div>
-                <div class="wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="store-item position-relative text-center">
-                        <img class="img-fluid" src="{{ asset('frontend/img/store-product-3.jpg') }}" alt="" />
-                        <div class="p-4">
-                            <h4 class="mb-3">UMKM EMPAT</h4>
-                            <p class="deskripsi">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Non
-                                hic itaque earum ab mollitia voluptatem!
-                            </p>
-                        </div>
-                        <div class="store-overlay">
-                            <a href="" class="btn btn-primary rounded-pill py-2 px-4 m-2">Info Selengkapnya<i
-                                    class="fa fa-arrow-right ms-2"></i></a>
-                            <a href="" class="btn btn-dark rounded-pill py-2 px-4 m-2">Hubungi Pemilik <i
-                                    class="fa fa-phone-alt ms-2"></i></a>
-                        </div>
-                    </div>
-                </div>
+                @endforelse
+                {{-- akhir perulangan data umkm --}}
             </div>
         </div>
     </div>
-    <!-- UMKM End -->
-
-    <!-- Langganan Start -->
+    
     <div class="container-fluid video my-5">
         <div class="container">
             <div class="row g-0 justify-content-center">
@@ -337,7 +257,7 @@
             </div>
         </div>
     </div>
-    <!-- Langganan End -->
+    <!-- Fasilitas End -->
 
     <!-- Berita Start -->
     <div class="container-xxl contact py-5" id="berita">

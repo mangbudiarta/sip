@@ -6,75 +6,340 @@
                 <div class="row">
                     <div class="col-xxl">
                         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Potensi Desa/</span> Gambar</h4>
-                        <!-- Form Layout Start-->
                         <div class="card mb-4">
                             <div class="card-header d-flex align-items-center justify-content-between">
-                                <h5 class="mb-0">Tambah Potensi Gambar</h5>
+                                <h5 class="mb-0">Data Potensi Gambar</h5>
                             </div>
                             <div class="card-body">
-                                <form action="" method="post">
-                                    <input type="hidden" name="id_potensidesa">
-                                    <div class="mb-3">
-                                        <label class="col-form-label" for="namapotensi">Nama Potensi</label>
-                                        <input type="text" class="form-control" id="namapotensi" name="namapotensi"
-                                            disabled readonly />
-                                    </div>
-                                    <div>
-                                        <label for="formFile" class="form-label">Gambar <span
-                                                class=" text-muted">(png/jpg)</span></label>
-                                        <input type="file" class="form-control" type="file" id="formFile"
-                                            name="gambarnav" onchange="handleFiles(event)" />
-                                        <div class="overflow-auto">
-                                            <img id="imageView" class="my-2" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="row justify-content-end">
-                                        <div class="col-sm-12">
-                                            <button type="submit" class="btn btn-primary" name="simpan">Simpan</button>
-                                        </div>
-                                    </div>
-                                </form>
+                                <div class="mb-3">
+                                    <label class="col-form-label" for="namapotensi">Nama Potensi</label>
+                                    <input type="text" class="form-control" id="namapotensi" name="namapotensi" disabled
+                                        readonly value="{{ $potensidesa->namapotensi }}" />
+                                </div>
                             </div>
                         </div>
-                        <!-- Form Layout End-->
-                        <!-- Table Layout Start -->
+
                         <div class="card mb-4">
-                            <div class="card-datatable table-responsive p-3">
-                                <table class="datatables table border-top">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Nama Potensi</th>
-                                            <th>Gambar</th>
-                                            <th>Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Pantai Kaca</td>
-                                            <td>navbar.png</td>
-                                            <td>
-                                                <a href="#" class="btn btn-danger btn-sm"><i
-                                                        class="menu-icon tf-icons bx bxs-trash m-0"></i></a>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <div class="table-responsive p-3">
+                                <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal"
+                                    data-bs-target="#GambarTambah">
+                                    <i class="menu-icon tf-icons bx bx-plus m-0"></i>Tambah
+                                </button>
+                                <input type="hidden" class="idpotensi" data-id="{{ $potensidesa->id_potensidesa }}">
+                                <!-- Tabel  Start-->
+                                <div id="dataPage">
+                                    <div class="d-flex justify-content-center mt-3">
+                                        <div class="spinner-border" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Tabel End-->
+
                             </div>
                         </div>
-                        <!-- Table Layout End -->
+                        <!-- Modal Tambah Start -->
+                        <div class="modal fade" id="GambarTambah" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="ModalTambah">Tambah Gambar</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- Form Layout Start-->
+                                        <form action="" method="post" id="add_gambar_form">
+                                            @csrf
+                                            <input type="hidden" name="id_potensidesa" id="id_potensidesa"
+                                                value="{{ $potensidesa->id_potensidesa }}">
+                                            <div>
+                                                <label for="image" class="form-label">Gambar <span
+                                                        class=" text-muted">(png/jpg)</span></label>
+                                                <input type="file" class="form-control" type="file" id="image"
+                                                    name="gambar" onchange="previewImage()" />
+                                                <img id="img-preview" class="my-2 col-sm-5" alt="">
+                                            </div>
+                                            <div class="row justify-content-end">
+                                                <div class="col-sm-12">
+                                                    <button type="submit" class="btn btn-primary" id="add_gambar_btn"
+                                                        name="simpan">Simpan</button>
+                                                    <button type="button" class="btn btn-outline-secondary"
+                                                        data-bs-dismiss="modal">
+                                                        Close
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <!-- Form Layout End-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal Tambah End -->
+
+                        <!-- Modal Edit Start -->
+                        <div class="modal fade" id="GambarEdit" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="ModalEdit">Edit Gambar</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- Form Layout Start-->
+                                        <form action="" method="post" id="edit_gambar_form">
+                                            @csrf
+                                            <input type="hidden" name="id_potensidesa" id="id_potensidesaedit"
+                                                value="{{ $potensidesa->id_potensidesa }}">
+                                            <input type="hidden" name="id_gambar" id="id_gambaredit">
+                                            <div>
+                                                <label for="image" class="form-label">Gambar <span
+                                                        class=" text-muted">(png/jpg)</span></label>
+                                                <input type="file" class="form-control" type="file" id="imageEdit"
+                                                    name="gambar" onchange="previewImageEdit()" />
+                                                <img id="img-previewEdit" class="my-2 col-sm-5" alt="">
+                                            </div>
+                                            <div class="row justify-content-end">
+                                                <div class="col-sm-12">
+                                                    <button type="submit" class="btn btn-primary" id="edit_gambar_btn"
+                                                        name="simpan">Simpan</button>
+                                                    <button type="button" class="btn btn-outline-secondary"
+                                                        data-bs-dismiss="modal">
+                                                        Close
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <!-- Form Layout End-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal Tambah End -->
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <script>
-        function handleFiles(e) {
-            const imageView = document.getElementById('imageView');
-            const file = e.target.files[0];
-            const blobURL = URL.createObjectURL(file);
-            imageView.src = blobURL;
+        $(function() {
+
+            // add ajax request
+            // jika form dengan id add_gambar_form disubmit
+            $("#add_gambar_form").submit(function(e) {
+                // jeda untuk melakukan proses pengecekan
+                e.preventDefault();
+                // simpan isi form dalam obyek dataForm
+                const dataForm = new FormData(this);
+                // ganti tulisan button simpan
+                $("#add_gambar_btn").text('Adding ...');
+                $.ajax({
+                    // panggil route name save.potensigambar
+                    url: '{{ route('save.potensigambar') }}',
+                    // method pengiriman data POST
+                    method: 'POST',
+                    // isi data: obyek dataForm
+                    data: dataForm,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    dataType: 'json',
+                    // jika sukses return respon json
+                    success: function(response) {
+                        // jika respon array key:status = 200
+                        if (response.status == 200) {
+                            // tampilkan data dengan mengirimkan parameter array key:succes
+                            fetch('success', 'Berhasil tambah data');
+                            // reset isi formulir tambah
+                            $("#add_gambar_form")[0].reset();
+                        } else {
+                            // jika respon array key:status selain 200
+                            // tampilkan data dengan mengirimkan parameter array key:danger
+                            fetch('danger', 'Gagal tambah data');
+                        }
+                        // kembalikan tulisan button simpan
+                        $("#add_gambar_btn").text('Submit');
+                        // tutup tampilan modal gambar tambah
+                        $("#GambarTambah").modal('hide');
+                    }
+                });
+            });
+
+            // delete ajax request
+            // jika class deletegambar pada datagambar.blade di klik
+            $(document).on('click', '.deletegambar', function(e) {
+                // jeda untuk melakukan proses pengecekan
+                e.preventDefault();
+                // buat variabel id dengan isi data dari atribut id pada class detelegambar
+                let id = $(this).attr('id');
+                // buat variabel csrf
+                let csrf = '{{ csrf_token() }}';
+                // jika confirm hapus true
+                if (confirm('Yakin hapus data ini ?')) {
+                    $.ajax({
+                        // panggil route name delete.gambar
+                        url: '{{ route('delete.potensigambar') }}',
+                        // methode DELETE
+                        method: 'DELETE',
+                        // isi data : id_gambar dan token
+                        data: {
+                            id_gambar: id,
+                            _token: csrf
+                        },
+                        // jika sukses return respon json
+                        success: function(response) {
+                            // jika respon array key:status = 200
+                            if (response.status == 200) {
+                                // tampilkan data dengan mengirimkan parameter array key:succes
+                                fetch('success', 'Berhasil hapus data');
+                            } else {
+                                // jika respon array key:status selain 200
+                                // tampilkan data dengan mengirimkan parameter array key:danger
+                                fetch('danger', 'Gagal hapus data');
+                            }
+                        }
+                    });
+                } else {
+                    // jika confirm hapus false/ tidak hapus
+                    // tampilkan data dengan mengirimkan parameter array key:info
+                    fetch('info', 'Data aman');
+                }
+
+            });
+
+            // edit ajax request
+            // jika class editgambar pada datagambar.blade di klik
+            $(document).on('click', '.editgambar', function(e) {
+                // jeda untuk melakukan proses pengecekan
+                e.preventDefault();
+                // buat variabel id dengan isi data dari atribut id pada class editgambar
+                let id = $(this).attr('id');
+                $.ajax({
+                    // panggil route name edit.potensigambar
+                    url: '{{ route('edit.potensigambar') }}',
+                    // method GET
+                    method: 'GET',
+                    // isi data : id_gambar dan token
+                    data: {
+                        id_gambar: id,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    // jika sukses return respon json
+                    success: function(response) {
+                        // tampilkan setiap value dari id inputan form
+                        $("#id_gambaredit").val(response.id_gambar);
+                        $("#id_potensidesaedit").val(response.id_potensidesa);
+                    }
+                });
+            });
+
+            // update ajax request
+            // jika form dengan id edit_gambar_form disubmit
+            $("#edit_gambar_form").submit(function(e) {
+                // jeda untuk melakukan proses pengecekan
+                e.preventDefault();
+                // dapatkan form edit
+                var form = $('#edit_gambar_form')[0];
+                // simpan isi form dalam obyek dataForm
+                var dataForm = new FormData(form);
+                // ganti tulisan button simpan
+                $("#edit_gambar_btn").text('Updating ...');
+                $.ajax({
+                    // panggil route name update.potensigambar
+                    url: '{{ route('update.potensigambar') }}',
+                    // method POST
+                    method: 'POST',
+                    // isi data: obyek dataForm
+                    data: dataForm,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    dataType: 'json',
+                    // jika sukses return respons json
+                    success: function(response) {
+                        // jika respon array key:status = 200
+                        if (response.status == 200) {
+                            // tampilkan data dengan mengirimkan parameter array key:succes
+                            fetch('success', 'Berhasil edit data');
+                        } else {
+                            // jika respon array key:status selain 200
+                            // tampilkan data dengan mengirimkan parameter array key:danger
+                            fetch('danger', 'Gagal edit data');
+
+                        }
+                        // kembalikan tulisan button simpan
+                        $("#edit_gambar_btn").text('Submit');
+                        // tutup tampilan modal gambar edit
+                        $("#GambarEdit").modal('hide');
+                    }
+                });
+            });
+
+            //get record
+            fetch('', '');
+
+            // fungsi menampilkan data
+            //parameter String type dan message
+            function fetch(type = '', message = '') {
+                // buat variabel id dengan isi data dari atribut id pada class detelegambar
+                let id = $('.idpotensi').data('id');
+                $.ajax({
+                    // panggil route name fetch.potensigambar
+                    url: '{{ route('fetch.potensigambar') }}',
+                    // method GET
+                    method: 'GET',
+                    data: {
+                        id_potensidesa: id
+                    },
+                    // jika sukses return respons json
+                    success: function(response) {
+                        // isi id dataPage dengan sintax html berisi response
+                        $("#dataPage").html(response);
+                        // buat tag table menjadi datatable
+                        $("table").DataTable({
+                            order: [0, 'desc']
+                        });
+                        // jika parameter type dan message tidak kosong
+                        if (type && message) {
+                            // Buat element alert sesuai parameter
+                            const alertHtml =
+                                `<div class="alert alert-${type} alert-dismissible fade show" role="alert">
+                                    ${message}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>`;
+                            // tampilkan element alert pada class .alert-notif pada view datagambar.blade
+                            $(".alert-notif").append(alertHtml);
+
+                        }
+
+                    }
+                });
+            }
+        });
+
+        // fungsi menampilkan gambar pada form tambah
+        function previewImage() {
+            // pilih gambar pada input file dengan id image
+            const image = document.querySelector('#image');
+            // pilih tempat tampil gambar pada id img-preview
+            const imgPreview = document.querySelector('#img-preview')
+            const blob = URL.createObjectURL(image.files[0]);
+            imgPreview.src = blob;
+        }
+
+        // fungsi menampilkan gambar pada form edit
+        function previewImageEdit() {
+            // pilih gambar pada input file dengan id imageEdit
+            const image = document.querySelector('#imageEdit');
+            // pilih tempat tampil gambar pada id img-previewEdit
+            const imgPreview = document.querySelector('#img-previewEdit')
+            // buat blob dari const image
+            const blob = URL.createObjectURL(image.files[0]);
+            // tampilkan blob pada imgPreview
+            imgPreview.src = blob;
         }
     </script>
 @endsection
