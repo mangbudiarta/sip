@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Validation\Rules\Unique;
 
 return new class extends Migration
 {
@@ -14,10 +15,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tb_wisatawan', function (Blueprint $table) {
-            $table->string('google_id', 255)->primary();
+            $table->integer('id_wisatawan')->autoIncrement();
+            $table->string('google_id', 255)->unique()->nullable();
             $table->string('nama', 100);
             $table->string('email', 50)->unique();
-            $table->string('password', 150);
+            $table->string('password', 150)->nullable();
             $table->string('foto', 100)->nullable()->default(null);
             $table->timestamps();
         });

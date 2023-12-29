@@ -42,17 +42,13 @@
                                         height="280px" />
                                 </div>
                                 <div class="bg-white shadow-sm text-center p-4 position-relative mt-n5 mx-4">
-                                    <a href="/review/{{ $item->slug }}" class="text-center mb-3 rating-star">
-                                        <small class="fa fa-star text-warning"></small>
-                                        <small class="fa fa-star text-warning"></small>
-                                        <small class="fa fa-star text-warning"></small>
-                                        <small class="fa fa-star text-warning"></small>
-                                        <small class="fa fa-star text-warning"></small>
-                                        <small>(5)</small>
-                                    </a>
                                     <a href="/potensidetail/{{ $item->slug }}"
                                         class="h4 d-block text-primary">{{ $item->namapotensi }}</a>
                                     <span class="text-body deskripsi">{{ $item->deskripsi }}</span>
+                                    <a href="/review/{{ $item->id_potensidesa }}" class="text-warning">
+                                        Lihat Review
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
                                 </div>
                             </div>
                         @empty

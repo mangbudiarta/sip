@@ -23,6 +23,8 @@ use App\Http\Controllers\KategoripotensiController;
 use App\Http\Controllers\PotensidesaController;
 use App\Http\Controllers\PotensidesagambarController;
 use App\Http\Controllers\ProfildesaController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\WisatawanController;
 use App\Models\Potensidesagambar;
 use Illuminate\Support\Facades\Route;
 
@@ -91,11 +93,9 @@ Route::get('/umkmdetail/{slug}', [UmkmController::class, 'detailumkm']);
 Route::get('/berita', [HomeController::class, 'berita']);
 Route::get('/fasilitas', [HomeController::class, 'fasilitas']);
 
-Route::get('/review', function () {
-    return view('frontend/potensi/review', [
-        "title" => "review"
-    ]);
-});
+Route::get('/review/{slug}', [ReviewController::class, 'index'])->name('review');
+Route::get('review/7/fetch', [ReviewController::class, 'fetch'])->name('fetch.review');
+Route::post('review/store', [ReviewController::class, 'store'])->name('save.review');
 
 Route::get('/beritadetail/{slug}', [BeritaController::class, 'detailberita']);
 
@@ -195,11 +195,11 @@ Route::group(['prefix' => 'admin'], function () {
         ]);
     });
 
-    Route::get('wisatawan', function () {
-        return view('admin/pages/wisatawan', [
-            "title" => "wisatawan"
-        ]);
-    });
+    Route::get('wisatawan/', [WisatawanController::class, 'index'])->name('wisatawan');
+    Route::get('wisatawan/7/fetch', [WisatawanController::class, 'fetch'])->name('fetch.wisatawan');
+    Route::delete('wisatawan/delete', [WisatawanController::class, 'destroy'])->name('delete.wisatawan');
+    Route::get('wisatawan/7/edit', [WisatawanController::class, 'edit'])->name('edit.wisatawan');
+    Route::post('wisatawan/update', [WisatawanController::class, 'update'])->name('update.wisatawan');
 
     Route::get('/potensigambar/{id_potensidesa}', [PotensidesagambarController::class, 'index'])->name('potensigambar');
     Route::get('potensigambar/7/fetch', [PotensidesagambarController::class, 'fetch'])->name('fetch.potensigambar');

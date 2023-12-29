@@ -7,7 +7,7 @@
                     <div class="d-flex align-items-end row">
                         <div class="col-sm-7">
                             <div class="card-body">
-                                <h5 class="card-title text-primary">Selamat Datang John! 🎉</h5>
+                                <h5 class="card-title text-primary">Selamat Datang Petugas 🎉</h5>
                                 <p class="mb-4">
                                     Selamat Datang di <span class="fw-bold">Sistem Informasi Desa Candikuning</span>
                                 </p>

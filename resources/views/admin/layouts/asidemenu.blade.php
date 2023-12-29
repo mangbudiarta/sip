@@ -24,13 +24,14 @@
             <span class="menu-header-text">Pages</span>
         </li>
         <!-- Layouts -->
-        <li class="menu-item {{ 
-            Route::currentRouteName() == 'navbar' || 
+        <li
+            class="menu-item {{ Route::currentRouteName() == 'navbar' ||
             Route::currentRouteName() == 'banner' ||
             Route::currentRouteName() == 'profildesa' ||
             Route::currentRouteName() == 'infowilayah' ||
-            Route::currentRouteName() == 'footer' ? 'open' : '' }}"
-        >
+            Route::currentRouteName() == 'footer'
+                ? 'open'
+                : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-layout"></i>
                 <div data-i18n="Layouts">Layouts</div>
@@ -64,7 +65,8 @@
                 </li>
             </ul>
         </li>
-        <li class="menu-item {{ Route::currentRouteName() == 'potensidesa' || Route::currentRouteName() == 'kategoripotensidesa' ? 'open' : '' }}">
+        <li
+            class="menu-item {{ Route::currentRouteName() == 'potensidesa' || Route::currentRouteName() == 'kategoripotensi' ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
                 <div data-i18n="Potensi Desa">Potensi Desa</div>
@@ -75,14 +77,15 @@
                         <div data-i18n="Potensi Desa">Daftar Potensi</div>
                     </a>
                 </li>
-                <li class="menu-item {{ Route::currentRouteName() == 'kategoripotensidesa' ? 'active' : '' }}">
+                <li class="menu-item {{ Route::currentRouteName() == 'kategoripotensi' ? 'active' : '' }}">
                     <a href="/admin/kategoripotensi" class="menu-link">
                         <div data-i18n="Kategori Potensi">Kategori Potensi</div>
                     </a>
                 </li>
             </ul>
         </li>
-        <li class="menu-item {{ Route::currentRouteName() == 'umkm' || Route::currentRouteName() == 'kategoriumkm' ? 'open' : '' }}">
+        <li
+            class="menu-item {{ Route::currentRouteName() == 'umkm' || Route::currentRouteName() == 'kategoriumkm' ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-store"></i>
                 <div data-i18n="UMKM">UMKM</div>
@@ -100,7 +103,8 @@
                 </li>
             </ul>
         </li>
-        <li class="menu-item {{ Route::currentRouteName() == 'fasilitas' || Route::currentRouteName() == 'kategorifasilitas' ? 'open' : '' }}">
+        <li
+            class="menu-item {{ Route::currentRouteName() == 'fasilitas' || Route::currentRouteName() == 'kategorifasilitas' ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-hotel"></i>
                 <div data-i18n="Fasilitas">Fasilitas</div>
@@ -118,7 +122,8 @@
                 </li>
             </ul>
         </li>
-        <li class="menu-item {{ Route::currentRouteName() == 'berita' || Route::currentRouteName() == 'kategoriberita' ? 'open' : '' }}">
+        <li
+            class="menu-item {{ Route::currentRouteName() == 'berita' || Route::currentRouteName() == 'kategoriberita' ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-news"></i>
                 <div data-i18n="Berita">Berita</div>
