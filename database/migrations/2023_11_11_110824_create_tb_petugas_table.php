@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tb_petugas', function (Blueprint $table) {
-            $table->char('kode_petugas', 5)->primary();
+            $table->integer('id_petugas')->autoIncrement();
+            $table->char('kode_petugas', 5)->unique();
             $table->string('nama', 100);
             $table->enum('jeniskelamin', ['Laki-laki', 'Perempuan']);
             $table->string('tempatlahir', 25)->nullable();

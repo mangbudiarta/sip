@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Loginpetugas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class LoginPetugasController extends Controller
 {
-    public function showLoginForm()
+    public function index()
     {
         $data['title'] = 'Login Page Petugas';
         return view('auth.loginpetugas', $data);
@@ -18,13 +19,23 @@ class LoginPetugasController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        // Proses autentikasi
-        if (Loginpetugas::attempt($credentials)) {
-            // Jika berhasil login
-            return redirect()->route('/'); // Gantilah 'home' dengan nama route yang sesuai
+        if (Auth::guard('petugas')->attempt($credentials)) {
+            // Jika login berhasil
+            $petugas = Auth::guard('petugas')->user();
+            Session::put('petugas_nama', $petugas->nama); // Simpan nama petugas dalam sesi
+            return redirect()->intended('/dashboard'); // Ganti '/dashboard' dengan route yang diinginkan
         }
 
-        // Jika gagal login
-        return back()->withErrors(['email' => 'Email atau password salah']);
+        // Jika login gagal
+        return back()->withErrors(['login' => 'Login failed. Please check your username and password.']);
+    }
+    public function logout()
+    {
+        Auth::guard('petugas')->logout();
+
+        // Hapus sesi nama petugas
+        Session::forget('petugas_nama');
+
+        return redirect('/loginpetugas'); // Ganti '/loginpetugas' dengan route login petugas
     }
 }

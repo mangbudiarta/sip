@@ -17,7 +17,7 @@
                                 <!-- Tabel  Start-->
                                 <div id="dataPage">
                                     <div class="d-flex justify-content-center mt-3">
-                                        <div class="spinner-border" role="status">
+                                        <div class="spinner-border"  role="status">
                                             <span class="visually-hidden">Loading...</span>
                                         </div>
                                     </div>
@@ -107,7 +107,7 @@
                                                 <label for="formFileEdit" class="form-label">Gambar <span
                                                         class=" text-muted">(png/jpg)</span></label>
                                                         <input type="file" class="form-control" type="file" id="imageEdit"
-                                                    name="gambar" onchange="previewImageEdit()" />
+                                                        name="gambar" onchange="previewImageEdit()" />
                                                 <img id="img-previewEdit" class="my-2 col-sm-5" alt="">
                                             </div>
                                             <div class="row justify-content-end">
