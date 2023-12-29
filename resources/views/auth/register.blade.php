@@ -77,7 +77,7 @@
                 @csrf
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email"  value="{{ old('email') }}"/>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email"  value="{{ old('email') }}" required/>
                     
                 </div>
                 <div class="mb-3 form-password-toggle">
@@ -90,6 +90,7 @@
                             name="password"
                             placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                             aria-describedby="password"
+                            required
                         />
                         <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                     </div>
