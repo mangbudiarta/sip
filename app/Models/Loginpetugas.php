@@ -3,17 +3,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Loginpetugas extends Model
+class Loginpetugas extends Authenticatable
 {
     use HasFactory, Notifiable;
 
     protected $table = 'tb_petugas';
-    protected $primaryKey = 'kode_petugas';
 
     protected $fillable = [
-        'nama', 'jeniskelamin', 'tempatlahir', 'tanggallahir', 'email', 'password', 'telepon', 'alamat', 'foto',
+        'nama', 'email', 'password', 'foto',
     ];
 }

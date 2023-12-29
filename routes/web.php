@@ -1,30 +1,28 @@
 <?php
 
-use App\Models\Loginpetugas;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UmkmController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\FooterController;
+use App\Http\Controllers\NavbarController;
+use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FasilitasController;
 use App\Http\Controllers\GoogleAuthController;
-use App\Http\Controllers\InfowilayahController;
-use App\Http\Controllers\LoginPetugasController;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
-use App\Http\Controllers\UmkmController;
-use App\Http\Controllers\UmkmGambarController;
-use App\Http\Controllers\NavbarController;
-use App\Http\Controllers\KategoriumkmController;
-use App\Http\Controllers\KategoriberitaController;
-use App\Http\Controllers\KategorifasilitasController;
-use App\Http\Controllers\KategoripotensiController;
-use App\Http\Controllers\PotensidesaController;
-use App\Http\Controllers\PotensidesagambarController;
 use App\Http\Controllers\ProfildesaController;
-use App\Models\Potensidesagambar;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UmkmGambarController;
+use App\Http\Controllers\InfowilayahController;
+use App\Http\Controllers\PotensidesaController;
+use App\Http\Controllers\KategoriumkmController;
+use App\Http\Controllers\LoginPetugasController;
+use App\Http\Controllers\KategoriberitaController;
+use App\Http\Controllers\KategoripotensiController;
+use App\Http\Controllers\KategorifasilitasController;
+use App\Http\Controllers\PotensidesagambarController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 
 /*
@@ -67,16 +65,6 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 Route::get('logout', [GoogleAuthController::class, 'logout'])->name('logout');
 
 
-
-
-// Auth Petugas
-// Route::get('/login', [LoginPetugasController::class, 'showLoginForm'])->name('login');
-// Route::post('/login', [LoginPetugasController::class, 'login']);
-
-
-
-
-
 // route front end
 Route::get('/', [HomeController::class, 'index'])->middleware(['auth', 'verified']);
 Route::get('/', [HomeController::class, 'index']);
@@ -97,13 +85,23 @@ Route::get('/review', function () {
     ]);
 });
 
-Route::get('/beritadetail/{slug}', [BeritaController::class, 'detailberita']);
 
+
+
+
+Route::get('/beritadetail/{slug}', [BeritaController::class, 'detailberita']);
 
 
 
 // route admin
 Route::group(['prefix' => 'admin'], function () {
+
+
+    //Login Petugas
+    Route::get('/loginpetugas', [LoginPetugasController::class, 'index'])->name('loginpetugas');
+    Route::post('/loginpetugas', [LoginPetugasController::class, 'login']);
+    Route::post('/logoutpetugas', [LoginPetugasController::class, 'logout'])->name('logoutpetugas');
+
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('navbar', [NavbarController::class, 'index'])->name('navbar');
     Route::get('navbar/fetch', [NavbarController::class, 'fetch'])->name('fetch.navbar');
@@ -189,11 +187,13 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('kategoriberita/edit', [KategoriberitaController::class, 'edit'])->name('edit.kategoriberita');
     Route::post('kategoriberita/update', [KategoriberitaController::class, 'update'])->name('update.kategoriberita');
 
-    Route::get('petugas', function () {
-        return view('admin/pages/petugas', [
-            "title" => "Petugas"
-        ]);
-    });
+    Route::get('petugas', [PetugasController::class, 'index'])->name('petugas');
+    Route::get('petugas/fetch', [PetugasController::class, 'fetch'])->name('fetch.petugas');
+    Route::get('petugas/show', [PetugasController::class, 'show'])->name('detail.petugas');
+    Route::post('petugas/store', [PetugasController::class, 'store'])->name('save.petugas');
+    Route::delete('petugas/delete', [PetugasController::class, 'destroy'])->name('delete.petugas');
+    Route::get('petugas/edit', [PetugasController::class, 'edit'])->name('edit.petugas');
+    Route::post('petugas/update', [PetugasController::class, 'update'])->name('update.petugas');
 
     Route::get('wisatawan', function () {
         return view('admin/pages/wisatawan', [

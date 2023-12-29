@@ -32,7 +32,7 @@ class BeritaController extends Controller
     {
         return view('admin.berita.databerita', [
             // mengisi array key:berita dengan semua data dari model berita
-            'berita' => Berita::select('id_berita', 'judulberita', 'penulis','tanggalposting','id_kategori','slug')->get()
+            'berita' => Berita::select('id_berita', 'judulberita', 'penulis', 'tanggalposting', 'id_kategori', 'slug')->get()
         ]);
     }
 
@@ -47,14 +47,14 @@ class BeritaController extends Controller
         $validateData = $this->validasiRules($request);
         if ($request->file('gambarcover')) {
             // ada input gambarcover, masukan nama gambar dari fungsi inputGambar (parameter data formulir)
-            $fileNameToStore= $this->inputGambar($request);
+            $fileNameToStore = $this->inputGambar($request);
         } else {
             // tidak input gambar, masukan nama noimage.png ke database
             $fileNameToStore = 'noimage.png';
         }
         // mengisi array validateData indeks gambarcover dengan nama gambar
-        $validateData['gambarcover']=$fileNameToStore;
-        
+        $validateData['gambarcover'] = $fileNameToStore;
+
         try {
             // input data ke database dari model berita
             $result = Berita::create($validateData);
@@ -66,7 +66,7 @@ class BeritaController extends Controller
         }
 
         // Berhasil input data, return status 200
-        if($result){
+        if ($result) {
             return response()->json([
                 'status' => 200,
             ]);
@@ -83,12 +83,12 @@ class BeritaController extends Controller
         // mengisi $id dari data form dengan name:id_berita
         $id = $request->id_berita;
         // mengisi $data dengan data berita sesuai id dari model berita
-		$data = Berita::find($id);
-		return response()->json([
+        $data = Berita::find($id);
+        return response()->json([
             // mengisi array key:berita dengan $data
             'berita' => $data,
             // mengisi array key:kategori dengan nama kategori dari relasi kategoriberita
-            'kategori' =>$data->kategoriberita->namakategori,
+            'kategori' => $data->kategoriberita->namakategori,
         ]);
     }
 
@@ -102,9 +102,9 @@ class BeritaController extends Controller
         // mengisi $id dari data form dengan name:id_berita
         $id = $request->id_berita;
         // mengisi $data dengan data berita sesuai id dari model berita
-		$data = Berita::find($id);
+        $data = Berita::find($id);
         // mengirim isi $data dengan json
-		return response()->json($data);
+        return response()->json($data);
     }
 
     /**
@@ -120,17 +120,17 @@ class BeritaController extends Controller
         $berita = Berita::find($request->id_berita);
         if ($request->file('gambarcover')) {
             // ada input gambar, masukan nama gambarcover dari fungsi inputGambar (parameter data formulir)
-            $fileNameToStore= $this->inputGambar($request);
+            $fileNameToStore = $this->inputGambar($request);
         } else {
             // tidak input gambar, pakai nama gambar sebelumnya
             $fileNameToStore = $berita->gambarcover;
         }
         // mengisi array validateData indeks gambarcover dengan nama gambar
-        $validateData['gambarcover']=$fileNameToStore;
-    
+        $validateData['gambarcover'] = $fileNameToStore;
+
         try {
             // update data ke database dari model berita
-            $result = Berita::where('id_berita',$berita->id_berita)->update($validateData);
+            $result = Berita::where('id_berita', $berita->id_berita)->update($validateData);
         } catch (\Throwable $th) {
             // gagal update data, return status 500
             return response()->json([
@@ -139,7 +139,7 @@ class BeritaController extends Controller
         }
 
         // Berhasil update data, return status 200
-        if($result){
+        if ($result) {
             return response()->json([
                 'status' => 200,
             ]);
@@ -166,7 +166,7 @@ class BeritaController extends Controller
         }
 
         // Berhasil delete data, return status 200
-        if($result){
+        if ($result) {
             return response()->json([
                 'status' => 200,
             ]);
@@ -178,7 +178,8 @@ class BeritaController extends Controller
      * @param obyek Request $request berisi data formulir
      * @return data tervalidasi
      */
-    public function validasiRules(Request $request) {
+    public function validasiRules(Request $request)
+    {
         return $request->validate([
             'judulberita' => 'required|max:150',
             'tanggalposting' => 'required',
@@ -195,14 +196,15 @@ class BeritaController extends Controller
      * @param obyek Request $request berisi data formulir
      * @return nama gambar
      */
-    public function inputGambar(Request $request) {
+    public function inputGambar(Request $request)
+    {
         // mendapatkan ekstensi gambar
         $extension = $request->file('gambarcover')->getClientOriginalExtension();
         // mendapatkan 6 karakter ramdom dari $sumber
         $sumber = "ABCDEFGHIJKLMNPQRSTUVWXYZ";
-        $randomName = substr(str_shuffle($sumber),0,6);
+        $randomName = substr(str_shuffle($sumber), 0, 6);
         // Nama gambar untuk disimpan
-        $fileNameToStore = 'berita-'.$randomName.'.'.$extension;
+        $fileNameToStore = 'berita-' . $randomName . '.' . $extension;
         // Lokasi penyimpanan gambar
         $path = $request->file('gambarcover')->storeAs('public/berita_img', $fileNameToStore);
         // return nama gambar
@@ -214,12 +216,12 @@ class BeritaController extends Controller
      * @param $slug dari tombol baca
      * @return view beritadetail dengan data
      */
-    public function detailberita($slug) {
+    public function detailberita($slug)
+    {
         $berita = Berita::where('slug', $slug)->firstOrFail();
-        return view('frontend/berita/beritadetail',[
+        return view('frontend/berita/beritadetail', [
             "title" => $berita->judulberita,
-            "beritadetail"=> $berita
+            "beritadetail" => $berita
         ]);
-        
     }
 }
