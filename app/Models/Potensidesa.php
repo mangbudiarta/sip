@@ -28,7 +28,7 @@ class Potensidesa extends Model
     // relasi N to M wisatawan
     public function wisatawan()
     {
-        return $this->belongsToMany(Wisatawan::class, 'tb_reviewpotensi','id_potensidesa','google_id');
+        return $this->belongsToMany(Wisatawan::class, 'tb_reviewpotensi','id_potensidesa','id_wisatawan');
     } 
     
 }

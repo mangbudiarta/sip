@@ -9,11 +9,13 @@ class Wisatawan extends Model
 {
     use HasFactory;
     protected $table = 'tb_wisatawan';
-    protected $primaryKey = 'google_id';
+    protected $primaryKey = 'id_wisatawan';
+    protected $guarded = ['id_wisatawan'];
+
     
     // relasi N to M potensidesa
     public function potensidesa()
     {
-        return $this->belongsToMany(Potensidesa::class, 'tb_reviewpotensi','id_potensidesa','google_id');
+        return $this->belongsToMany(Potensidesa::class, 'tb_reviewpotensi','id_potensidesa','id_wisatawan');
     } 
 }

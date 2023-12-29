@@ -7,12 +7,7 @@
                     <div class="d-flex align-items-end row">
                         <div class="col-sm-7">
                             <div class="card-body">
-                                @if (Session::has('petugas.nama'))
-                                <h5 class="card-title text-primary">Welcome, {{ Session::get('petugas_nama') }}</h5>
-                                <!-- Tambahkan konten dashboard sesuai kebutuhan -->
-                                @else
-                                    <p>Unauthorized access</p>
-                                @endif
+                                <h5 class="card-title text-primary">Selamat Datang Petugas 🎉</h5>
                                 <p class="mb-4">
                                     Selamat Datang di <span class="fw-bold">Sistem Informasi Desa Candikuning</span>
                                 </p>

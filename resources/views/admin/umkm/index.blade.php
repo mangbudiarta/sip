@@ -28,7 +28,7 @@
                         <!-- Table Layout End -->
                         <!-- Modal Tambah Start -->
                         <div class="modal fade" id="ModalUmkmTambah" tabindex="-1" aria-hidden="true">
-                            <div class="modal-dialog modal-lg" role="document"> 
+                            <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="ModalUmkmTambah">Tambah UMKM</h5>
@@ -42,18 +42,19 @@
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="namaumkm">Nama UMKM</label>
                                                 <input type="text" class="form-control" id="namaumkm" name="namaumkm"
-                                                    placeholder="ex : UMKM Teko" required />
+                                                    placeholder="ex : UMKM Teko" required oninput="generateSlugTambah()" />
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="slug">Slug</label>
                                                 <input type="text" class="form-control" id="slug" name="slug"
-                                                    placeholder="ex : UMKM-Teko" required />
+                                                    placeholder="ex : UMKM-Teko" required readonly />
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="deskripsi">Deskripsi</label>
                                                 <textarea id="deskripsi" class="form-control editor" name="deskripsi"
                                                     placeholder="ex: UMKM Teko adalah umkm yang ada di Desa Candikuning"
-                                                    aria-label="ex: UMKM Teko adalah umkm yang ada di Desa Candikuning" cols="100%" rows="10" aria-describedby="basic-icon-default-message2" required ></textarea>
+                                                    aria-label="ex: UMKM Teko adalah umkm yang ada di Desa Candikuning" cols="100%" rows="10"
+                                                    aria-describedby="basic-icon-default-message2" required></textarea>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="infopemilik">Info Pemilik <span
@@ -64,8 +65,8 @@
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="kategori">Kategori</label>
                                                 {{-- Select option value from database --}}
-                                                <select class="form-select form-select" name="id_kategori"
-                                                    id="kategori" required>
+                                                <select class="form-select form-select" name="id_kategori" id="kategori"
+                                                    required>
                                                     <option>-- Pilih Kategori --</option>
                                                     @foreach ($kategori as $item)
                                                         <option value="{{ $item->id_kategori }}">
@@ -77,14 +78,14 @@
                                             <div>
                                                 <label for="formFile2" class="form-label">Gambar Cover<span
                                                         class=" text-muted">(png/jpg)</span></label>
-                                                <input type="file" class="form-control" type="file" id="imageEdit"
-                                                    name="gambarcover" onchange="previewImageEdit()" />
-                                                <img id="img-previewEdit" class="my-2 col-sm-5" alt="">
+                                                <input type="file" class="form-control" type="file" id="image"
+                                                    name="gambarcover" onchange="previewImage()" />
+                                                <img id="img-preview" class="my-2 col-sm-5" alt="">
                                             </div>
                                             <div class="row justify-content-end">
                                                 <div class="col-sm-12">
-                                                    <button type="submit" class="btn btn-primary"
-                                                        name="simpan" id="add_umkm_btn">Simpan</button>
+                                                    <button type="submit" class="btn btn-primary" name="simpan"
+                                                        id="add_umkm_btn">Simpan</button>
                                                     <button type="button" class="btn btn-outline-secondary"
                                                         data-bs-dismiss="modal">
                                                         Close
@@ -111,24 +112,25 @@
                                     <div class="modal-body">
                                         <!-- Form Layout Start-->
                                         <form action="" method="post" id="edit_umkm_form">
-                                            @csrf 
+                                            @csrf
                                             <input type="hidden" class="form-control" id="id_umkm" name="id_umkm" />
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="namaumkmedit">Nama UMKM</label>
                                                 <input type="text" class="form-control" id="namaumkmedit"
-                                                    name="namaumkm" placeholder="ex : UMKM Teko" required/>
+                                                    name="namaumkm" placeholder="ex : UMKM Teko" required
+                                                    oninput="generateSlugEdit()" />
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="slugedit">Slug</label>
                                                 <input type="text" class="form-control" id="slugedit" name="slug"
-                                                    placeholder="ex : UMKM-Teko" required />
+                                                    placeholder="ex : UMKM-Teko" required readonly />
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="deskripsiedit">Deskripsi</label>
                                                 <textarea id="deskripsiedit" class="form-control editoredit" name="deskripsi"
                                                     placeholder="ex: UMKM Teko adalah umkm yang ada di Desa Candikuning"
-                                                    aria-label="ex: UMKM Teko adalah umkm yang ada di Desa Candikuning"
-                                                    aria-describedby="basic-icon-default-message2" cols="100%" rows="10" required></textarea>
+                                                    aria-label="ex: UMKM Teko adalah umkm yang ada di Desa Candikuning" aria-describedby="basic-icon-default-message2"
+                                                    cols="100%" rows="10" required></textarea>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="pemilikedit">Info Pemilik<span
@@ -160,8 +162,8 @@
                                             </div>
                                             <div class="row justify-content-end">
                                                 <div class="col-sm-12">
-                                                    <button type="submit" class="btn btn-primary"
-                                                        name="simpan" id="edit_umkm_btn" >Simpan</button>
+                                                    <button type="submit" class="btn btn-primary" name="simpan"
+                                                        id="edit_umkm_btn">Simpan</button>
                                                     <button type="button" class="btn btn-outline-secondary"
                                                         data-bs-dismiss="modal">
                                                         Close
@@ -187,7 +189,7 @@
                                     <div class="modal-body">
                                         <!-- Form Layout Start-->
                                         <form action="" method="post">
-                                            @csrf 
+                                            @csrf
                                             <input type="hidden" class="form-control" id="id_umkm" name="id_umkm" />
                                             <div id="img-previewdetail" class="my-2 d-flex justify-content-center"
                                                 alt="">
@@ -199,15 +201,15 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="slugdetail">Slug</label>
-                                                <input type="text" class="form-control" id="slugdetail" name="slug"
-                                                    placeholder="ex : UMKM-Teko" readonly/>
+                                                <input type="text" class="form-control" id="slugdetail"
+                                                    name="slug" placeholder="ex : UMKM-Teko" readonly />
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="deskripsidetail">Deskripsi</label>
                                                 <textarea id="deskripsidetail" class="form-control editoredit" name="deskripsi"
                                                     placeholder="ex: UMKM Teko adalah umkm yang ada di Desa Candikuning"
-                                                    aria-label="ex: UMKM Teko adalah umkm yang ada di Desa Candikuning"
-                                                    aria-describedby="basic-icon-default-message2" cols="100%" rows="10" readonly ></textarea>
+                                                    aria-label="ex: UMKM Teko adalah umkm yang ada di Desa Candikuning" aria-describedby="basic-icon-default-message2"
+                                                    cols="100%" rows="10" readonly></textarea>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="pemilikdetail">Info Pemilik<span
@@ -289,7 +291,7 @@
                         // kembalikan tulisan button simpan
                         $("#add_umkm_btn").text('Submit');
                         // tutup tampilan modal umkm tambah
-                        $("#ModalUmkmTambah").modal('hide'); 
+                        $("#ModalUmkmTambah").modal('hide');
                     }
                 });
             });
@@ -357,7 +359,7 @@
                     success: function(response) {
                         // tampilkan setiap value dari id inputan form
                         $("#namaumkmdetail").val(response.umkm.namaumkm);
-                        $("#slugdetail").val(response.umkm.slug); 
+                        $("#slugdetail").val(response.umkm.slug);
                         $("#deskripsidetail").val(response.umkm.deskripsi);
                         $("#pemilikdetail").val(response.umkm.infopemilik);
                         $("#kategoridetail").val(response.umkm.id_kategori);
@@ -499,5 +501,26 @@
             // tampilkan blob pada imgPreview
             imgPreview.src = blob;
         }
-    </script>    
+
+        // fungsi membuat slug otomatis
+        function generateSlugTambah() {
+            const titleInput = document.getElementById('namaumkm');
+            const slugInput = document.getElementById('slug');
+
+            const title = titleInput.value.trim().toLowerCase();
+            const slug = title.replace(/\s+/g, '-').slice(0, 50); // Mengambil hanya 50 karakter pertama
+
+            slugInput.value = slug;
+        }
+
+        function generateSlugEdit() {
+            const titleInput = document.getElementById('namaumkmedit');
+            const slugInput = document.getElementById('slugedit');
+
+            const title = titleInput.value.trim().toLowerCase();
+            const slug = title.replace(/\s+/g, '-').slice(0, 50); // Mengambil hanya 50 karakter pertama
+
+            slugInput.value = slug;
+        }
+    </script>
 @endsection

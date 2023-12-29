@@ -44,4 +44,20 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($user) {
+            // Triggered when a new user is created
+            Wisatawan::create([
+                'google_id' => $user->google_id,
+                'email' => $user->email,
+                'nama' => $user->name,
+                'password' => $user->password,
+                'foto' => 'noimage.png',
+                ]);
+        });
+    }
 }

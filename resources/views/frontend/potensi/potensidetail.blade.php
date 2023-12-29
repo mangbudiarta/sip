@@ -8,8 +8,8 @@
                 <div id="header-carousel" class="carousel slide carousel-fade m-auto col-lg-8" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img class="w-100" style="height: 350px;" src="{{ asset('frontend/img/carousel-1.jpg') }}"
-                                alt="Gambar Potensi" />
+                            <img class="w-100" style="height: 350px"
+                                src="/storage/potensi_img/{{ $potensidetail->gambarcover }}" alt="Image Potensi Desa" />
                         </div>
                         @forelse($gambarpotensi as $item)
                             <div class="carousel-item">
@@ -48,18 +48,4 @@
         </div>
     </div>
     <!-- Potensi Start -->
-    <script>
-        var map = L.map('map').setView([-8.306624, 115.154572], 13);
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
-        var circle = L.circle([-8.306624, 115.154572], {
-            color: 'red',
-            fillColor: '#f03',
-            fillOpacity: 0.5,
-            radius: 500
-        }).addTo(map);
-        circle.bindPopup("Lokasi Obyek Wisata");
-    </script>
 @endsection

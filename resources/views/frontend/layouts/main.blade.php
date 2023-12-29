@@ -41,24 +41,26 @@
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="{{ asset('backend/assets/js/config.js') }}"></script>
+    <script src="{{ asset('backend/assets/vendor/libs/jquery/jquery.js') }}"></script>
 </head>
 
 <body>
 
-@if(session('error'))
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>Error:</strong> {{ session('error') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-@endif
+    @if (session('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Error:</strong> {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
 
-<!-- Menampilkan pesan sukses -->
-@if(session('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Success:</strong> {{ session('success') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-@endif
+    <!-- Menampilkan pesan sukses -->
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Success:</strong> {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
 
 
     <!-- Navbar Start -->
@@ -66,11 +68,11 @@
         <div class="container">
             <nav class="navbar navbar-expand-lg bg-white navbar-light py-2 py-lg-0">
                 <a href="/" class="navbar-brand">
-                @forelse ($navbar as $item)
-                    <img class="img-fluid" src="/storage/navbar_img/{{ $item->gambarnav }}" alt="Logo Desa Candikuning"
-                        style="width: 250px" />
-                @empty
-                @endforelse
+                    @forelse ($navbar as $item)
+                        <img class="img-fluid" src="/storage/navbar_img/{{ $item->gambarnav }}"
+                            alt="Logo Desa Candikuning" style="width: 250px" />
+                    @empty
+                    @endforelse
                 </a>
                 <button type="button" class="navbar-toggler ms-auto me-0" data-bs-toggle="collapse"
                     data-bs-target="#navbarCollapse">
@@ -80,21 +82,23 @@
                     <div class="navbar-nav ms-auto">
                         <a href="/" class="nav-item nav-link {{ $title == 'Home' ? 'active' : '' }}">Home</a>
                         <a href="/potensi"
-                            class="nav-item nav-link {{ $title == 'Potensi' ? 'active' : '' }}">Potensi</a>
+                            class="nav-item nav-link {{ $title == 'potensi desa' ? 'active' : '' }}">Potensi</a>
                         <a href="/umkm" class="nav-item nav-link {{ $title == 'Umkm' ? 'active' : '' }}">UMKM</a>
                         <a href="/fasilitas"
                             class="nav-item nav-link {{ $title == 'Fasilitas' ? 'active' : '' }}">Fasilitas</a>
                         <a href="/berita" class="nav-item nav-link {{ $title == 'Berita' ? 'active' : '' }}">Berita</a>
                     </div>
                     @auth
-                    <a href="{{ route('logout') }}" class="btn btn-outline-primary rounded-pill py-2 px-4 animated zoomIn">
-                        Logout
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
+                        <a href="{{ route('logout') }}"
+                            class="btn btn-outline-primary rounded-pill py-2 px-4 animated zoomIn">
+                            Logout
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
                     @else
-                        <a href="{{ route('auth') }}" class="btn btn-outline-primary rounded-pill py-2 px-4 animated zoomIn">Login</a>
+                        <a href="{{ route('auth') }}"
+                            class="btn btn-outline-primary rounded-pill py-2 px-4 animated zoomIn">Login</a>
                     @endauth
 
                 </div>

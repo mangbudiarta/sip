@@ -14,11 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tb_reviewpotensi', function (Blueprint $table) {
-            $table->string('google_id', 255);
+            $table->integer('id_review')->autoIncrement();
+            $table->integer('id_wisatawan');
             $table->integer('id_potensidesa');
             $table->integer('rating');
             $table->text('review');
-            $table->foreign('google_id')->references('google_id')->on('tb_wisatawan');
+            $table->foreign('id_wisatawan')->references('id_wisatawan')->on('tb_wisatawan');
             $table->foreign('id_potensidesa')->references('id_potensidesa')->on('tb_potensidesa');
             $table->timestamps(); 
         });
