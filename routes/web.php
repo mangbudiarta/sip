@@ -82,6 +82,7 @@ Route::get('/fasilitas', [HomeController::class, 'fasilitas']);
 
 Route::get('/review/{slug}', [ReviewController::class, 'index'])->name('review');
 Route::get('review/7/fetch', [ReviewController::class, 'fetch'])->name('fetch.review');
+Route::get('review/7/rating', [ReviewController::class, 'rating'])->name('fetch.rating');
 Route::post('review/store', [ReviewController::class, 'store'])->name('save.review');
 
 Route::get('/beritadetail/{slug}', [BeritaController::class, 'detailberita']);
@@ -222,4 +223,10 @@ Route::group(['prefix' => 'admin'], function () {
     Route::delete('kategorifasilitas/delete', [KategorifasilitasController::class, 'destroy'])->name('delete.kategorifasilitas');
     Route::get('kategorifasilitas/edit', [KategorifasilitasController::class, 'edit'])->name('edit.kategorifasilitas');
     Route::post('kategorifasilitas/update', [KategorifasilitasController::class, 'update'])->name('update.kategorifasilitas');
+
+    Route::get('/documentation', function () {
+        $title = "Dokumentasi";
+        return view('admin.documentation', ['title' => $title]);
+    })->name('documentation');
+    
 });

@@ -114,9 +114,6 @@
     <script src="{{ asset('backend/assets/vendor/js/menu.js') }}"></script>
     <!-- endbuild -->
 
-    <!-- Vendors JS -->
-    <script src="{{ asset('backend/assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
-
     <!-- Main JS -->
     <script src="{{ asset('backend/assets/js/main.js') }}"></script>
 

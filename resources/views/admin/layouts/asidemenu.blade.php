@@ -159,7 +159,7 @@
 
         <!-- Misc -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text">help</span></li>
-        <li class="menu-item">
+        <li class="menu-item {{ Route::currentRouteName() == 'documentation' ? 'active' : '' }}">
             <a href="/admin/documentation" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-file"></i>
                 <div data-i18n="Documentation">Documentation</div>

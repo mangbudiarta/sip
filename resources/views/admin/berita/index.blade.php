@@ -44,11 +44,13 @@
                                                 <input type="text" class="form-control" id="judulberitatambah"
                                                     name="judulberita" placeholder="ex : Pantai Kaca" required
                                                     oninput="generateSlugTambah()" />
+                                                <span id="error-judulberita" class="text-danger"></span>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="slug">Slug</label>
                                                 <input type="text" class="form-control" id="slug" name="slug"
                                                     placeholder="ex : Pantai-Kaca" required readonly />
+                                                <span id="error-slug" class="text-danger"></span>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="isiberita">Isi berita</label>
@@ -56,16 +58,19 @@
                                                     placeholder="ex: Desa Candikuning merupakan desa wisata yang ada di Tabanan"
                                                     aria-label="ex: Desa Candikuning merupakan desa wisata yang ada di Tabanan"
                                                     aria-describedby="basic-icon-default-message2" cols="100%" rows="10" required></textarea>
+                                                <span id="error-isiberita" class="text-danger"></span>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="PenulisTambah">Penulis</label>
                                                 <input type="text" class="form-control" id="PenulisTambah" name="penulis"
                                                     required value="Admin"readonly />
+                                                <span id="error-penulis" class="text-danger"></span>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="tglposting">Tanggal posting</label>
                                                 <input type="date" class="form-control" id="tglposting"
                                                     name="tanggalposting" placeholder="ex :23/08/2023" required readonly />
+                                                <span id="error-tanggalposting" class="text-danger"></span>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="kategori">Kategori <span
@@ -81,6 +86,7 @@
                                                         </option>
                                                     @endforeach
                                                 </select>
+                                                <span id="error-id_kategori" class="text-danger"></span>
                                             </div>
                                             <div>
                                                 <label for="image" class="form-label">Gambar Cover<span
@@ -88,6 +94,7 @@
                                                 <input type="file" class="form-control" type="file" id="image"
                                                     name="gambarcover" onchange="previewImage()" />
                                                 <img id="img-preview" class="my-2 col-sm-5" alt="">
+                                                <span id="error-gambarcover" class="text-danger"></span>
                                             </div>
                                             <div class="row justify-content-end">
                                                 <div class="col-sm-12">
@@ -127,11 +134,13 @@
                                                 <input type="text" class="form-control" id="judulberitaedit"
                                                     name="judulberita" placeholder="ex : Pantai Kaca" required
                                                     oninput="generateSlugEdit()" />
+                                                <span id="error-judulberita-edit" class="text-danger"></span>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="slugedit">Slug</label>
                                                 <input type="text" class="form-control" id="slugedit" name="slug"
                                                     placeholder="ex : Pantai-Kaca" required readonly />
+                                                <span id="error-slug-edit" class="text-danger"></span>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="isiberitaedit">Isi Berita</label>
@@ -139,17 +148,20 @@
                                                     placeholder="ex: Desa Candikuning merupakan desa wisata yang ada di Tabanan"
                                                     aria-label="ex: Desa Candikuning merupakan desa wisata yang ada di Tabanan"
                                                     aria-describedby="basic-icon-default-message2" cols="100%" rows="10" required></textarea>
+                                                <span id="error-isiberita-edit" class="text-danger"></span>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="penulisedit">Penulis</label>
                                                 <input type="text" class="form-control" id="penulisedit"
                                                     name="penulis" required readonly />
+                                                <span id="error-penulis" class="text-danger"></span>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="tglpostingedit">Tanggal posting</label>
                                                 <input type="date" class="form-control" id="tglpostingedit"
                                                     name="tanggalposting" placeholder="ex :23/08/2023" required
                                                     readonly />
+                                                <span id="error-tanggalposting-edit" class="text-danger"></span>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="kategoriedit">KategoriKategori <span
@@ -165,6 +177,7 @@
                                                         </option>
                                                     @endforeach
                                                 </select>
+                                                <span id="error-id_kategori-edit" class="text-danger"></span>
                                             </div>
                                             <div>
                                                 <label for="imageEdit" class="form-label">Gambar Cover<span
@@ -172,6 +185,7 @@
                                                 <input type="file" class="form-control" type="file" id="imageEdit"
                                                     name="gambarcover" onchange="previewImageEdit()" />
                                                 <img id="img-previewEdit" class="my-2 col-sm-5" alt="">
+                                                <span id="error-gambarcover-edit" class="text-danger"></span>
                                             </div>
                                             <div class="row justify-content-end">
                                                 <div class="col-sm-12">
@@ -314,6 +328,23 @@
                         $("#add_berita_btn").text('Submit');
                         // tutup tampilan modal berita tambah
                         $("#BeritaTambah").modal('hide');
+                    },
+                    error: function(xhr) {
+                        // Handle errors
+                        if (xhr.status === 422) {
+                            var errors = xhr.responseJSON.errors;
+
+                            // Loop through errors and display them in the corresponding element
+                            $.each(errors, function(key, value) {
+                                $('#error-' + key).text(value);
+                                // Add the 'is-invalid' class to the input with an error
+                                $('[name="' + key + '"]').addClass('is-invalid');
+                            });
+                            // Prevent the default console error handling
+                            return false;
+                        } else {
+                            fetch('danger', 'Hubungi Admin');
+                        }
                     }
                 });
             });
@@ -463,6 +494,23 @@
                         $("#edit_berita_btn").text('Submit');
                         // tutup tampilan modal berita edit
                         $("#BeritaEdit").modal('hide');
+                    },
+                    error: function(xhr) {
+                        // Handle errors
+                        if (xhr.status === 422) {
+                            var errors = xhr.responseJSON.errors;
+
+                            // Loop through errors and display them in the corresponding element
+                            $.each(errors, function(key, value) {
+                                $('#error-' + key + '-edit').text(value);
+                                // Add the 'is-invalid' class to the input with an error
+                                $('[name="' + key + '"]').addClass('is-invalid');
+                            });
+                            // Prevent the default console error handling
+                            return false;
+                        } else {
+                            fetch('danger', 'Hubungi Admin');
+                        }
                     }
                 });
             });

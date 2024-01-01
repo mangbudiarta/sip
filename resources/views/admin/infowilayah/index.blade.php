@@ -40,8 +40,8 @@
                                             @csrf
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="judul">Judul</label>
-                                                <input type="text" class="form-control" id="judul"
-                                                    name="judul" placeholder="ex : Desa Candikuning" required />
+                                                <input type="text" class="form-control" id="judul" name="judul"
+                                                    placeholder="ex : Desa Candikuning" required />
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="deskripsi">Deskripsi</label>
@@ -90,7 +90,8 @@
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="judulinfo">Judul</label>
                                                 <input type="text" class="form-control" id="judulinfo" name="judul"
-                                                    placeholder="ex : Desa Wisata & Indah" required/>
+                                                    placeholder="ex : Desa Wisata & Indah" required />
+                                                <span id="error-judul-edit" class="text-danger"></span>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="deskripsi">Deskripsi</label>
@@ -98,18 +99,20 @@
                                                     placeholder="ex: Desa Candikuning merupakan desa wisata yang ada di Tabanan"
                                                     aria-label="ex: Desa Candikuning merupakan desa wisata yang ada di Tabanan"
                                                     aria-describedby="basic-icon-default-message2" required></textarea>
+                                                <span id="error-deskripsi-edit" class="text-danger"></span>
                                             </div>
                                             <div>
                                                 <label for="formFile" class="form-label">Gambar Cover<span
                                                         class=" text-muted">(png/jpg)</span></label>
                                                 <input type="file" class="form-control" type="file" id="imageEdit"
                                                     name="gambarcover" onchange="previewImageEdit()" />
-                                                    <img id="img-previewEdit" class="my-2 col-sm-5" alt="">
+                                                <img id="img-previewEdit" class="my-2 col-sm-5" alt="">
+                                                <span id="error-gambarcover-edit" class="text-danger"></span>
                                             </div>
                                             <div class="row justify-content-end">
                                                 <div class="col-sm-12">
-                                                    <button type="submit" class="btn btn-primary"
-                                                        name="simpan" id="edit_infowilayah">Simpan</button>
+                                                    <button type="submit" class="btn btn-primary" name="simpan"
+                                                        id="edit_infowilayah">Simpan</button>
                                                     <button type="button" class="btn btn-outline-secondary"
                                                         data-bs-dismiss="modal">Batal</button>
                                                 </div>
@@ -142,8 +145,7 @@
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="judul">Judul</label>
                                                 <input type="text" class="form-control" id="juduldetail"
-                                                    name="judul" placeholder="ex : Kadek Homestay" readonly
-                                                    required />
+                                                    name="judul" placeholder="ex : Kadek Homestay" readonly required />
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="detail">Deskripsi</label>
@@ -212,6 +214,23 @@
                         $("#add_infowilayah_btn").text('Submit');
                         // tutup tampilan modal infowilayah tambah
                         $("#InfoWilayahTambah").modal('hide');
+                    },
+                    error: function(xhr) {
+                        // Handle errors
+                        if (xhr.status === 422) {
+                            var errors = xhr.responseJSON.errors;
+
+                            // Loop through errors and display them in the corresponding element
+                            $.each(errors, function(key, value) {
+                                $('#error-' + key).text(value);
+                                // Add the 'is-invalid' class to the input with an error
+                                $('[name="' + key + '"]').addClass('is-invalid');
+                            });
+                            // Prevent the default console error handling
+                            return false;
+                        } else {
+                            fetch('danger', 'Hubungi Admin');
+                        }
                     }
                 });
             });
@@ -353,6 +372,23 @@
                         $("#edit_infowilayah_btn").text('Submit');
                         // tutup tampilan modal infowilayah edit
                         $("#InfoWilayahEdit").modal('hide');
+                    },
+                    error: function(xhr) {
+                        // Handle errors
+                        if (xhr.status === 422) {
+                            var errors = xhr.responseJSON.errors;
+
+                            // Loop through errors and display them in the corresponding element
+                            $.each(errors, function(key, value) {
+                                $('#error-' + key + '-edit').text(value);
+                                // Add the 'is-invalid' class to the input with an error
+                                $('[name="' + key + '"]').addClass('is-invalid');
+                            });
+                            // Prevent the default console error handling
+                            return false;
+                        } else {
+                            fetch('danger', 'Hubungi Admin');
+                        }
                     }
                 });
             });

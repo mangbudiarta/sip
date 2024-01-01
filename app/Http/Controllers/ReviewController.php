@@ -37,9 +37,23 @@ class ReviewController extends Controller
     {
         return view('frontend.potensi.datareview', [
             // mengisi array key:review dengan semua data dari model review
-            'review' => Review::where('id_potensidesa', $request->id_potensidesa )->get(),
+            'review' => Review::where('id_potensidesa', $request->id_potensidesa )->orderBy('created_at', 'desc')->get(),
         ]);
     }
+
+/**
+     * Fungsi mendapatkan semua Rating
+     * @param -
+     * @return view datarating dengan array key:feview
+     */
+    public function rating(Request $request)
+    {
+        return view('frontend.potensi.datarating', [
+            'ratarata' => round(Review::where('id_potensidesa', $request->id_potensidesa)->avg('rating'), 2),
+            'jumlahreview' => Review::where('id_potensidesa', $request->id_potensidesa )->count(),
+        ]);
+    }
+
 
     /**
      * Fungsi menyimpan data Review ke database

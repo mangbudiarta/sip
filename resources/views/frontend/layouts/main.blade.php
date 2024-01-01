@@ -115,14 +115,11 @@
             <div class="row g-5">
                 <div class="col-lg-4 col-md-6">
                     <div class="text-center mb-4">
-                        <img src="{{ asset('frontend/img/lambangdesa.png') }}" alt="logo desa candikuning"
+                        <img src="/storage/footer_img/{{ $footer->gambar }}" alt="logo desa candikuning"
                             style="width: 80px" />
                     </div>
                     <p class="mb-2">
-                        Lorem ipsum dolor sit amet consectetur adipisicing
-                        elit. Laborum iusto commodi quae, quas cumque
-                        laboriosam voluptatum sapiente eius. Reiciendis,
-                        incidunt. Provident cumque a perspiciatis quisquam!
+                        {{ $footer->deskripsi }}
                     </p>
                 </div>
                 <div class="col-lg-3 col-md-6">
@@ -140,8 +137,7 @@
                 </div>
                 <div class="col-lg-5 col-md-6">
                     <h4 class="text-primary mb-4">Peta Desa</h4>
-                    <iframe width="100%" height="400px" id="gmap_canvas"
-                        src="https://maps.google.com/maps?q=candikuning&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                    <iframe width="100%" height="400px" id="gmap_canvas" src="{{ $footer->peta }}"
                         frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
                 </div>
             </div>

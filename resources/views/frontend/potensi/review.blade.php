@@ -8,18 +8,14 @@
                         <h2 class="display-6">{{ $potensidesa->namapotensi }}</h2>
                     </div>
                     <input type="hidden" class="idreview" data-id="{{ $potensidesa->id_potensidesa }}">
-                    <div class="my-2">
-                        <span class="text-center mb-3 rating-star">
-                            @for ($i = 1; $i <= 5; $i++)
-                                @if ($i <= $ratarata)
-                                    <i class="fa fa-star" style="color: gold;"></i>
-                                @else
-                                    <i class="fa fa-star" style="color: gray;"></i>
-                                @endif
-                            @endfor
-                            <small>{{ $ratarata }} | {{ $jumlahreview }} ulasan</small>
-                        </span>
+                    {{-- data rating --}}
+                    <div id="dataRating" class="my-2">
+                        <div class="spinner-border" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
                     </div>
+                    {{-- akhir data rating --}}
+
                     <div class="mb-2">
                         <span class="text-body deskripsi">{{ $potensidesa->deskripsi }}
                         </span>
@@ -167,6 +163,7 @@
                             fetch('success', 'Berhasil tambah review');
                             // reset isi formulir tambah
                             $("#add_review_form")[0].reset();
+                            $("#add_review_form")[0].reset();
                         } else {
                             // jika respon array key:status selain 200
                             // tampilkan data dengan mengirimkan parameter array key:danger
@@ -199,6 +196,7 @@
                     success: function(response) {
                         // isi id dataPage dengan sintax html berisi response
                         $("#dataPage").html(response);
+                        getRatings();
                         // buat tag table menjadi datatable
                         // jika parameter type dan message tidak kosong
                         if (type && message) {
@@ -212,6 +210,27 @@
                             $(".alert-notif").append(alertHtml);
 
                         }
+
+                    }
+                });
+            }
+
+            // fungsi menampilkan data rating
+            //parameter String type dan message
+            function getRatings() {
+                let id = $('.idreview').data('id');
+                $.ajax({
+                    // panggil route name fetch.review
+                    url: '{{ route('fetch.rating') }}',
+                    // method GET
+                    method: 'GET',
+                    data: {
+                        id_potensidesa: id,
+                    },
+                    // jika sukses return respons json
+                    success: function(response) {
+                        // isi id dataRating dengan sintax html berisi response
+                        $("#dataRating").html(response);
 
                     }
                 });

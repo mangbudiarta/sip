@@ -43,23 +43,27 @@
                                                 <label class="col-form-label" for="namafasilitas">Nama Fasilitas</label>
                                                 <input type="text" class="form-control" id="namafasilitas"
                                                     name="namafasilitas" placeholder="ex : Kadek Homestay" required />
+                                                <span id="error-namafasilitas" class="text-danger"></span>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="deskripsi">Deskripsi</label>
                                                 <textarea id="deskripsi" class="form-control" name="deskripsi" placeholder="ex: Homestay Terbaik Di Candikuning"
                                                     aria-label="ex: Homestay Terbaik Di Candikuning" aria-describedby="basic-icon-default-message2"></textarea>
+                                                <span id="error-deskripsi" class="text-danger"></span>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="lokasi">Lokasi <span
                                                         class=" text-muted">(link maps)</span></label>
                                                 <input type="text" class="form-control" id="lokasi" name="lokasi"
                                                     placeholder="ex : https://maps.google.com/ssss" />
+                                                <span id="error-lokasi" class="text-danger"></span>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="kontak">Kontak <span
                                                         class=" text-muted">(no telepon/media sosial)</span></label>
                                                 <input type="text" class="form-control" id="kontak" name="kontak"
                                                     placeholder="ex: +62831123123" />
+                                                <span id="error-kontak" class="text-danger"></span>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="kategori">Kategori <span
@@ -75,6 +79,7 @@
                                                         </option>
                                                     @endforeach
                                                 </select>
+                                                <span id="error-id_kategori" class="text-danger"></span>
                                             </div>
                                             <div>
                                                 <label for="formFile1" class="form-label">Gambar <span
@@ -82,6 +87,7 @@
                                                 <input type="file" class="form-control" type="file" id="image"
                                                     name="gambar" onchange="previewImage()" />
                                                 <img id="img-preview" class="my-2 col-sm-5" alt="">
+                                                <span id="error-gambar" class="text-danger"></span>
                                             </div>
                                             <div class="row justify-content-end">
                                                 <div class="col-sm-12">
@@ -120,23 +126,27 @@
                                                     Fasilitas</label>
                                                 <input type="text" class="form-control" id="namafasilitasedit"
                                                     name="namafasilitas" placeholder="ex : Kadek Homestay" required />
+                                                <span id="error-namafasilitas-edit" class="text-danger"></span>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="edit">Deskripsi</label>
                                                 <textarea id="deskripsiedit" class="form-control" name="deskripsi" placeholder="ex: Homestay Terbaik Di Candikuning"
                                                     aria-label="ex: Homestay Terbaik Di Candikuning" aria-describedby="basic-icon-default-message2"></textarea>
+                                                <span id="error-tdeskripsi-edit" class="text-danger"></span>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="lokasiedit">Lokasi <span
                                                         class=" text-muted">(link maps)</span></label>
                                                 <input type="text" class="form-control" id="lokasiedit"
                                                     name="lokasi" placeholder="ex : https://maps.google.com/ssss" />
+                                                <span id="error-lokasi-edit" class="text-danger"></span>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="kontakedit">Kontak <span
                                                         class=" text-muted">(no telepon/media sosial)</span></label>
                                                 <input type="text" class="form-control" id="kontakedit"
                                                     name="kontak" placeholder="ex: +62831123123" />
+                                                <span id="error-kontak-edit" class="text-danger"></span>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="kategoriedit">Kategori <span
@@ -152,6 +162,7 @@
                                                         </option>
                                                     @endforeach
                                                 </select>
+                                                <span id="error-id_kategori-edit" class="text-danger"></span>
                                             </div>
                                             <div>
                                                 <label for="formFile2" class="form-label">Gambar <span
@@ -159,6 +170,7 @@
                                                 <input type="file" class="form-control" type="file" id="imageEdit"
                                                     name="gambar" onchange="previewImageEdit()" />
                                                 <img id="img-previewEdit" class="my-2 col-sm-5" alt="">
+                                                <span id="error-gambar-edit" class="text-danger"></span>
                                             </div>
                                             <div class="row justify-content-end">
                                                 <div class="col-sm-12">
@@ -298,6 +310,23 @@
                         $("#add_fasilitas_btn").text('Submit');
                         // tutup tampilan modal fasilitas tambah
                         $("#FasilitasTambah").modal('hide');
+                    },
+                    error: function(xhr) {
+                        // Handle errors
+                        if (xhr.status === 422) {
+                            var errors = xhr.responseJSON.errors;
+
+                            // Loop through errors and display them in the corresponding element
+                            $.each(errors, function(key, value) {
+                                $('#error-' + key).text(value);
+                                // Add the 'is-invalid' class to the input with an error
+                                $('[name="' + key + '"]').addClass('is-invalid');
+                            });
+                            // Prevent the default console error handling
+                            return false;
+                        } else {
+                            fetch('danger', 'Hubungi Admin');
+                        }
                     }
                 });
             });
@@ -445,6 +474,23 @@
                         $("#edit_fasilitas_btn").text('Submit');
                         // tutup tampilan modal fasilitas edit
                         $("#FasilitasEdit").modal('hide');
+                    },
+                    error: function(xhr) {
+                        // Handle errors
+                        if (xhr.status === 422) {
+                            var errors = xhr.responseJSON.errors;
+
+                            // Loop through errors and display them in the corresponding element
+                            $.each(errors, function(key, value) {
+                                $('#error-' + key + '-edit').text(value);
+                                // Add the 'is-invalid' class to the input with an error
+                                $('[name="' + key + '"]').addClass('is-invalid');
+                            });
+                            // Prevent the default console error handling
+                            return false;
+                        } else {
+                            fetch('danger', 'Hubungi Admin');
+                        }
                     }
                 });
             });

@@ -33,7 +33,7 @@ class UmkmController extends Controller
     {
         return view('admin.umkm.dataumkm', [
             // mengisi array key:umkm dengan semua data dari model Umkm
-            'umkm' => Umkm::select('id_umkm', 'namaumkm', 'gambarcover')->get()
+            'umkm' => Umkm::select('id_umkm', 'namaumkm', 'gambarcover','slug')->get()
         ]);
     }
 
