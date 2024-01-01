@@ -9,7 +9,7 @@
                         <!-- Table Layout Start -->
                         <div class="card mb-4">
                             <div class="table-responsive p-3">
-                            
+
 
                                 <!-- Tabel  Start-->
                                 <div id="dataPage">
@@ -35,18 +35,19 @@
                                     <div class="modal-body">
                                         <!-- Form Layout Start-->
                                         <form action="" method="post" id="add_navbar_form">
-                                            @csrf 
+                                            @csrf
                                             <div>
                                                 <label for="formFile1" class="form-label">Gambar <span
                                                         class=" text-muted">(png/jpg)</span></label>
                                                 <input type="file" class="form-control" type="file" id="image"
                                                     name="gambarnav" onchange="previewImage()" />
                                                 <img id="img-preview" class="my-2 col-sm-5" alt="">
+                                                <span id="error-gambarnav" class="text-danger"></span>
                                             </div>
                                             <div class="row justify-content-end">
                                                 <div class="col-sm-12">
-                                                    <button type="submit" class="btn btn-primary"
-                                                        name="simpan" id="add_navbar_btn" >Simpan</button>
+                                                    <button type="submit" class="btn btn-primary" name="simpan"
+                                                        id="add_navbar_btn">Simpan</button>
                                                     <button type="button" class="btn btn-outline-secondary"
                                                         data-bs-dismiss="modal">Batal</button>
                                                 </div>
@@ -70,7 +71,7 @@
                                     <div class="modal-body">
                                         <!-- Form Layout Start-->
                                         <form action="" method="post" id="edit_navbar_form">
-                                            @csrf 
+                                            @csrf
                                             <input type ="hidden" name="id_navbar" id="id_navbar">
                                             <div>
                                                 <label for="formFile1" class="form-label">Gambar <span
@@ -78,11 +79,12 @@
                                                 <input type="file" class="form-control" type="file" id="imageEdit"
                                                     name="gambarnav" onchange="previewImageEdit()" />
                                                 <img id="img-previewEdit" class="my-2 col-sm-5" alt="">
+                                                <span id="error-gambarnav-edit" class="text-danger"></span>
                                             </div>
                                             <div class="row justify-content-end">
                                                 <div class="col-sm-12">
-                                                    <button type="submit" class="btn btn-primary"
-                                                        name="simpan" id="edit_navbar_btn" >Simpan</button>
+                                                    <button type="submit" class="btn btn-primary" name="simpan"
+                                                        id="edit_navbar_btn">Simpan</button>
                                                     <button type="button" class="btn btn-outline-secondary"
                                                         data-bs-dismiss="modal">Batal</button>
                                                 </div>
@@ -139,6 +141,23 @@
                         $("#add_navbar_btn").text('Submit');
                         // tutup tampilan modal navbar tambah
                         $("#NavbarTambah").modal('hide');
+                    },
+                    error: function(xhr) {
+                        // Handle errors
+                        if (xhr.status === 422) {
+                            var errors = xhr.responseJSON.errors;
+
+                            // Loop through errors and display them in the corresponding element
+                            $.each(errors, function(key, value) {
+                                $('#error-' + key).text(value);
+                                // Add the 'is-invalid' class to the input with an error
+                                $('[name="' + key + '"]').addClass('is-invalid');
+                            });
+                            // Prevent the default console error handling
+                            return false;
+                        } else {
+                            fetch('danger', 'Hubungi Admin');
+                        }
                     }
                 });
             });
@@ -248,6 +267,23 @@
                         $("#edit_navbar_btn").text('Submit');
                         // tutup tampilan modal fasilitas edit
                         $("#NavbarEdit").modal('hide');
+                    },
+                    error: function(xhr) {
+                        // Handle errors
+                        if (xhr.status === 422) {
+                            var errors = xhr.responseJSON.errors;
+
+                            // Loop through errors and display them in the corresponding element
+                            $.each(errors, function(key, value) {
+                                $('#error-' + key + '-edit').text(value);
+                                // Add the 'is-invalid' class to the input with an error
+                                $('[name="' + key + '"]').addClass('is-invalid');
+                            });
+                            // Prevent the default console error handling
+                            return false;
+                        } else {
+                            fetch('danger', 'Hubungi Admin');
+                        }
                     }
                 });
             });

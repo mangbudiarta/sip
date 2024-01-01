@@ -18,4 +18,10 @@ class Review extends Model
     {
         return $this->belongsTo(Wisatawan::class, 'id_wisatawan','id_wisatawan');
     }
+    
+    // relasi N to 1 potensidesa
+    public function potensidesa()
+    {
+        return $this->belongsTo(Potensidesa::class, 'id_potensidesa','id_potensidesa');
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Footer;
 use App\Models\Navbar;
 use Illuminate\Support\ServiceProvider;
 
@@ -26,8 +27,9 @@ class AppServiceProvider extends ServiceProvider
     {
         // Menggunakan share method untuk mengirim data ke semua view
         view()->share([
-            //data from navbar model
-            'navbar' => Navbar::all()
+            //data from navbar dan footer model
+            'navbar' => Navbar::all(),
+            'footer' => Footer::first()
          ]);
     }
 }

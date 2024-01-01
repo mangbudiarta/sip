@@ -43,11 +43,13 @@
                                                 <label class="col-form-label" for="namaumkm">Nama UMKM</label>
                                                 <input type="text" class="form-control" id="namaumkm" name="namaumkm"
                                                     placeholder="ex : UMKM Teko" required oninput="generateSlugTambah()" />
+                                                <span id="error-namaumkm" class="text-danger"></span>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="slug">Slug</label>
                                                 <input type="text" class="form-control" id="slug" name="slug"
                                                     placeholder="ex : UMKM-Teko" required readonly />
+                                                <span id="error-slug" class="text-danger"></span>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="deskripsi">Deskripsi</label>
@@ -55,12 +57,14 @@
                                                     placeholder="ex: UMKM Teko adalah umkm yang ada di Desa Candikuning"
                                                     aria-label="ex: UMKM Teko adalah umkm yang ada di Desa Candikuning" cols="100%" rows="10"
                                                     aria-describedby="basic-icon-default-message2" required></textarea>
+                                                <span id="error-deskripsi" class="text-danger"></span>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="infopemilik">Info Pemilik <span
                                                         class=" text-muted">(no telepon/media sosial)</span></label>
                                                 <input type="text" class="form-control" id="infopemilik"
                                                     name="infopemilik" placeholder="ex: +62831123123" required />
+                                                <span id="error-infopemilik" class="text-danger"></span>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="kategori">Kategori</label>
@@ -74,6 +78,7 @@
                                                         </option>
                                                     @endforeach
                                                 </select>
+                                                <span id="error-id_kategori" class="text-danger"></span>
                                             </div>
                                             <div>
                                                 <label for="formFile2" class="form-label">Gambar Cover<span
@@ -81,6 +86,7 @@
                                                 <input type="file" class="form-control" type="file" id="image"
                                                     name="gambarcover" onchange="previewImage()" />
                                                 <img id="img-preview" class="my-2 col-sm-5" alt="">
+                                                <span id="error-gambarcover" class="text-danger"></span>
                                             </div>
                                             <div class="row justify-content-end">
                                                 <div class="col-sm-12">
@@ -119,11 +125,13 @@
                                                 <input type="text" class="form-control" id="namaumkmedit"
                                                     name="namaumkm" placeholder="ex : UMKM Teko" required
                                                     oninput="generateSlugEdit()" />
+                                                <span id="error-namaumkm-edit" class="text-danger"></span>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="slugedit">Slug</label>
                                                 <input type="text" class="form-control" id="slugedit" name="slug"
                                                     placeholder="ex : UMKM-Teko" required readonly />
+                                                <span id="error-slug-edit" class="text-danger"></span>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="deskripsiedit">Deskripsi</label>
@@ -131,12 +139,14 @@
                                                     placeholder="ex: UMKM Teko adalah umkm yang ada di Desa Candikuning"
                                                     aria-label="ex: UMKM Teko adalah umkm yang ada di Desa Candikuning" aria-describedby="basic-icon-default-message2"
                                                     cols="100%" rows="10" required></textarea>
+                                                <span id="error-deskripsi-edit" class="text-danger"></span>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="pemilikedit">Info Pemilik<span
                                                         class=" text-muted">(no telepon/media sosial)</span></label>
                                                 <input type="text" class="form-control" id="pemilikedit"
                                                     name="infopemilik" placeholder="ex: +62831123123" required />
+                                                <span id="error-pemilik-edit" class="text-danger"></span>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label" for="kategoriedit">Kategori <span
@@ -152,6 +162,7 @@
                                                         </option>
                                                     @endforeach
                                                 </select>
+                                                <span id="error-id_kategori-edit" class="text-danger"></span>
                                             </div>
                                             <div>
                                                 <label for="formFile2" class="form-label">Gambar Cover<span
@@ -159,6 +170,7 @@
                                                 <input type="file" class="form-control" type="file" id="imageEdit"
                                                     name="gambarcover" onchange="previewImageEdit()" />
                                                 <img id="img-previewEdit" class="my-2 col-sm-5" alt="">
+                                                <span id="error-gambarcover-edit" class="text-danger"></span>
                                             </div>
                                             <div class="row justify-content-end">
                                                 <div class="col-sm-12">
@@ -292,6 +304,23 @@
                         $("#add_umkm_btn").text('Submit');
                         // tutup tampilan modal umkm tambah
                         $("#ModalUmkmTambah").modal('hide');
+                    },
+                    error: function(xhr) {
+                        // Handle errors
+                        if (xhr.status === 422) {
+                            var errors = xhr.responseJSON.errors;
+
+                            // Loop through errors and display them in the corresponding element
+                            $.each(errors, function(key, value) {
+                                $('#error-' + key).text(value);
+                                // Add the 'is-invalid' class to the input with an error
+                                $('[name="' + key + '"]').addClass('is-invalid');
+                            });
+                            // Prevent the default console error handling
+                            return false;
+                        } else {
+                            fetch('danger', 'Hubungi Admin');
+                        }
                     }
                 });
             });
@@ -439,6 +468,23 @@
                         $("#edit_umkm_btn").text('Submit');
                         // tutup tampilan modal umkm edit
                         $("#UmkmEdit").modal('hide');
+                    },
+                    error: function(xhr) {
+                        // Handle errors
+                        if (xhr.status === 422) {
+                            var errors = xhr.responseJSON.errors;
+
+                            // Loop through errors and display them in the corresponding element
+                            $.each(errors, function(key, value) {
+                                $('#error-' + key + '-edit').text(value);
+                                // Add the 'is-invalid' class to the input with an error
+                                $('[name="' + key + '"]').addClass('is-invalid');
+                            });
+                            // Prevent the default console error handling
+                            return false;
+                        } else {
+                            fetch('danger', 'Hubungi Admin');
+                        }
                     }
                 });
             });

@@ -36,12 +36,17 @@
             <!-- Carousel End -->
 
             <ul class="post-info d-flex list-unstyled">
-                <li class="pe-lg-4 pe-3"><i class="bi bi-person-check"></i>{{ $potensidetail->penulis }}</li>
-                <li class="pe-lg-4 pe-3"><i class="bi bi-calendar-date"></i>{{ $potensidetail->tanggalposting }}</li>
-                <li class="pe-lg-4 pe-3"><i class="bi bi-list"></i>{{ $potensidetail->kategoripotensi->namakategori }}
+                <li class="pe-lg-4 pe-3"><i class="bi bi-person-check me-1"></i>{{ $potensidetail->penulis }}</li>
+                <li class="pe-lg-4 pe-3"><i class="bi bi-calendar-date me-1"></i>{{ $potensidetail->tanggalposting }}</li>
+                <li class="pe-lg-4 pe-3"><i class="bi bi-list me-1"></i>{{ $potensidetail->kategoripotensi->namakategori }}
                 </li>
-                <li class="pe-lg-4 pe-3"><a href="{{ $potensidetail->lokasi }}" class="btn btn-sm btn-info"
-                        target="_blank">Lokasi</a>
+                <li class="pe-lg-4 pe-3"><a href="{{ $potensidetail->lokasi }}" class="text-info" target="_blank">Lokasi <i
+                            class="fas fa-external-link-alt"></i></a>
+                </li>
+                <li class="pe-lg-4 pe-3"><a href="/review/{{ $potensidetail->id_potensidesa }}" class="text-warning">
+                        Lihat Review
+                        <i class="fas fa-external-link-alt"></i>
+                    </a>
                 </li>
             </ul>
             <p class="text-justify">{{ $potensidetail->deskripsi }}</p>

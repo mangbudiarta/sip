@@ -179,7 +179,7 @@ class ProfildesaController extends Controller
             'judul' => 'required|max:25',
             'deskripsi' => 'required',
             'video' => 'max:60|required',
-            'gambar' => 'image|file|max:1024|nullable'
+            'gambarcover' => 'image|file|max:1024|nullable'
         ]);
     }
 

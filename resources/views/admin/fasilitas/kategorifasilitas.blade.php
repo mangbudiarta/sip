@@ -41,6 +41,7 @@
                                                 <label class="col-form-label" for="namakategori">Nama Kategori</label>
                                                 <input type="text" class="form-control" id="namakategori"
                                                     name="namakategori" placeholder="ex : Alam" required />
+                                                <span id="error-namakategori" class="text-danger"></span>
                                             </div>
                                             <div class="row justify-content-end">
                                                 <div class="col-sm-12">
@@ -79,6 +80,7 @@
                                                 <label class="col-form-label" for="namakategoriedit">Nama Kategori</label>
                                                 <input type="text" class="form-control" id="namakategoriedit"
                                                     name="namakategori" placeholder="ex : Alam" required />
+                                                <span id="error-namakategori-edit" class="text-danger"></span>
                                             </div>
                                             <div class="row justify-content-end">
                                                 <div class="col-sm-12">
@@ -143,6 +145,23 @@
                         $("#add_kategori_btn").text('Simpan');
                         // tutup tampilan modal kategori tambah
                         $("#KategoriTambah").modal('hide');
+                    },
+                    error: function(xhr) {
+                        // Handle errors
+                        if (xhr.status === 422) {
+                            var errors = xhr.responseJSON.errors;
+
+                            // Loop through errors and display them in the corresponding element
+                            $.each(errors, function(key, value) {
+                                $('#error-' + key).text(value);
+                                // Add the 'is-invalid' class to the input with an error
+                                $('[name="' + key + '"]').addClass('is-invalid');
+                            });
+                            // Prevent the default console error handling
+                            return false;
+                        } else {
+                            fetch('danger', 'Hubungi Admin');
+                        }
                     }
                 });
             });
@@ -251,6 +270,23 @@
                         $("#edit_kategori_btn").text('Simpan');
                         // tutup tampilan modal kategori edit
                         $("#KategoriEdit").modal('hide');
+                    },
+                    error: function(xhr) {
+                        // Handle errors
+                        if (xhr.status === 422) {
+                            var errors = xhr.responseJSON.errors;
+
+                            // Loop through errors and display them in the corresponding element
+                            $.each(errors, function(key, value) {
+                                $('#error-' + key + '-edit').text(value);
+                                // Add the 'is-invalid' class to the input with an error
+                                $('[name="' + key + '"]').addClass('is-invalid');
+                            });
+                            // Prevent the default console error handling
+                            return false;
+                        } else {
+                            fetch('danger', 'Hubungi Admin');
+                        }
                     }
                 });
             });

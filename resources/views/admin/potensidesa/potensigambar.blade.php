@@ -59,6 +59,7 @@
                                                 <input type="file" class="form-control" type="file" id="image"
                                                     name="gambar" onchange="previewImage()" />
                                                 <img id="img-preview" class="my-2 col-sm-5" alt="">
+                                                <span id="error-gambar" class="text-danger"></span>
                                             </div>
                                             <div class="row justify-content-end">
                                                 <div class="col-sm-12">
@@ -100,6 +101,7 @@
                                                 <input type="file" class="form-control" type="file" id="imageEdit"
                                                     name="gambar" onchange="previewImageEdit()" />
                                                 <img id="img-previewEdit" class="my-2 col-sm-5" alt="">
+                                                <span id="error-gambar-edit" class="text-danger"></span>
                                             </div>
                                             <div class="row justify-content-end">
                                                 <div class="col-sm-12">
@@ -164,6 +166,23 @@
                         $("#add_gambar_btn").text('Submit');
                         // tutup tampilan modal gambar tambah
                         $("#GambarTambah").modal('hide');
+                    },
+                    error: function(xhr) {
+                        // Handle errors
+                        if (xhr.status === 422) {
+                            var errors = xhr.responseJSON.errors;
+
+                            // Loop through errors and display them in the corresponding element
+                            $.each(errors, function(key, value) {
+                                $('#error-' + key).text(value);
+                                // Add the 'is-invalid' class to the input with an error
+                                $('[name="' + key + '"]').addClass('is-invalid');
+                            });
+                            // Prevent the default console error handling
+                            return false;
+                        } else {
+                            fetch('danger', 'Hubungi Admin');
+                        }
                     }
                 });
             });
@@ -274,6 +293,23 @@
                         $("#edit_gambar_btn").text('Submit');
                         // tutup tampilan modal gambar edit
                         $("#GambarEdit").modal('hide');
+                    },
+                    error: function(xhr) {
+                        // Handle errors
+                        if (xhr.status === 422) {
+                            var errors = xhr.responseJSON.errors;
+
+                            // Loop through errors and display them in the corresponding element
+                            $.each(errors, function(key, value) {
+                                $('#error-' + key + '-edit').text(value);
+                                // Add the 'is-invalid' class to the input with an error
+                                $('[name="' + key + '"]').addClass('is-invalid');
+                            });
+                            // Prevent the default console error handling
+                            return false;
+                        } else {
+                            fetch('danger', 'Hubungi Admin');
+                        }
                     }
                 });
             });

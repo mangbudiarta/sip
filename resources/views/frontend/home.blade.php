@@ -98,9 +98,6 @@
                     </div>
             </div>
         @empty
-            @auth
-                {{ Auth::user()->name }}
-            @endauth
             @endforelse
         </div>
     </div>
