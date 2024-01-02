@@ -9,10 +9,6 @@
                         <!-- Table Layout Start -->
                         <div class="card mb-4">
                             <div class="table-responsive p-3">
-                                <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal"
-                                    data-bs-target="#footerTambah">
-                                    <i class="menu-icon tf-icons bx bx-plus m-0"></i>Tambah
-                                </button>
 
                                 <!-- Tabel  Start-->
                                 <div id="dataPage">
