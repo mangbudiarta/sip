@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
         view()->share([
             //data from navbar dan footer model
             'navbar' => Navbar::all(),
-            'footer' => Footer::first()
+            'footer' => Footer::all()
          ]);
     }
 }
