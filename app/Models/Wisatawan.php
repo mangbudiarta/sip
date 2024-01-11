@@ -10,7 +10,14 @@ class Wisatawan extends Model
     use HasFactory;
     protected $table = 'tb_wisatawan';
     protected $primaryKey = 'id_wisatawan';
-    protected $guarded = ['id_wisatawan'];
+    protected $fillable = [
+        'id_wisatawan',
+        'google_id',
+        'nama',
+        'email',
+        'password',
+        'foto'
+    ];
 
     
     // relasi N to M potensidesa

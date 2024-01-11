@@ -1,10 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\Review;
-use App\Models\Potensidesa;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ApiController extends Controller

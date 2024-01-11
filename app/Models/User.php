@@ -52,6 +52,7 @@ class User extends Authenticatable implements MustVerifyEmail
         static::created(function ($user) {
             // Triggered when a new user is created
             Wisatawan::create([
+                'id_wisatawan' => $user->id,
                 'google_id' => $user->google_id,
                 'email' => $user->email,
                 'nama' => $user->name,
