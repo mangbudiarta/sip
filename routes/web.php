@@ -38,13 +38,6 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 |
 */
 
-
-
-// Route::middleware(['users'])->group(function () {
-//     Route::post('review/store', [ReviewController::class, 'store'])->name('save.review');
-// });
-
-
 // Auth
 Route::get('auth', [GoogleAuthController::class, 'index'])->name('auth');
 Route::get('auth/google', [GoogleAuthController::class, 'redirect'])->name('google-auth');
@@ -90,6 +83,7 @@ Route::get('/fasilitas', [HomeController::class, 'fasilitas']);
 Route::get('/review/{slug}', [ReviewController::class, 'index'])->name('review');
 Route::get('review/7/fetch', [ReviewController::class, 'fetch'])->name('fetch.review');
 Route::get('review/7/rating', [ReviewController::class, 'rating'])->name('fetch.rating');
+Route::post('review/store', [ReviewController::class, 'store'])->name('save.review');
 
 Route::get('/beritadetail/{slug}', [BeritaController::class, 'detailberita']);
 

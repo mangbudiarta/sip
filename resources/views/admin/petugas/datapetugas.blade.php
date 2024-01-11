@@ -1,7 +1,7 @@
 {{-- tempat alert notif --}}
 <div class="alert-notif"></div>
 <table class="table border-top">
-           
+
     <thead>
         <tr>
             <th>No</th>
@@ -11,7 +11,6 @@
             <th>Tempat Lahir</th>
             <th>Tanggal Lahir</th>
             <th>Email</th>
-            <th>Password</th>
             <th>Alamat</th>
             <th>Foto</th>
             <th>Aksi</th>
@@ -27,10 +26,9 @@
                 <td>{{ $item->tempatlahir }}</td>
                 <td>{{ $item->tanggallahir }}</td>
                 <td>{{ $item->email }}</td>
-                <td>{{ $item->password }}</td>
                 <td>{{ $item->alamat }}</td>
-                <td><img src="/storage/petugas_img/{{ $item->foto }}" alt="gambar" width="100"
-                        height="100" class="img-fluid img-thumbnail"></td>
+                <td><img src="/storage/petugas_img/{{ $item->foto }}" alt="gambar" width="100" height="100"
+                        class="img-fluid img-thumbnail"></td>
                 <td>
                     <a href="#" id='{{ $item->id_petugas }}' class="btn btn-warning btn-sm editpetugas m-1"
                         data-bs-toggle="modal" data-bs-target="#petugasEdit"><i
