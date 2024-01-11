@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tb_wisatawan', function (Blueprint $table) {
-            $table->integer('id_wisatawan')->autoIncrement();
+            $table->integer('id_wisatawan')->primary();
             $table->string('google_id', 255)->unique()->nullable();
             $table->string('nama', 100);
             $table->string('email', 50)->unique();
