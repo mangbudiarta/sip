@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Umkm;
 use App\Models\Umkmgambar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UmkmGambarController extends Controller
 {
@@ -15,12 +16,13 @@ class UmkmGambarController extends Controller
      */
     public function index($id_umkm)
     {
+        $petugas = Auth::guard('petugas')->user();
         return view('admin.umkm.umkmgambar', [
             // mengisi array key:kategori dengan semua data dari model Kategoriumkm
             'umkm' => Umkm::select('id_umkm', 'namaumkm')->where('id_umkm', $id_umkm)->first(),
             // mengisi array key: title dengan string 'Umkm'
             'title' => 'Umkm Gambar'
-        ]);
+        ], compact('petugas'));
     }
 
     /**
@@ -47,14 +49,14 @@ class UmkmGambarController extends Controller
         $validateData = $this->validasiRules($request);
         if ($request->file('gambar')) {
             // ada input gambar, masukan nama gambar dari fungsi inputGambar (parameter data formulir)
-            $fileNameToStore= $this->inputGambar($request);
+            $fileNameToStore = $this->inputGambar($request);
         } else {
             // tidak input gambar, masukan nama noimage.png ke database
             $fileNameToStore = 'noimage.png';
         }
         // mengisi array validateData indeks gambar dengan nama gambar
-        $validateData['gambar']=$fileNameToStore;
-        
+        $validateData['gambar'] = $fileNameToStore;
+
         try {
             // input data ke database dari model UmkmGambar
             $result = Umkmgambar::create($validateData);
@@ -66,7 +68,7 @@ class UmkmGambarController extends Controller
         }
 
         // Berhasil input data, return status 200
-        if($result){
+        if ($result) {
             return response()->json([
                 'status' => 200,
             ]);
@@ -83,9 +85,9 @@ class UmkmGambarController extends Controller
         // mengisi $id dari data form dengan name:id_gambar
         $id = $request->id_gambar;
         // mengisi $data dengan data umkm sesuai id dari model Umkm
-		$data = Umkmgambar::find($id);
+        $data = Umkmgambar::find($id);
         // mengirim isi $data dengan json
-		return response()->json($data);
+        return response()->json($data);
     }
 
     /**
@@ -101,17 +103,17 @@ class UmkmGambarController extends Controller
         $umkmgambar = Umkmgambar::find($request->id_gambar);
         if ($request->file('gambar')) {
             // ada input gambar, masukan nama gambar dari fungsi inputGambar (parameter data formulir)
-            $fileNameToStore= $this->inputGambar($request);
+            $fileNameToStore = $this->inputGambar($request);
         } else {
             // tidak input gambar, pakai nama gambar sebelumnya
             $fileNameToStore = $umkmgambar->gambar;
         }
         // mengisi array validateData indeks gambar dengan nama gambar
-        $validateData['gambar']=$fileNameToStore;
-    
+        $validateData['gambar'] = $fileNameToStore;
+
         try {
             // update data ke database dari model Umkm
-            $result = Umkmgambar::where('id_gambar',$umkmgambar->id_gambar)->update($validateData);
+            $result = Umkmgambar::where('id_gambar', $umkmgambar->id_gambar)->update($validateData);
         } catch (\Throwable $th) {
             // gagal update data, return status 500
             return response()->json([
@@ -120,7 +122,7 @@ class UmkmGambarController extends Controller
         }
 
         // Berhasil update data, return status 200
-        if($result){
+        if ($result) {
             return response()->json([
                 'status' => 200,
             ]);
@@ -147,7 +149,7 @@ class UmkmGambarController extends Controller
         }
 
         // Berhasil delete data, return status 200
-        if($result){
+        if ($result) {
             return response()->json([
                 'status' => 200,
             ]);
@@ -159,9 +161,10 @@ class UmkmGambarController extends Controller
      * @param obyek Request $request berisi data formulir
      * @return data tervalidasi
      */
-    public function validasiRules(Request $request) {
+    public function validasiRules(Request $request)
+    {
         return $request->validate([
-            'id_umkm' => 'required', 
+            'id_umkm' => 'required',
             'gambar' => 'image|file|max:1024|nullable'
         ]);
     }
@@ -171,14 +174,15 @@ class UmkmGambarController extends Controller
      * @param obyek Request $request berisi data formulir
      * @return nama gambar
      */
-    public function inputGambar(Request $request) {
+    public function inputGambar(Request $request)
+    {
         // mendapatkan ekstensi gambar
         $extension = $request->file('gambar')->getClientOriginalExtension();
         // mendapatkan 6 karakter ramdom dari $sumber
         $sumber = "ABCDEFGHIJKLMNPQRSTUVWXYZ";
-        $randomName = substr(str_shuffle($sumber),0,6);
+        $randomName = substr(str_shuffle($sumber), 0, 6);
         // Nama gambar untuk disimpan
-        $fileNameToStore = 'umkm-'.$randomName.'.'.$extension;
+        $fileNameToStore = 'umkm-' . $randomName . '.' . $extension;
         // Lokasi penyimpanan gambar
         $path = $request->file('gambar')->storeAs('public/umkmgambar_img', $fileNameToStore);
         // return nama gambar

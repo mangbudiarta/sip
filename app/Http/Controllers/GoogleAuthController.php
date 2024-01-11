@@ -51,18 +51,9 @@ class GoogleAuthController extends Controller
                     session()->flash('error', 'Terjadi kesalahan saat membuat pengguna.');
                 }
 
-                // Auth::login($new_user);
                 return redirect()->intended('/');
             } else {
                 Auth::login($user);
-                // if (Auth::login($user)) {
-                //     // Tambahkan notifikasi berhasil login
-                //     session()->flash('success', 'Selamat datang kembali, ' . $user->name . '! Anda berhasil login.');
-                // } else {
-                //     // Tambahkan notifikasi kesalahan login
-                //     session()->flash('error', 'Terjadi kesalahan saat login.');
-                // }
-
             }
 
             return redirect()->intended('/');
@@ -78,3 +69,32 @@ class GoogleAuthController extends Controller
         return redirect()->intended('/');
     }
 }
+
+
+
+
+
+
+
+
+
+ // if (Auth::login($user)) {
+                //     // Tambahkan notifikasi berhasil login
+                //     session()->flash('success', 'Selamat datang kembali, ' . $user->name . '! Anda berhasil login.');
+                // } else {
+                //     // Tambahkan notifikasi kesalahan login
+                //     session()->flash('error', 'Terjadi kesalahan saat login.');
+                // }
+
+
+
+
+
+
+
+
+
+
+
+
+                // Auth::login($new_user);

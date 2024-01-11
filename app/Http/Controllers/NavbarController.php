@@ -4,20 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Navbar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NavbarController extends Controller
 {
-     /**
+    /**
      * Fungsi menampilkan view index pada folder admin/navbar
      * @param -
      * @return view index dengan array key:kategori dan key:title
      */
     public function index()
     {
+        $petugas = Auth::guard('petugas')->user();
         return view('admin.navbar.index', [
             // mengisi array key: title dengan string 'Navbar'
             'title' => 'Navbar'
-        ]);
+        ], compact('petugas'));
     }
 
     /**
@@ -44,14 +46,14 @@ class NavbarController extends Controller
         $validateData = $this->validasiRules($request);
         if ($request->file('gambarnav')) {
             // ada input gambar, masukan nama gambar dari fungsi inputGambar (parameter data formulir)
-            $fileNameToStore= $this->inputGambar($request);
+            $fileNameToStore = $this->inputGambar($request);
         } else {
             // tidak input gambar, masukan nama noimage.png ke database
             $fileNameToStore = 'noimage.png';
         }
         // mengisi array validateData indeks gambar dengan nama gambar
-        $validateData['gambarnav']=$fileNameToStore;
-        
+        $validateData['gambarnav'] = $fileNameToStore;
+
         try {
             // input data ke database dari model Navbar
             $result = Navbar::create($validateData);
@@ -63,7 +65,7 @@ class NavbarController extends Controller
         }
 
         // Berhasil input data, return status 200
-        if($result){
+        if ($result) {
             return response()->json([
                 'status' => 200,
             ]);
@@ -80,9 +82,9 @@ class NavbarController extends Controller
         // mengisi $id dari data form dengan name:id_navbar
         $id = $request->id_navbar;
         // mengisi $data dengan data navbar sesuai id dari model Navbar
-		$data = Navbar::find($id);
+        $data = Navbar::find($id);
         // mengirim isi $data dengan json
-		return response()->json($data);
+        return response()->json($data);
     }
 
     /**
@@ -98,17 +100,17 @@ class NavbarController extends Controller
         $navbar = Navbar::find($request->id_navbar);
         if ($request->file('gambarnav')) {
             // ada input gambar, masukan nama gambar dari fungsi inputGambar (parameter data formulir)
-            $fileNameToStore= $this->inputGambar($request);
+            $fileNameToStore = $this->inputGambar($request);
         } else {
             // tidak input gambar, pakai nama gambar sebelumnya
             $fileNameToStore = $navbar->gambarnav;
         }
         // mengisi array validateData indeks gambar dengan nama gambar
-        $validateData['gambarnav']=$fileNameToStore;
-    
+        $validateData['gambarnav'] = $fileNameToStore;
+
         try {
             // update data ke database dari model Navbar
-            $result = Navbar::where('id_navbar',$navbar->id_navbar)->update($validateData);
+            $result = Navbar::where('id_navbar', $navbar->id_navbar)->update($validateData);
         } catch (\Throwable $th) {
             // gagal update data, return status 500
             return response()->json([
@@ -117,7 +119,7 @@ class NavbarController extends Controller
         }
 
         // Berhasil update data, return status 200
-        if($result){
+        if ($result) {
             return response()->json([
                 'status' => 200,
             ]);
@@ -144,7 +146,7 @@ class NavbarController extends Controller
         }
 
         // Berhasil delete data, return status 200
-        if($result){
+        if ($result) {
             return response()->json([
                 'status' => 200,
             ]);
@@ -156,7 +158,8 @@ class NavbarController extends Controller
      * @param obyek Request $request berisi data formulir
      * @return data tervalidasi
      */
-    public function validasiRules(Request $request) {
+    public function validasiRules(Request $request)
+    {
         return $request->validate([
             'gambarnav' => 'image|file|max:1024|nullable'
         ]);
@@ -167,14 +170,15 @@ class NavbarController extends Controller
      * @param obyek Request $request berisi data formulir
      * @return nama gambar
      */
-    public function inputGambar(Request $request) {
+    public function inputGambar(Request $request)
+    {
         // mendapatkan ekstensi gambar
         $extension = $request->file('gambarnav')->getClientOriginalExtension();
         // mendapatkan 6 karakter ramdom dari $sumber
         $sumber = "ABCDEFGHIJKLMNPQRSTUVWXYZ";
-        $randomName = substr(str_shuffle($sumber),0,6);
+        $randomName = substr(str_shuffle($sumber), 0, 6);
         // Nama gambar untuk disimpan
-        $fileNameToStore = 'navbar-'.$randomName.'.'.$extension;
+        $fileNameToStore = 'navbar-' . $randomName . '.' . $extension;
         // Lokasi penyimpanan gambar
         $path = $request->file('gambarnav')->storeAs('public/navbar_img', $fileNameToStore);
         // return nama gambar

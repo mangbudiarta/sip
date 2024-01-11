@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Wisatawan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class WisatawanController extends Controller
 {
@@ -14,10 +15,11 @@ class WisatawanController extends Controller
      */
     public function index()
     {
+        $petugas = Auth::guard('petugas')->user();
         return view('admin.wisatawan.index', [
             // mengisi array key: title dengan string 'wisatawan'
             'title' => 'wisatawan'
-        ]);
+        ], compact('petugas'));
     }
 
     /**
@@ -43,9 +45,9 @@ class WisatawanController extends Controller
         // mengisi $id dari data form dengan name:id_wisatawan
         $id = $request->id_wisatawan;
         // mengisi $data dengan data wisatawan sesuai id dari model wisatawan
-		$data = Wisatawan::find($id);
+        $data = Wisatawan::find($id);
         // mengirim isi $data dengan json
-		return response()->json($data);
+        return response()->json($data);
     }
 
     /**
@@ -61,17 +63,17 @@ class WisatawanController extends Controller
         $wisatawan = Wisatawan::find($request->id_wisatawan);
         if ($request->file('foto')) {
             // ada input gambar, masukan nama gambar dari fungsi inputGambar (parameter data formulir)
-            $fileNameToStore= $this->inputGambar($request);
+            $fileNameToStore = $this->inputGambar($request);
         } else {
             // tidak input gambar, pakai nama gambar sebelumnya
             $fileNameToStore = $wisatawan->foto;
         }
         // mengisi array validateData indeks gambar dengan nama gambar
-        $validateData['foto']=$fileNameToStore;
-    
+        $validateData['foto'] = $fileNameToStore;
+
         try {
             // update data ke database dari model wisatawan
-            $result = Wisatawan::where('id_wisatawan',$wisatawan->id_wisatawan)->update($validateData);
+            $result = Wisatawan::where('id_wisatawan', $wisatawan->id_wisatawan)->update($validateData);
         } catch (\Throwable $th) {
             // gagal update data, return status 500
             return response()->json([
@@ -80,7 +82,7 @@ class WisatawanController extends Controller
         }
 
         // Berhasil update data, return status 200
-        if($result){
+        if ($result) {
             return response()->json([
                 'status' => 200,
             ]);
@@ -107,7 +109,7 @@ class WisatawanController extends Controller
         }
 
         // Berhasil delete data, return status 200
-        if($result){
+        if ($result) {
             return response()->json([
                 'status' => 200,
             ]);
@@ -119,7 +121,8 @@ class WisatawanController extends Controller
      * @param obyek Request $request berisi data formulir
      * @return data tervalidasi
      */
-    public function validasiRules(Request $request) {
+    public function validasiRules(Request $request)
+    {
         return $request->validate([
             'nama' => 'required|max:100',
             'email' => 'required',
@@ -132,14 +135,15 @@ class WisatawanController extends Controller
      * @param obyek Request $request berisi data formulir
      * @return nama foto
      */
-    public function inputGambar(Request $request) {
+    public function inputGambar(Request $request)
+    {
         // mendapatkan ekstensi foto
         $extension = $request->file('foto')->getClientOriginalExtension();
         // mendapatkan 6 karakter ramdom dari $sumber
         $sumber = "ABCDEFGHIJKLMNPQRSTUVWXYZ";
-        $randomName = substr(str_shuffle($sumber),0,6);
+        $randomName = substr(str_shuffle($sumber), 0, 6);
         // Nama foto untuk disimpan
-        $fileNameToStore = 'wisatawan-'.$randomName.'.'.$extension;
+        $fileNameToStore = 'wisatawan-' . $randomName . '.' . $extension;
         // Lokasi penyimpanan foto
         $path = $request->file('foto')->storeAs('public/wisatawan_img', $fileNameToStore);
         // return nama foto

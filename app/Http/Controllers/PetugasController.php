@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\petugas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class petugasController extends Controller
@@ -15,12 +16,13 @@ class petugasController extends Controller
      */
     public function index()
     {
+        $petugas = Auth::guard('petugas')->user();
         return view('admin.petugas.index', [
             // mengisi array key: title dengan string 'petugas'
             'title' => 'petugas',
             'jeniskelamin' => Petugas::select('jeniskelamin')->distinct()->get()
 
-        ]);
+        ], compact('petugas'));
     }
 
     /**

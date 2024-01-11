@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class ReviewController extends Controller
 {
-     /**
+    /**
      * Fungsi menampilkan view index pada folder admin/infowilayah
      * @param -
      * @return view index dengan array key:kategori dan key:title
@@ -17,11 +17,11 @@ class ReviewController extends Controller
     public function index($id_potensidesa)
     {
         return view('frontend.potensi.review', [
-            'potensidesa' => Potensidesa::select('id_potensidesa', 'namapotensi','gambarcover','deskripsi','slug')->where('id_potensidesa', $id_potensidesa)->first(),
+            'potensidesa' => Potensidesa::select('id_potensidesa', 'namapotensi', 'gambarcover', 'deskripsi', 'slug')->where('id_potensidesa', $id_potensidesa)->first(),
             'gambarpotensi' => Potensidesagambar::select('id_potensidesa', 'gambar')->where('id_potensidesa', $id_potensidesa)->get(),
             'ratarata' => round(Review::where('id_potensidesa', $id_potensidesa)->avg('rating'), 2),
-            'jumlahreview' => Review::where('id_potensidesa', $id_potensidesa )->count(),
-            'review' => Review::select('id_potensidesa','rating')->where('id_potensidesa', $id_potensidesa )->get(),
+            'jumlahreview' => Review::where('id_potensidesa', $id_potensidesa)->count(),
+            'review' => Review::select('id_potensidesa', 'rating')->where('id_potensidesa', $id_potensidesa)->get(),
             // mengisi array key: title dengan string 'Info Wilayah'
             'title' => 'Review Potensi',
             'review' => Review::all()
@@ -37,11 +37,11 @@ class ReviewController extends Controller
     {
         return view('frontend.potensi.datareview', [
             // mengisi array key:review dengan semua data dari model review
-            'review' => Review::where('id_potensidesa', $request->id_potensidesa )->orderBy('created_at', 'desc')->get(),
+            'review' => Review::where('id_potensidesa', $request->id_potensidesa)->orderBy('created_at', 'desc')->get(),
         ]);
     }
 
-/**
+    /**
      * Fungsi mendapatkan semua Rating
      * @param -
      * @return view datarating dengan array key:feview
@@ -50,7 +50,7 @@ class ReviewController extends Controller
     {
         return view('frontend.potensi.datarating', [
             'ratarata' => round(Review::where('id_potensidesa', $request->id_potensidesa)->avg('rating'), 2),
-            'jumlahreview' => Review::where('id_potensidesa', $request->id_potensidesa )->count(),
+            'jumlahreview' => Review::where('id_potensidesa', $request->id_potensidesa)->count(),
         ]);
     }
 
@@ -63,7 +63,7 @@ class ReviewController extends Controller
     public function store(Request $request)
     {
         // mengisi array validateData dengan data valid dari fungsi validasiRules (parameter data formulir)
-        $validateData = $this->validasiRules($request);    
+        $validateData = $this->validasiRules($request);
         try {
             // input data ke database dari model Review
             $result = Review::create($validateData);
@@ -75,19 +75,20 @@ class ReviewController extends Controller
         }
 
         // Berhasil input data, return status 200
-        if($result){
+        if ($result) {
             return response()->json([
                 'status' => 200,
             ]);
         }
     }
-    
+
     /**
      * Fungsi validasi form inputan user 
      * @param obyek Request $request berisi data formulir
      * @return data tervalidasi
      */
-    public function validasiRules(Request $request) {
+    public function validasiRules(Request $request)
+    {
         return $request->validate([
             'id_wisatawan' => 'required',
             'id_potensidesa' => 'required',

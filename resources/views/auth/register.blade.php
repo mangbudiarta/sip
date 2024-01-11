@@ -96,7 +96,7 @@
                     </div>
 
                 </div>
-                <button class="btn btn-primary d-grid w-100" type="submit">Sign up</button>
+                <button class="btn btn-primary d-grid w-100" type="submit">Register</button>
             </form>
             
 

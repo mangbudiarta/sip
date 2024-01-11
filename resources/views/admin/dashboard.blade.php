@@ -7,7 +7,11 @@
                     <div class="d-flex align-items-end row">
                         <div class="col-sm-7">
                             <div class="card-body">
-                                <h5 class="card-title text-primary">Selamat Datang Petugas 🎉</h5>
+                                {{-- @if(Session::has('petugas_nama')) --}}
+                                <h5 class="card-title text-primary">Selamat Datang {{ $petugas ? $petugas->nama : 'Guest' }}! 🎉</h5>
+                                {{-- @else
+                                <p>Please log in</p>
+                                @endif --}}
                                 <p class="mb-4">
                                     Selamat Datang di <span class="fw-bold">Sistem Informasi Desa Candikuning</span>
                                 </p>
