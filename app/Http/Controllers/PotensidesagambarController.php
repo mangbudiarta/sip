@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Potensidesa;
-use App\Models\Potensidesagambar;
 use Illuminate\Http\Request;
+use App\Models\Potensidesagambar;
+use Illuminate\Support\Facades\Auth;
 
 class PotensidesagambarController extends Controller
 {
@@ -15,12 +16,13 @@ class PotensidesagambarController extends Controller
      */
     public function index($id_potensidesa)
     {
+        $petugas = Auth::guard('petugas')->user();
         return view('admin.potensidesa.potensigambar', [
             // mengisi array key: title dengan string 'Potensi Gambar'
             'title' => 'Potensi Gambar',
             // mengisi array key:potensigambar dengan semua data dari model potensigambar
-            'potensidesa' => Potensidesa::select('id_potensidesa', 'namapotensi')->where('id_potensidesa', $id_potensidesa )->first(),
-        ]);
+            'potensidesa' => Potensidesa::select('id_potensidesa', 'namapotensi')->where('id_potensidesa', $id_potensidesa)->first(),
+        ], compact('petugas'));
     }
 
     /**
@@ -32,7 +34,7 @@ class PotensidesagambarController extends Controller
     {
         return view('admin.potensidesa.datagambar', [
             // mengisi array key:potensigambar dengan semua data dari model potensigambar
-            'potensigambar' => Potensidesagambar::where('id_potensidesa', $request->id_potensidesa )->get(),
+            'potensigambar' => Potensidesagambar::where('id_potensidesa', $request->id_potensidesa)->get(),
         ]);
     }
 
@@ -47,14 +49,14 @@ class PotensidesagambarController extends Controller
         $validateData = $this->validasiRules($request);
         if ($request->file('gambar')) {
             // ada input gambar, masukan nama gambar dari fungsi inputGambar (parameter data formulir)
-            $fileNameToStore= $this->inputGambar($request);
+            $fileNameToStore = $this->inputGambar($request);
         } else {
             // tidak input gambar, masukan nama noimage.png ke database
             $fileNameToStore = 'noimage.png';
         }
         // mengisi array validateData indeks gambar dengan nama gambar
-        $validateData['gambar']=$fileNameToStore;
-        
+        $validateData['gambar'] = $fileNameToStore;
+
         try {
             // input data ke database dari model Potensidesagambar
             $result = Potensidesagambar::create($validateData);
@@ -66,7 +68,7 @@ class PotensidesagambarController extends Controller
         }
 
         // Berhasil input data, return status 200
-        if($result){
+        if ($result) {
             return response()->json([
                 'status' => 200,
             ]);
@@ -83,9 +85,9 @@ class PotensidesagambarController extends Controller
         // mengisi $id dari data form dengan name:id_potensigambar
         $id = $request->id_gambar;
         // mengisi $data dengan data potensigambar sesuai id dari model Potensidesagambar
-		$data = Potensidesagambar::find($id);
+        $data = Potensidesagambar::find($id);
         // mengirim isi $data dengan json
-		return response()->json($data);
+        return response()->json($data);
     }
 
     /**
@@ -101,17 +103,17 @@ class PotensidesagambarController extends Controller
         $potensigambar = Potensidesagambar::find($request->id_gambar);
         if ($request->file('gambar')) {
             // ada input gambar, masukan nama gambar dari fungsi inputGambar (parameter data formulir)
-            $fileNameToStore= $this->inputGambar($request);
+            $fileNameToStore = $this->inputGambar($request);
         } else {
             // tidak input gambar, pakai nama gambar sebelumnya
             $fileNameToStore = $potensigambar->gambar;
         }
         // mengisi array validateData indeks gambar dengan nama gambar
-        $validateData['gambar']=$fileNameToStore;
-    
+        $validateData['gambar'] = $fileNameToStore;
+
         try {
             // update data ke database dari model Potensidesagambar
-            $result = Potensidesagambar::where('id_gambar',$potensigambar->id_gambar)->update($validateData);
+            $result = Potensidesagambar::where('id_gambar', $potensigambar->id_gambar)->update($validateData);
         } catch (\Throwable $th) {
             // gagal update data, return status 500
             return response()->json([
@@ -120,7 +122,7 @@ class PotensidesagambarController extends Controller
         }
 
         // Berhasil update data, return status 200
-        if($result){
+        if ($result) {
             return response()->json([
                 'status' => 200,
             ]);
@@ -147,7 +149,7 @@ class PotensidesagambarController extends Controller
         }
 
         // Berhasil delete data, return status 200
-        if($result){
+        if ($result) {
             return response()->json([
                 'status' => 200,
             ]);
@@ -159,7 +161,8 @@ class PotensidesagambarController extends Controller
      * @param obyek Request $request berisi data formulir
      * @return data tervalidasi
      */
-    public function validasiRules(Request $request) {
+    public function validasiRules(Request $request)
+    {
         return $request->validate([
             'id_potensidesa' => 'required',
             'gambar' => 'image|file|max:1024'
@@ -171,14 +174,15 @@ class PotensidesagambarController extends Controller
      * @param obyek Request $request berisi data formulir
      * @return nama gambar
      */
-    public function inputGambar(Request $request) {
+    public function inputGambar(Request $request)
+    {
         // mendapatkan ekstensi gambar
         $extension = $request->file('gambar')->getClientOriginalExtension();
         // mendapatkan 6 karakter ramdom dari $sumber
         $sumber = "ABCDEFGHIJKLMNPQRSTUVWXYZ";
-        $randomName = substr(str_shuffle($sumber),0,6);
+        $randomName = substr(str_shuffle($sumber), 0, 6);
         // Nama gambar untuk disimpan
-        $fileNameToStore = 'obyek-'.$randomName.'.'.$extension;
+        $fileNameToStore = 'obyek-' . $randomName . '.' . $extension;
         // Lokasi penyimpanan gambar
         $path = $request->file('gambar')->storeAs('public/potensigambar_img', $fileNameToStore);
         // return nama gambar

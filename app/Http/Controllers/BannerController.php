@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Banner;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BannerController extends Controller
 {
@@ -14,10 +15,11 @@ class BannerController extends Controller
      */
     public function index()
     {
+        $petugas = Auth::guard('petugas')->user();
         return view('admin.banner.index', [
             // mengisi array key: title dengan string 'banner'
             'title' => 'banner'
-        ]);
+        ], compact('petugas'));
     }
 
     /**
@@ -44,14 +46,14 @@ class BannerController extends Controller
         $validateData = $this->validasiRules($request);
         if ($request->file('gambar')) {
             // ada input gambar, masukan nama gambar dari fungsi inputGambar (parameter data formulir)
-            $fileNameToStore= $this->inputGambar($request);
+            $fileNameToStore = $this->inputGambar($request);
         } else {
             // tidak input gambar, masukan nama noimage.png ke database
             $fileNameToStore = 'noimage.png';
         }
         // mengisi array validateData indeks gambar dengan nama gambar
-        $validateData['gambar']=$fileNameToStore;
-        
+        $validateData['gambar'] = $fileNameToStore;
+
         try {
             // input data ke database dari model banner
             $result = Banner::create($validateData);
@@ -63,7 +65,7 @@ class BannerController extends Controller
         }
 
         // Berhasil input data, return status 200
-        if($result){
+        if ($result) {
             return response()->json([
                 'status' => 200,
             ]);
@@ -80,8 +82,8 @@ class BannerController extends Controller
         // mengisi $id dari data form dengan name:id_banner
         $id = $request->id_banner;
         // mengisi $data dengan data banner sesuai id dari model banner
-		$data = Banner::find($id);
-		return response()->json([
+        $data = Banner::find($id);
+        return response()->json([
             // mengisi array key:banner dengan $data
             'banner' => $data
         ]);
@@ -97,9 +99,9 @@ class BannerController extends Controller
         // mengisi $id dari data form dengan name:id_banner
         $id = $request->id_banner;
         // mengisi $data dengan data banner sesuai id dari model banner
-		$data = Banner::find($id);
+        $data = Banner::find($id);
         // mengirim isi $data dengan json
-		return response()->json($data);
+        return response()->json($data);
     }
 
     /**
@@ -115,17 +117,17 @@ class BannerController extends Controller
         $banner = Banner::find($request->id_banner);
         if ($request->file('gambar')) {
             // ada input gambar, masukan nama gambar dari fungsi inputGambar (parameter data formulir)
-            $fileNameToStore= $this->inputGambar($request);
+            $fileNameToStore = $this->inputGambar($request);
         } else {
             // tidak input gambar, pakai nama gambar sebelumnya
             $fileNameToStore = $banner->gambar;
         }
         // mengisi array validateData indeks gambar dengan nama gambar
-        $validateData['gambar']=$fileNameToStore;
-    
+        $validateData['gambar'] = $fileNameToStore;
+
         try {
             // update data ke database dari model banner
-            $result = Banner::where('id_banner',$banner->id_banner)->update($validateData);
+            $result = Banner::where('id_banner', $banner->id_banner)->update($validateData);
         } catch (\Throwable $th) {
             // gagal update data, return status 500
             return response()->json([
@@ -134,7 +136,7 @@ class BannerController extends Controller
         }
 
         // Berhasil update data, return status 200
-        if($result){
+        if ($result) {
             return response()->json([
                 'status' => 200,
             ]);
@@ -161,7 +163,7 @@ class BannerController extends Controller
         }
 
         // Berhasil delete data, return status 200
-        if($result){
+        if ($result) {
             return response()->json([
                 'status' => 200,
             ]);
@@ -173,7 +175,8 @@ class BannerController extends Controller
      * @param obyek Request $request berisi data formulir
      * @return data tervalidasi
      */
-    public function validasiRules(Request $request) {
+    public function validasiRules(Request $request)
+    {
         return $request->validate([
             'judul' => 'required|max:50',
             'deskripsi' => 'required',
@@ -186,14 +189,15 @@ class BannerController extends Controller
      * @param obyek Request $request berisi data formulir
      * @return nama gambar
      */
-    public function inputGambar(Request $request) {
+    public function inputGambar(Request $request)
+    {
         // mendapatkan ekstensi gambar
         $extension = $request->file('gambar')->getClientOriginalExtension();
         // mendapatkan 6 karakter ramdom dari $sumber
         $sumber = "ABCDEFGHIJKLMNPQRSTUVWXYZ";
-        $randomName = substr(str_shuffle($sumber),0,6);
+        $randomName = substr(str_shuffle($sumber), 0, 6);
         // Nama gambar untuk disimpan
-        $fileNameToStore = 'fasilitas-'.$randomName.'.'.$extension;
+        $fileNameToStore = 'fasilitas-' . $randomName . '.' . $extension;
         // Lokasi penyimpanan gambar
         $path = $request->file('gambar')->storeAs('public/banner_img', $fileNameToStore);
         // return nama gambar

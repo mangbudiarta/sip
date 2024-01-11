@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Footer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FooterController extends Controller
 {
@@ -14,10 +15,11 @@ class FooterController extends Controller
      */
     public function index()
     {
+        $petugas = Auth::guard('petugas')->user();
         return view('admin.footer.index', [
             // mengisi array key: title dengan string 'footer'
             'title' => 'footer'
-        ]);
+        ], compact('petugas'));
     }
 
     /**

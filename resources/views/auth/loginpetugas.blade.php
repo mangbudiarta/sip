@@ -66,6 +66,14 @@
               <!-- /Logo -->
               <h4 class="mb-2">Welcome to SIP Desa Candikuning 👋</h4>
               <p class="mb-4">Please sign-in to your account and start the adventure</p>
+              @if(session('success'))
+              <p class="alert alert-success">{{ session('success') }}</p>
+              @endif
+              @if($errors->any())
+              @foreach($errors->all() as $err)
+              <p class="alert alert-danger">{{ $err }}</p>
+              @endforeach
+              @endif
 
               <form id="formAuthentication" class="mb-3" action="{{ route('loginpetugas') }}" method="POST">
                 @csrf
@@ -97,7 +105,7 @@
                   </div>
                 </div>
                 <div class="mb-3">
-                  <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
+                  <button class="btn btn-primary d-grid w-100" type="submit">Log in</button>
                 </div>
               </form>
             </div>

@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Berita;
-use App\Models\Kategoriberita;
 use Illuminate\Http\Request;
+use App\Models\Kategoriberita;
+use Illuminate\Support\Facades\Auth;
 
 class BeritaController extends Controller
 {
@@ -15,12 +16,13 @@ class BeritaController extends Controller
      */
     public function index()
     {
+        $petugas = Auth::guard('petugas')->user();
         return view('admin.berita.index', [
             // mengisi array key:kategori dengan semua data dari model Kategoriberita
             'kategori' => Kategoriberita::all(),
             // mengisi array key: title dengan string 'berita'
             'title' => 'Berita'
-        ]);
+        ], compact('petugas'));
     }
 
     /**

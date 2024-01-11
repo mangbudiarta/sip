@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kategoripotensi;
 use Illuminate\Http\Request;
+use App\Models\Kategoripotensi;
+use Illuminate\Support\Facades\Auth;
 
 class KategoripotensiController extends Controller
 {
@@ -14,12 +15,13 @@ class KategoripotensiController extends Controller
      */
     public function index()
     {
+        $petugas = Auth::guard('petugas')->user();
         return view('admin.potensidesa.kategoripotensi', [
             // mengisi array key: title dengan string 'Kategori potensidesa'
             'title' => "Kategori potensidesa"
-        ]);
+        ], compact('petugas'));
     }
-    
+
     /**
      * Fungsi mendapatkan semua data kategori potensi
      * @param -
@@ -53,7 +55,7 @@ class KategoripotensiController extends Controller
         }
 
         // berhasil input data, return status 200
-        if($result){
+        if ($result) {
             return response()->json([
                 'status' => 200,
             ]);
@@ -70,9 +72,9 @@ class KategoripotensiController extends Controller
         // mengisi $id dari data form dengan name:id_kategori
         $id = $request->id_kategori;
         // mengisi $data dengan data kategoripotensi sesuai id dari model Kategoripotensi
-		$data = Kategoripotensi::find($id);
+        $data = Kategoripotensi::find($id);
         // mengirim isi $data dengan json
-		return response()->json($data);
+        return response()->json($data);
     }
 
     /**
@@ -98,13 +100,13 @@ class KategoripotensiController extends Controller
         }
 
         // berhasil update data, return status 200
-        if($result){
+        if ($result) {
             return response()->json([
                 'status' => 200,
             ]);
         }
     }
-    
+
     /**
      * Fungsi delete data kategoripotensi sesuai id
      * @param obyek Request $request berisi data formulir
@@ -114,19 +116,19 @@ class KategoripotensiController extends Controller
     {
         // mengisi $id dari data form dengan name:id_kategori
         $id = $request->id_kategori;
-        
+
         try {
             // delete data pada database dari model Kategoripotensi
             $result = Kategoripotensi::destroy($id);
         } catch (\Throwable $th) {
-             // gagal delete data, return status 500
+            // gagal delete data, return status 500
             return response()->json([
                 'status' => 500,
             ]);
         }
-        
+
         // berhasil delete data, return status 200
-        if($result){
+        if ($result) {
             return response()->json([
                 'status' => 200,
             ]);
@@ -138,7 +140,8 @@ class KategoripotensiController extends Controller
      * @param obyek Request $request berisi data formulir
      * @return data tervalidasi
      */
-    public function validasiRules(Request $request) {
+    public function validasiRules(Request $request)
+    {
         return $request->validate([
             'namakategori' => 'required|max:25'
         ]);

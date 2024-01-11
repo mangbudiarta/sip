@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Infowilayah;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class InfowilayahController extends Controller
 {
@@ -14,10 +15,11 @@ class InfowilayahController extends Controller
      */
     public function index()
     {
+        $petugas = Auth::guard('petugas')->user();
         return view('admin.infowilayah.index', [
             // mengisi array key: title dengan string 'Info Wilayah'
             'title' => 'Infowilayah'
-        ]);
+        ], compact('petugas'));
     }
 
     /**
@@ -44,14 +46,14 @@ class InfowilayahController extends Controller
         $validateData = $this->validasiRules($request);
         if ($request->file('gambarcover')) {
             // ada input gambar, masukan nama gambar dari fungsi inputGambar (parameter data formulir)
-            $fileNameToStore= $this->inputGambar($request);
+            $fileNameToStore = $this->inputGambar($request);
         } else {
             // tidak input gambar, masukan nama noimage.png ke database
             $fileNameToStore = 'noimage.png';
         }
         // mengisi array validateData indeks gambar dengan nama gambar
-        $validateData['gambarcover']=$fileNameToStore;
-        
+        $validateData['gambarcover'] = $fileNameToStore;
+
         try {
             // input data ke database dari model infowilayah
             $result = Infowilayah::create($validateData);
@@ -63,7 +65,7 @@ class InfowilayahController extends Controller
         }
 
         // Berhasil input data, return status 200
-        if($result){
+        if ($result) {
             return response()->json([
                 'status' => 200,
             ]);
@@ -80,8 +82,8 @@ class InfowilayahController extends Controller
         // mengisi $id dari data form dengan name:id_infowilayah
         $id = $request->id_infowilayah;
         // mengisi $data dengan data infowilayah sesuai id dari model infowilayah
-		$data = Infowilayah::find($id);
-		return response()->json([
+        $data = Infowilayah::find($id);
+        return response()->json([
             // mengisi array key:infowilayah dengan $data
             'infowilayah' => $data
         ]);
@@ -97,9 +99,9 @@ class InfowilayahController extends Controller
         // mengisi $id dari data form dengan name:id_infowilayah
         $id = $request->id_infowilayah;
         // mengisi $data dengan data infowilayah sesuai id dari model infowilayah
-		$data = Infowilayah::find($id);
+        $data = Infowilayah::find($id);
         // mengirim isi $data dengan json
-		return response()->json($data);
+        return response()->json($data);
     }
 
     /**
@@ -115,17 +117,17 @@ class InfowilayahController extends Controller
         $infowilayah = Infowilayah::find($request->id_infowilayah);
         if ($request->file('gambarcover')) {
             // ada input gambar, masukan nama gambar dari fungsi inputGambar (parameter data formulir)
-            $fileNameToStore= $this->inputGambar($request);
+            $fileNameToStore = $this->inputGambar($request);
         } else {
             // tidak input gambar, pakai nama gambar sebelumnya
             $fileNameToStore = $infowilayah->gambarcover;
         }
         // mengisi array validateData indeks gambar dengan nama gambar
-        $validateData['gambarcover']=$fileNameToStore;
-    
+        $validateData['gambarcover'] = $fileNameToStore;
+
         try {
             // update data ke database dari model infowilayah
-            $result = infowilayah::where('id_infowilayah',$infowilayah->id_infowilayah)->update($validateData);
+            $result = infowilayah::where('id_infowilayah', $infowilayah->id_infowilayah)->update($validateData);
         } catch (\Throwable $th) {
             // gagal update data, return status 500
             return response()->json([
@@ -134,7 +136,7 @@ class InfowilayahController extends Controller
         }
 
         // Berhasil update data, return status 200
-        if($result){
+        if ($result) {
             return response()->json([
                 'status' => 200,
             ]);
@@ -161,7 +163,7 @@ class InfowilayahController extends Controller
         }
 
         // Berhasil delete data, return status 200
-        if($result){
+        if ($result) {
             return response()->json([
                 'status' => 200,
             ]);
@@ -173,7 +175,8 @@ class InfowilayahController extends Controller
      * @param obyek Request $request berisi data formulir
      * @return data tervalidasi
      */
-    public function validasiRules(Request $request) {
+    public function validasiRules(Request $request)
+    {
         return $request->validate([
             'judul' => 'required|max:25',
             'deskripsi' => 'max:255|required',
@@ -186,14 +189,15 @@ class InfowilayahController extends Controller
      * @param obyek Request $request berisi data formulir
      * @return nama gambar
      */
-    public function inputGambar(Request $request) {
+    public function inputGambar(Request $request)
+    {
         // mendapatkan ekstensi gambar
         $extension = $request->file('gambarcover')->getClientOriginalExtension();
         // mendapatkan 6 karakter ramdom dari $sumber
         $sumber = "ABCDEFGHIJKLMNPQRSTUVWXYZ";
-        $randomName = substr(str_shuffle($sumber),0,6);
+        $randomName = substr(str_shuffle($sumber), 0, 6);
         // Nama gambar untuk disimpan
-        $fileNameToStore = 'infowilayah-'.$randomName.'.'.$extension;
+        $fileNameToStore = 'infowilayah-' . $randomName . '.' . $extension;
         // Lokasi penyimpanan gambar
         $path = $request->file('gambarcover')->storeAs('public/infowilayah_img', $fileNameToStore);
         // return nama gambar

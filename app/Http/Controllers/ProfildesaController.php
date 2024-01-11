@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Profildesa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProfildesaController extends Controller
 {
@@ -14,10 +15,11 @@ class ProfildesaController extends Controller
      */
     public function index()
     {
+        $petugas = Auth::guard('petugas')->user();
         return view('admin.profildesa.index', [
             // mengisi array key: title dengan string 'profildesa'
             'title' => 'profildesa'
-        ]);
+        ], compact('petugas'));
     }
 
     /**
@@ -109,19 +111,19 @@ class ProfildesaController extends Controller
      */
     public function update(Request $request)
     {
-       // mengisi array validateData dengan data valid dari fungsi validasiRules (parameter data formulir)
+        // mengisi array validateData dengan data valid dari fungsi validasiRules (parameter data formulir)
         $validateData = $this->validasiRules($request);
         // mengiai $fasilitas dengan dari model Fasilitas sesuai id
         $profildesa = Profildesa::find($request->id_profildesa);
         if ($request->file('gambarcover')) {
             // ada input gambar, masukan nama gambar dari fungsi inputGambar (parameter data formulir)
-            $fileNameToStore= $this->inputGambar($request);
+            $fileNameToStore = $this->inputGambar($request);
         } else {
             // tidak input gambar, pakai nama gambar sebelumnya
             $fileNameToStore = $profildesa->gambarcover;
         }
         // mengisi array validateData indeks gambar dengan nama gambar
-        $validateData['gambarcover']=$fileNameToStore;
+        $validateData['gambarcover'] = $fileNameToStore;
 
         try {
             // update data ke database dari model profildesa
@@ -202,17 +204,17 @@ class ProfildesaController extends Controller
         // return nama gambar
         return $fileNameToStore;
     }
-        /**
+    /**
      * Fungsi menampilkan isi profildesa
      * @param $slug dari tombol baca
      * @return view beritadetail dengan data
      */
-    public function detailprofil() {
+    public function detailprofil()
+    {
         $profildesa = Profildesa::all();
-        return view('frontend.pages.profil',[
+        return view('frontend.pages.profil', [
             "title" => "profil desa",
-            "profildetail"=> $profildesa
+            "profildetail" => $profildesa
         ]);
-        
     }
 }

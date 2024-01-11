@@ -4,7 +4,7 @@
         {{-- Jika jumlah footer == 0, tampilkan tombol footer lainnya --}}
             @if (count($footer) == 0)
                 <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal"
-                    data-bs-target="#FooterTambah">
+                    data-bs-target="#footerTambah">
                     <i class="menu-icon tf-icons bx bx-plus m-0"></i>Tambah
                 </button>
             @endif
