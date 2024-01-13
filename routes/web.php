@@ -21,6 +21,7 @@ use App\Http\Controllers\InfowilayahController;
 use App\Http\Controllers\PotensidesaController;
 use App\Http\Controllers\KategoriumkmController;
 use App\Http\Controllers\LoginPetugasController;
+use App\Http\Controllers\DocumentationController;
 use App\Http\Controllers\KategoriberitaController;
 use App\Http\Controllers\KategoripotensiController;
 use App\Http\Controllers\KategorifasilitasController;
@@ -226,9 +227,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('kategorifasilitas/edit', [KategorifasilitasController::class, 'edit'])->name('edit.kategorifasilitas');
         Route::post('kategorifasilitas/update', [KategorifasilitasController::class, 'update'])->name('update.kategorifasilitas');
 
-        Route::get('/documentation', function () {
-            $title = "Dokumentasi";
-            return view('admin.documentation', ['title' => $title]);
-        })->name('documentation');
+
+        Route::get('/documentation', [DocumentationController::class, 'index'])->name('documentation');
     });
 });
