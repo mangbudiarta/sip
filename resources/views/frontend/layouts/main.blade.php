@@ -114,36 +114,36 @@
     <div class="container-fluid bg-dark footer mt-5 py-5 wow fadeIn" data-wow-delay="0.1s" id="footer">
         <div class="container py-5">
             <div class="row g-5">
-            @forelse ($footer as $item)
-                <div class="col-lg-4 col-md-6">
-                    <div class="text-center mb-4">
-                        <img src="/storage/footer_img/{{ $item->gambar }}" alt="logo desa candikuning"
-                            style="width: 80px" />
+                @forelse ($footer as $item)
+                    <div class="col-lg-4 col-md-6">
+                        <div class="text-center mb-4">
+                            <img src="/storage/footer_img/{{ $item->gambar }}" alt="logo desa candikuning"
+                                style="width: 80px" />
+                        </div>
+                        <p class="mb-2">
+                            {{ $item->deskripsi }}
+                        </p>
                     </div>
-                    <p class="mb-2">
-                        {{ $item->deskripsi }}
-                    </p>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h4 class="text-primary mb-4">Media Sosial</h4>
-                    <div class="d-flex pt-3">
-                        <a class="btn btn-square btn-primary rounded-circle me-2" href=""><i
-                                class="fab fa-twitter"></i></a>
-                        <a class="btn btn-square btn-primary rounded-circle me-2" href=""><i
-                                class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-square btn-primary rounded-circle me-2" href=""><i
-                                class="fab fa-youtube"></i></a>
-                        <a class="btn btn-square btn-primary rounded-circle me-2" href=""><i
-                                class="fab fa-linkedin-in"></i></a>
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="text-primary mb-4">Media Sosial</h4>
+                        <div class="d-flex pt-3">
+                            <a class="btn btn-square btn-primary rounded-circle me-2" href=""><i
+                                    class="fab fa-twitter"></i></a>
+                            <a class="btn btn-square btn-primary rounded-circle me-2" href=""><i
+                                    class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-square btn-primary rounded-circle me-2" href=""><i
+                                    class="fab fa-youtube"></i></a>
+                            <a class="btn btn-square btn-primary rounded-circle me-2" href=""><i
+                                    class="fab fa-linkedin-in"></i></a>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-5 col-md-6">
-                    <h4 class="text-primary mb-4">Peta Desa</h4>
-                    <iframe width="100%" height="400px" id="gmap_canvas" src="{{ $item->peta }}"
-                        frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
-                </div>
+                    <div class="col-lg-5 col-md-6">
+                        <h4 class="text-primary mb-4">Peta Desa</h4>
+                        <iframe width="100%" height="400px" id="gmap_canvas" src="{{ $item->peta }}"
+                            frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+                    </div>
             </div>
-            @empty
+        @empty
             @endforelse
         </div>
     </div>
@@ -154,7 +154,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                    &copy; <a class="fw-medium" href="#">Kelompok 6</a>,
+                    &copy; <a class="fw-medium" href="#">Kelompok 1</a>,
                     All Right Reserved.
                 </div>
                 <div class="col-md-6 text-center text-md-end">
