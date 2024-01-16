@@ -13,5 +13,5 @@
         </div>
     </div>
 @empty
-    <p>Data Review Kosong</p>
+    <p class="text-center">Ayo, jadilah pemberi review pertama</p>
 @endforelse

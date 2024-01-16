@@ -179,7 +179,7 @@ class InfowilayahController extends Controller
     {
         return $request->validate([
             'judul' => 'required|max:25',
-            'deskripsi' => 'max:255|required',
+            'deskripsi' => 'required',
             'gambarcover' => 'image|file|max:1024'
         ]);
     }

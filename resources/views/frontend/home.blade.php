@@ -5,7 +5,7 @@
         <div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="w-100" style="height: 600px;" src="{{ asset('frontend/img/carousel-1.jpg') }}"
+                    <img class="w-100" style="height: 600px;" src="{{ asset('frontend/img/carousel-3.jpg') }}"
                         alt="Image" />
                     <div class="carousel-caption">
                         <div class="container">
@@ -316,14 +316,14 @@
                                 <i class="fa fa-envelope fa-2x text-white"></i>
                             </div>
                             <p class="mb-2">Email</p>
-                            <p class="mb-0">support@example.com</p>
+                            <p class="mb-0">support@sip.com</p>
                         </div>
                         <div class="col-md-3 text-center wow fadeInUp" data-wow-delay="0.4s">
                             <div class="btn-square mx-auto mb-3">
                                 <i class="fa fa-phone fa-2x text-white"></i>
                             </div>
                             <p class="mb-2">Telepon/Wa</p>
-                            <p class="mb-0">+012 345 67890</p>
+                            <p class="mb-0">+62 812 334 122</p>
                         </div>
                         <div class="col-md-3 text-center wow fadeInUp" data-wow-delay="0.5s">
                             <div class="btn-square mx-auto mb-3">

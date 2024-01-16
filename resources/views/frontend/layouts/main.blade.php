@@ -134,7 +134,7 @@
                             <a class="btn btn-square btn-primary rounded-circle me-2" href=""><i
                                     class="fab fa-youtube"></i></a>
                             <a class="btn btn-square btn-primary rounded-circle me-2" href=""><i
-                                    class="fab fa-linkedin-in"></i></a>
+                                    class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                     <div class="col-lg-5 col-md-6">
